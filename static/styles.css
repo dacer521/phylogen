@@ -21,6 +21,26 @@ body {
   gap: 2rem;
 }
 
+.simulation__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.simulation__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.simulation__logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
 .simulation__header h1 {
   font-size: 2rem;
   margin: 0 0 0.5rem;
@@ -215,6 +235,14 @@ body {
   font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
   font-size: 0.75rem;
   color: #475467;
+}
+
+.logo-image {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 @media (max-width: 960px) {

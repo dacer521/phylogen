@@ -5,13 +5,21 @@
 {% block content %}
   <section class="simulation">
     <header class="simulation__header">
-      <h1>Evolution Simulator</h1>
+      <div class="simulation__title">
+        <img src="{{ url_for('static', filename='images/phylogen-logo.png') }}"
+             alt="Phylogen logo"
+             class="simulation__logo">
+        <h1>Evolution Simulator</h1>
+      </div>
       <p>Track each trophic level as sprites move across the shared habitat grid.</p>
     </header>
 
     <div class="simulation__layout">
+
+
       <div class="map-panel"
            style="--grid-rows: {{ map_grid.rows }}; --grid-cols: {{ map_grid.cols }};">
+           
         <div class="map-grid" role="grid" aria-label="Habitat map">
           {% for row in range(map_grid.rows) %}
             {% for col in range(map_grid.cols) %}
