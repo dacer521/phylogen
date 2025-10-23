@@ -9,7 +9,6 @@ def create_app(test_config=None):
 		from phylogen.routes import bp as main_bp
 		app.register_blueprint(main_bp)
 	except Exception:
-		# If blueprint import fails, fall back to a simple route
 		@app.route('/')
 		def index():
 			from flask import render_template

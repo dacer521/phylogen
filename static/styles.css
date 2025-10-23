@@ -5,11 +5,224 @@ body {
   margin: 0;
   padding: 2rem;
 }
+
 .container {
-  max-width: 720px;
+  max-width: 1120px;
   margin: 0 auto;
   background: #fff;
-  padding: 2rem;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+.simulation {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.simulation__header h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+}
+
+.simulation__header p {
+  margin: 0;
+  color: #475467;
+}
+
+.simulation__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  gap: 2rem;
+}
+
+.map-panel {
+  position: relative;
+  display: grid;
+  width: fit-content;
+  gap: 0.5rem;
+  --tile-size: clamp(24px, 3vw, 48px);
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), var(--tile-size));
+  grid-template-rows: repeat(var(--grid-rows), var(--tile-size));
+  gap: 2px;
+  background: #dce2f0;
+  padding: 4px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(16,24,40,0.05);
+  position: relative;
+  isolation: isolate;
+}
+
+.map-tile {
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.map-tile[data-label] {
+  background: #fde68a;
+  border-color: #f59e0b;
+}
+
+.map-label {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  padding: 2px 4px;
+  font-size: 0.65rem;
+  line-height: 1.2;
+  background: rgba(15, 118, 110, 0.14);
+  color: #0f766e;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.sprite-layer {
+  position: absolute;
+  inset: 4px;
+  display: grid;
+  gap: 2px;
+  justify-self: center;
+  align-self: center;
+  grid-template-columns: repeat(var(--grid-cols), var(--tile-size));
+  grid-template-rows: repeat(var(--grid-rows), var(--tile-size));
+  pointer-events: none;
+}
+
+.sprite {
+  --sprite-size: calc(var(--tile-size) - 6px);
+  width: var(--sprite-size);
+  height: var(--sprite-size);
+  gap: 2px;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  align-self: center;
+  position: relative;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: #f8fafc;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: center;
+  grid-row: calc(var(--sprite-row) + 1);
+  grid-column: calc(var(--sprite-col) + 1);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+}
+
+.sprite[data-level='apex'] {
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+}
+
+.sprite[data-level='secondary-consumers'] {
+  background: linear-gradient(135deg, #f97316, #facc15);
+}
+
+.sprite[data-level='primary-consumers'] {
+  background: linear-gradient(135deg, #16a34a, #4ade80);
+}
+
+.sprite__name {
+  display: none;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-left: 10.5rem;
+  background: #f8fafc;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.sidebar h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.trophic-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.trophic-level__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.trophic-level__header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.trophic-level__count {
+  font-size: 0.75rem;
+  padding-left: 0.5rem;
+  color: #475467;
+}
+
+.trophic-level__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.trophic-level__organism {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trophic-level__organism:hover,
+.trophic-level__organism:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 6px 14px rgba(56, 189, 248, 0.25);
+  outline: none;
+}
+
+.trophic-level__organism-name {
+  font-weight: 600;
+}
+
+.trophic-level__organism-coords {
+  font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  font-size: 0.75rem;
+  color: #475467;
+}
+
+@media (max-width: 960px) {
+  .simulation__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-panel {
+    justify-self: center;
+  }
 }

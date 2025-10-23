@@ -1,8 +1,78 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - Phylogen{% endblock %}
+{% block title %}Evolution Simulator - Phylogen{% endblock %}
 
 {% block content %}
-  <h1>Welcome to Phylogen</h1>
-  <p>This is a minimal Flask app skeleton.</p>
+  <section class="simulation">
+    <header class="simulation__header">
+      <h1>Evolution Simulator</h1>
+      <p>Track each trophic level as sprites move across the shared habitat grid.</p>
+    </header>
+
+    <div class="simulation__layout">
+      <div class="map-panel"
+           style="--grid-rows: {{ map_grid.rows }}; --grid-cols: {{ map_grid.cols }};">
+        <div class="map-grid" role="grid" aria-label="Habitat map">
+          {% for row in range(map_grid.rows) %}
+            {% for col in range(map_grid.cols) %}
+              {% set label = map_grid.label_lookup.get((row, col)) %}
+              <div class="map-tile"
+                   role="gridcell"
+                   aria-label="Tile {{ row }} {{ col }}"
+                   data-row="{{ row }}"
+                   data-col="{{ col }}"
+                   {% if label %}data-label="{{ label }}"{% endif %}>
+                {% if label %}
+                  <span class="map-label">{{ label }}</span>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+
+        <div class="sprite-layer" aria-hidden="true">
+          {% for level in trophic_levels %}
+            {% for organism in level.organisms %}
+              <div class="sprite"
+                   id="{{ organism.id }}"
+                   data-level="{{ level.id }}"
+                   data-row="{{ organism.row }}"
+                   data-col="{{ organism.col }}"
+                   style="--sprite-row: {{ organism.row }}; --sprite-col: {{ organism.col }};">
+                <span class="sprite__name">{{ organism.name }}</span>
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <h2>Trophic Levels</h2>
+        <div class="trophic-levels">
+          {% for level in trophic_levels %}
+            <section class="trophic-level" data-level="{{ level.id }}">
+              <header class="trophic-level__header">
+                <h3>{{ level.name }}</h3>
+                <span class="trophic-level__count">{{ level.organisms|length }} organisms</span>
+              </header>
+              <ul class="trophic-level__list">
+                {% for organism in level.organisms %}
+                  <li>
+                    <button type="button"
+                            class="trophic-level__organism"
+                            data-target-id="{{ organism.id }}">
+                      <span class="trophic-level__organism-name">{{ organism.name }}</span>
+                      <span class="trophic-level__organism-coords">
+                        r{{ '%02d' % organism.row }}, c{{ '%02d' % organism.col }}
+                      </span>
+                    </button>
+                  </li>
+                {% endfor %}
+              </ul>
+            </section>
+          {% endfor %}
+        </div>
+      </aside>
+    </div>
+  </section>
 {% endblock %}
