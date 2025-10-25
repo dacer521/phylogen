@@ -62,6 +62,7 @@ body {
   display: grid;
   width: fit-content;
   gap: 0.5rem;
+  background-image: url("images/backgrounds/underwater-1.png");
   --tile-size: clamp(24px, 3vw, 48px);
 }
 
@@ -70,7 +71,7 @@ body {
   grid-template-columns: repeat(var(--grid-cols), var(--tile-size));
   grid-template-rows: repeat(var(--grid-rows), var(--tile-size));
   gap: 2px;
-  background: #dce2f0;
+  /* background: #dce2f0; */
   padding: 4px;
   border-radius: 8px;
   position: relative;
@@ -79,10 +80,13 @@ body {
 
 .map-tile {
   position: relative;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(148, 163, 184, 0.4);
   border-radius: 6px;
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
 }
 
 .map-tile[data-label] {
@@ -117,7 +121,7 @@ body {
 }
 
 .sprite {
-  --sprite-size: calc(var(--tile-size) - 6px);
+  --sprite-size: calc(var(--tile-size));
   width: var(--sprite-size);
   height: var(--sprite-size);
   gap: 2px;
@@ -127,30 +131,62 @@ body {
   align-self: center;
   position: relative;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  /* background-size: cover; */
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
   color: #f8fafc;
   font-size: 0.7rem;
   font-weight: 600;
   text-align: center;
-  grid-row: calc(var(--sprite-row) + 1);
-  grid-column: calc(var(--sprite-col) + 1);
+  grid-row: var(--sprite-row);
+  grid-column: var(--sprite-col);
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+
 }
 
 .sprite[data-level='apex'] {
-  background: linear-gradient(135deg, #9333ea, #ec4899);
+  /* background: linear-gradient(135deg, #9333ea, #ec4899); */
 }
 
 .sprite[data-level='secondary-consumers'] {
-  background: linear-gradient(135deg, #f97316, #facc15);
+  /* background: linear-gradient(135deg, #f97316, #facc15); */
 }
 
 .sprite[data-level='primary-consumers'] {
-  background: linear-gradient(135deg, #16a34a, #4ade80);
+  /* background: linear-gradient(135deg, #16a34a, #4ade80); */
 }
 
 .sprite__name {
   display: none;
+}
+
+.sprite:nth-child(1) {
+  background-image: url("images/sprites/ocean/alage.png");
+}
+.sprite:nth-child(2) {
+  background-image: url("images/sprites/ocean/plankton.png");
+}
+.sprite:nth-child(3) {
+  background-image: url("images/sprites/ocean/shrimp.png");
+}
+.sprite:nth-child(4) {
+  background-image: url("images/sprites/ocean/krill.png");
+}
+.sprite:nth-child(5) {
+  background-image: url("images/sprites/ocean/lobster.png");
+}
+.sprite:nth-child(6) {
+  background-image: url("images/sprites/ocean/jellyfish.png");
+}
+.sprite:nth-child(7) {
+  background-image: url("images/sprites/ocean/seal.png");
+}
+.sprite:nth-child(8) {
+  background-image: url("images/sprites/ocean/whale-shark.png");
+}
+.sprite:nth-child(9) {
+  background-image: url("images/sprites/ocean/orca.png");
 }
 
 .sidebar {

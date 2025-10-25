@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template
 
+from Organisim import Organism
+
 bp = Blueprint('main', __name__)
 
 
@@ -15,39 +17,48 @@ def index():
         ],
     }
     map_grid["label_lookup"] = {
-        (label["row"], label["col"]): label["text"] for label in map_grid["labels"]
+    (label["row"]-1, label["col"]-1): label["text"] for label in map_grid["labels"]
     }
+
 
     trophic_levels = [
         {
             "id": "producers",
             "name": "Primary Producers",
             "organisms": [
-                {"id": "producer-1", "name": "Algae Mat", "row": 2, "col": 4},
-                {"id": "producer-2", "name": "Grass Patch", "row": 3, "col": 8},
+                Organism("producer-1", "Alage", 1, 4, "../static/images/sprites/ocean/alage.png"),
+                Organism("producer-2", "Grass Patch", 3, 8, "../static/images/sprites/ocean/plankton.webp"),
             ],
         },
         {
             "id": "primary-consumers",
             "name": "Primary Consumers",
             "organisms": [
-                {"id": "consumer-1", "name": "Grazing Herd", "row": 4, "col": 8},
-                {"id": "consumer-2", "name": "Burrowers", "row": 7, "col": 5},
+                Organism("consumer-1", "Shrimp", 4, 8, "../static/images/sprites/ocean/shrimp.png"),
+                Organism("consumer-2", "Krill", 7, 5, "../static/images/sprites/ocean/krill.png"),
             ],
         },
         {
             "id": "secondary-consumers",
             "name": "Secondary Consumers",
             "organisms": [
-                {"id": "predator-1", "name": "Pack Hunters", "row": 6, "col": 11},
-                {"id": "predator-2", "name": "Scavengers", "row": 10, "col": 2},
+                Organism("predator-1", "Lobster", 6, 11, "../static/images/sprites/ocean/lobster.png"),
+                Organism("predator-2", "Jellyfish", 10, 2, "../static/images/sprites/ocean/jellyfish.png"),
+            ],
+        },
+        {
+            "id": "tertiary-consumers",
+            "name": "Tertiary Consumers",
+            "organisms" :[
+                Organism("predator-3", "Seal", 11, 12, "../static/images/sprites/ocean/seal.png"),
+                Organism("predator-4", "Whale Shark", 6, 5, "../static/images/sprites/ocean/whale-shark.png"),
             ],
         },
         {
             "id": "apex",
             "name": "Apex Predator",
             "organisms": [
-                {"id": "apex-1", "name": "Alpha Predator", "row": 8, "col": 12},
+                Organism("apex-1", "Orca", 8, 12, "../static/images/sprites/ocean/orca.png"),
             ],
         },
     ]
