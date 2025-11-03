@@ -42,17 +42,18 @@
           {% for level in trophic_levels %}
             {% for organism in level.organisms %}
               <div class="sprite"
-            id="{{ organism.id }}"
-            data-level="{{ level.id }}"
-            data-row="{{ organism.row }}"
-            data-col="{{ organism.col }}"
-            style="--sprite-row: {{ organism.row }};
-                    --sprite-col: {{ organism.col }};
-                    background-image: url({{url_for('static', filename=organism.imagePath) }});">
-          <span class="sprite__name">{{ organism.name }}</span>
-        </div>
+                   id="{{ organism.id }}"
+                   data-level="{{ level.id }}"
+                   data-row="{{ organism.row }}"
+                   data-col="{{ organism.col }}"
+                   style="--sprite-row: {{ organism.row }};
+                  --sprite-col: {{ organism.col }};
+                  background-image: url('{{ url_for('static', filename=organism.imagePath) }}');">
 
-            {% endfor %}
+                <span class="sprite__name">{{ organism.name }}</span>
+              </div>
+
+            {% endfor %} 
           {% endfor %}
         </div>
       </div>

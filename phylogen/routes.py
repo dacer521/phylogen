@@ -27,7 +27,7 @@ def index():
             "name": "Primary Producers",
             "organisms": [
                 Organism("producer-1", "Alage", 1, 4, "../static/images/sprites/ocean/alage.png"),
-                Organism("producer-2", "Grass Patch", 3, 8, "../static/images/sprites/ocean/plankton.webp"),
+                Organism("producer-2", "Plankton", 3, 8, "../static/images/sprites/ocean/plankton.png"),
             ],
         },
         {

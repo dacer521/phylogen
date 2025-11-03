@@ -59,7 +59,10 @@ body {
 
 .map-panel {
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
   gap: 0.5rem;
   background-image: url("images/backgrounds/underwater-1.png");
@@ -80,13 +83,13 @@ body {
 
 .map-tile {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(148, 163, 184, 0.4);
   border-radius: 6px;
   overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  place-items: center;
 }
 
 .map-tile[data-label] {
@@ -113,6 +116,8 @@ body {
   inset: 4px;
   display: grid;
   gap: 2px;
+  align-items: center;
+  justify-items: center;
   justify-self: center;
   align-self: center;
   grid-template-columns: repeat(var(--grid-cols), var(--tile-size));
@@ -122,16 +127,14 @@ body {
 
 .sprite {
   --sprite-size: calc(var(--tile-size));
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: var(--sprite-size);
   height: var(--sprite-size);
-  gap: 2px;
-  display: grid;
-  place-items: center;
-  justify-self: center;
-  align-self: center;
-  position: relative;
+  aspect-ratio: 1 / 1;
+  margin: auto;
   border-radius: 50%;
-  /* background-size: cover; */
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

@@ -19,5 +19,5 @@ def create_app(test_config=None):
 
 if __name__ == '__main__':
 	app = create_app()
-	# Use 0.0.0.0 so it is reachable from other devices if needed; debug on for development
+
 	app.run(host='0.0.0.0', port=5000, debug=True)
