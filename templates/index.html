@@ -11,14 +11,19 @@
              class="simulation__logo">
         <h1>Evolution Simulator</h1>
       </div>
-      <p>Track each trophic level as sprites move across the shared habitat grid.</p>
+
+      <button type="button"
+              id="start-simulation"
+              class="simulation__control">
+        Start Movement
+      </button>
     </header>
 
-    <div class="simulation__layout">
+    <div class="simulation__layout"
+         style="--grid-rows: {{ map_grid.rows }}; --grid-cols: {{ map_grid.cols }};">
 
 
-      <div class="map-panel"
-           style="--grid-rows: {{ map_grid.rows }}; --grid-cols: {{ map_grid.cols }};">
+      <div class="map-panel">
            
         <div class="map-grid" role="grid" aria-label="Habitat map">
           {% for row in range(map_grid.rows) %}
@@ -65,7 +70,7 @@
             <section class="trophic-level" data-level="{{ level.id }}">
               <header class="trophic-level__header">
                 <h3>{{ level.name }}</h3>
-                <span class="trophic-level__count">{{ level.organisms|length }} organisms</span>
+                <span class="trophic-level__count">Population: {{ level.population_count }} individuals</span>
               </header>
               <ul class="trophic-level__list">
                 {% for organism in level.organisms %}
@@ -77,6 +82,8 @@
                       <span class="trophic-level__organism-coords">
                         r{{ '%02d' % organism.row }}, c{{ '%02d' % organism.col }}
                       </span>
+                      <span class="trophic-level__organism-population">{{ organism.size }} individuals</span>
+                      <span class="trophic-level__organism-genome">Avg genome: n/a</span>
                     </button>
                   </li>
                 {% endfor %}

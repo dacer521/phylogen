@@ -1,0 +1,590 @@
+[
+  {
+    "cycle": 0,
+    "summary": [
+      {
+        "caughtPrey": false,
+        "id": "producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "producer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "consumer-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "apex-1",
+        "wasCaught": false
+      }
+    ],
+    "organisms": [
+      {
+        "averageGenome": [
+          0.4335,
+          0.5328,
+          0.4628,
+          0.5353
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "producer-1",
+        "population": 80,
+        "row": 1,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4318,
+          0.5235,
+          0.4531,
+          0.4911
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 8,
+        "cycleStep": 30,
+        "id": "producer-2",
+        "population": 133,
+        "row": 3,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4833,
+          0.4897,
+          0.4487,
+          0.4979
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 8,
+        "cycleStep": 30,
+        "id": "consumer-1",
+        "population": 77,
+        "row": 4,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4723,
+          0.4889,
+          0.4842,
+          0.4974
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "consumer-2",
+        "population": 63,
+        "row": 7,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5547,
+          0.611,
+          0.3895,
+          0.7009
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 11,
+        "cycleStep": 30,
+        "id": "predator-1",
+        "population": 31,
+        "row": 6,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4965,
+          0.5755,
+          0.3873,
+          0.6661
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 2,
+        "cycleStep": 30,
+        "id": "predator-2",
+        "population": 49,
+        "row": 10,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.376,
+          0.6682,
+          0.5381,
+          0.7144
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "predator-3",
+        "population": 24,
+        "row": 11,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.533,
+          0.5666,
+          0.4603,
+          0.6242
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "predator-4",
+        "population": 19,
+        "row": 6,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.6292,
+          0.6373,
+          0.405,
+          0.7657
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "apex-1",
+        "population": 23,
+        "row": 8,
+        "wasCaught": false
+      }
+    ]
+  },
+  {
+    "cycle": 1,
+    "summary": [
+      {
+        "caughtPrey": false,
+        "id": "producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "producer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "consumer-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-3",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "apex-1",
+        "wasCaught": false
+      }
+    ],
+    "organisms": [
+      {
+        "averageGenome": [
+          0.413,
+          0.554,
+          0.4589,
+          0.5212
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "producer-1",
+        "population": 83,
+        "row": 1,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.422,
+          0.5046,
+          0.456,
+          0.4875
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 8,
+        "cycleStep": 30,
+        "id": "producer-2",
+        "population": 124,
+        "row": 3,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4459,
+          0.4927,
+          0.4464,
+          0.4706
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 8,
+        "cycleStep": 30,
+        "id": "consumer-1",
+        "population": 73,
+        "row": 4,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4521,
+          0.5099,
+          0.451,
+          0.4919
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "consumer-2",
+        "population": 60,
+        "row": 7,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5228,
+          0.5691,
+          0.4685,
+          0.6757
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 11,
+        "cycleStep": 30,
+        "id": "predator-1",
+        "population": 32,
+        "row": 6,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5791,
+          0.5316,
+          0.4688,
+          0.6023
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 2,
+        "cycleStep": 30,
+        "id": "predator-2",
+        "population": 57,
+        "row": 10,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4223,
+          0.5953,
+          0.4872,
+          0.6192
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "predator-3",
+        "population": 24,
+        "row": 11,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5232,
+          0.6014,
+          0.5277,
+          0.5666
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "predator-4",
+        "population": 20,
+        "row": 6,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.6005,
+          0.7388,
+          0.4778,
+          0.71
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "apex-1",
+        "population": 21,
+        "row": 8,
+        "wasCaught": false
+      }
+    ]
+  },
+  {
+    "cycle": 2,
+    "summary": [
+      {
+        "caughtPrey": false,
+        "id": "producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "producer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "consumer-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "predator-3",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "apex-1",
+        "wasCaught": false
+      }
+    ],
+    "organisms": [
+      {
+        "averageGenome": [
+          0.3959,
+          0.497,
+          0.4388,
+          0.5137
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "producer-1",
+        "population": 82,
+        "row": 1,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3902,
+          0.5524,
+          0.4443,
+          0.5236
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 8,
+        "cycleStep": 30,
+        "id": "producer-2",
+        "population": 111,
+        "row": 3,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.3819,
+          0.4689,
+          0.4969,
+          0.481
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 8,
+        "cycleStep": 30,
+        "id": "consumer-1",
+        "population": 80,
+        "row": 4,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4316,
+          0.5098,
+          0.5351,
+          0.4651
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "consumer-2",
+        "population": 65,
+        "row": 7,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5281,
+          0.5403,
+          0.5584,
+          0.6094
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 11,
+        "cycleStep": 30,
+        "id": "predator-1",
+        "population": 25,
+        "row": 6,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.63,
+          0.5577,
+          0.4891,
+          0.5838
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 2,
+        "cycleStep": 30,
+        "id": "predator-2",
+        "population": 49,
+        "row": 10,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.6025,
+          0.6311,
+          0.4772,
+          0.4951
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "predator-3",
+        "population": 23,
+        "row": 11,
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5412,
+          0.6051,
+          0.5778,
+          0.629
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "predator-4",
+        "population": 25,
+        "row": 6,
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.6413,
+          0.7086,
+          0.4809,
+          0.7269
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "apex-1",
+        "population": 21,
+        "row": 8,
+        "wasCaught": false
+      }
+    ]
+  }
+]

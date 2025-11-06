@@ -1,0 +1,226 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const startButton = document.getElementById('start-simulation');
+  if (!startButton) {
+    return;
+  }
+
+  let running = false;
+  let currentController = null;
+  const stepInterval = 800;
+  const organismPanels = new Map();
+  const levelPanels = new Map();
+
+  const persistState = (cycle, summary, organisms) => {
+    if (cycle === undefined || cycle === null) {
+      return;
+    }
+
+    fetch('/api/simulation/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        cycle,
+        summary: Array.isArray(summary) ? summary : [],
+        organisms: Array.isArray(organisms) ? organisms : [],
+      }),
+    }).catch((error) => {
+      console.error('Failed to persist simulation state', error);
+    });
+  };
+
+  const updateSprite = ({ id, row, col, caughtPrey, cycleStep, canMove }) => {
+    const sprite = document.getElementById(id);
+    if (!sprite) {
+      return;
+    }
+    if (typeof row === 'number') {
+      sprite.dataset.row = String(row);
+      sprite.style.setProperty('--sprite-row', row);
+    }
+    if (typeof col === 'number') {
+      sprite.dataset.col = String(col);
+      sprite.style.setProperty('--sprite-col', col);
+    }
+
+    if (typeof caughtPrey === 'boolean') {
+      sprite.dataset.caughtPrey = caughtPrey ? 'true' : 'false';
+    } else {
+      delete sprite.dataset.caughtPrey;
+    }
+
+    if (typeof cycleStep === 'number') {
+      sprite.dataset.cycleStep = String(cycleStep);
+    } else {
+      delete sprite.dataset.cycleStep;
+    }
+
+    if (typeof canMove === 'boolean') {
+      sprite.dataset.canMove = canMove ? 'true' : 'false';
+    } else {
+      delete sprite.dataset.canMove;
+    }
+  };
+
+  document.querySelectorAll('.trophic-level').forEach((section) => {
+    const levelId = section.dataset.level;
+    const countNode = section.querySelector('.trophic-level__count');
+    if (!levelId || !countNode) {
+      return;
+    }
+    levelPanels.set(levelId, { section, countNode });
+  });
+
+  document.querySelectorAll('.trophic-level__organism').forEach((button) => {
+    const organismId = button.dataset.targetId;
+    if (!organismId) {
+      return;
+    }
+    const populationNode = button.querySelector('.trophic-level__organism-population');
+    const genomeNode = button.querySelector('.trophic-level__organism-genome');
+    const parentSection = button.closest('.trophic-level');
+    organismPanels.set(organismId, {
+      populationNode,
+      genomeNode,
+      levelId: parentSection ? parentSection.dataset.level : null,
+      population: null,
+    });
+  });
+
+  const refreshLevelTotals = () => {
+    levelPanels.forEach(({ countNode }, levelId) => {
+      let total = 0;
+      organismPanels.forEach((panel) => {
+        if (panel.levelId === levelId && typeof panel.population === 'number') {
+          total += panel.population;
+        }
+      });
+      countNode.textContent = `Population: ${total} individuals`;
+    });
+  };
+
+  const updateOrganismPanel = ({ id, population, averageGenome }) => {
+    const panel = organismPanels.get(id);
+    if (!panel) {
+      return;
+    }
+
+    if (typeof population === 'number' && panel.populationNode) {
+      panel.populationNode.textContent = `${population} individuals`;
+      panel.population = population;
+    }
+
+    if (panel.genomeNode) {
+      if (Array.isArray(averageGenome) && averageGenome.length > 0) {
+        const formattedValues = averageGenome
+          .map((value) => {
+            const numeric = Number.parseFloat(value);
+            return Number.isFinite(numeric) ? numeric.toFixed(3) : 'n/a';
+          })
+          .join(', ');
+        panel.genomeNode.textContent = `Avg genome: ${formattedValues}`;
+      } else {
+        panel.genomeNode.textContent = 'Avg genome: n/a';
+      }
+    }
+
+    refreshLevelTotals();
+  };
+
+  const performStep = () => {
+    if (!running) {
+      return;
+    }
+
+    const controller = new AbortController();
+    currentController = controller;
+
+    fetch('/api/simulation/step', {
+      method: 'POST',
+      signal: controller.signal,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Simulation step failed: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (!data) {
+          return;
+        }
+        const {
+          organisms = [],
+          cycleComplete = false,
+          cycleSummary = [],
+          cycleIndex = null,
+        } = data;
+
+        if (Array.isArray(organisms)) {
+          organisms.forEach((organism) => {
+            updateSprite(organism);
+            updateOrganismPanel(organism);
+          });
+        }
+
+        if (cycleComplete) {
+          const detail = {
+            cycle: cycleIndex,
+            summary: Array.isArray(cycleSummary) ? cycleSummary : [],
+          };
+          stopSimulation({ abort: false });
+          persistState(cycleIndex, detail.summary, organisms);
+          document.dispatchEvent(new CustomEvent('simulation:cycleComplete', { detail }));
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        stopSimulation();
+      })
+      .finally(() => {
+        if (currentController === controller) {
+          currentController = null;
+        }
+        if (running && !controller.signal.aborted) {
+          window.setTimeout(performStep, stepInterval);
+        }
+      });
+  };
+
+  function resetSimulationState() {
+    fetch('/api/simulation/reset', {
+      method: 'POST',
+    }).catch((error) => {
+      console.error('Failed to reset simulation state', error);
+    });
+  }
+
+  const startSimulation = () => {
+    if (running) {
+      return;
+    }
+    running = true;
+    startButton.textContent = 'Stop Movement';
+    startButton.classList.add('is-active');
+    performStep();
+  };
+
+  const stopSimulation = (options = {}) => {
+    running = false;
+    startButton.textContent = 'Start Movement';
+    startButton.classList.remove('is-active');
+    const { abort = true } = options;
+    if (abort && currentController) {
+      currentController.abort();
+    }
+  };
+
+  startButton.addEventListener('click', () => {
+    if (running) {
+      stopSimulation();
+    } else {
+      startSimulation();
+    }
+  });
+
+  resetSimulationState();
+});
