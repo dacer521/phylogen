@@ -119,3 +119,6 @@ class Organism:
 
     def setWasCaught(self, caught=True):
         self._was_caught = caught
+
+    def setMoves(self, moves):
+        self.moves = moves

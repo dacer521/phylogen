@@ -1,14 +1,41 @@
-from flask import Blueprint, current_app, jsonify, render_template, request
+from typing import Optional
+from pathlib import Path
+import uuid
+
+from flask import Blueprint, current_app, jsonify, redirect, render_template, request, url_for
+from werkzeug.utils import secure_filename
 
 from .simulation import (
     build_trophic_levels,
     initialize_simulation_state,
     persist_simulation_state,
+    replace_first_species,
     reset_simulation_history,
     step_simulation,
 )
 
 bp = Blueprint('main', __name__)
+
+LEVEL_ALIAS_MAP = {
+    "producer": "producers",
+    "producers": "producers",
+    "primary-consumer": "primary-consumers",
+    "primary-consumers": "primary-consumers",
+    "secondary-consumer": "secondary-consumers",
+    "secondary-consumers": "secondary-consumers",
+    "tertiary-consumer": "tertiary-consumers",
+    "tertiary-consumers": "tertiary-consumers",
+    "apex": "apex",
+    "apex-predator": "apex",
+    "apex predators": "apex",
+}
+
+
+def _normalize_level_id(raw_value: Optional[str]) -> Optional[str]:
+    if not raw_value:
+        return None
+    key = raw_value.strip().lower()
+    return LEVEL_ALIAS_MAP.get(key, key)
 
 
 def _build_map_context(biome_name="Evolution Simulator"):
@@ -51,18 +78,66 @@ def ocean():
 
 @bp.route('/species/define', methods=['GET', 'POST'])
 def define_species():
+    next_url = (
+        request.values.get("next")
+        or request.referrer
+        or url_for('main.index')
+    )
+
     if request.method == 'POST':
+        species_name = request.form.get("name", "").strip()
+        species_level = _normalize_level_id(request.form.get("trophic_level"))
+        moves_value = (request.form.get("moves") or "yes").strip().lower()
+        is_mobile = moves_value not in ("no", "false", "0")
         species_data = {
-            "name": request.form.get("name", "").strip(),
-            "trophic_level": request.form.get("trophic_level"),
+            "name": species_name,
+            "trophic_level": species_level,
+            "moves": is_mobile,
         }
+
         image = request.files.get("species_image")
+        image_path = None
         if image and image.filename:
-            species_data["image_filename"] = image.filename
+            uploads_dir = Path(current_app.static_folder or "") / "uploads"
+            try:
+                uploads_dir.mkdir(parents=True, exist_ok=True)
+            except OSError:
+                current_app.logger.exception("Failed to create uploads directory at %s", uploads_dir)
+                uploads_dir = None
+
+            filename = secure_filename(image.filename)
+            if not filename:
+                filename = "species-image"
+
+            if uploads_dir:
+                unique_name = f"{uuid.uuid4().hex}_{filename}"
+                destination = uploads_dir / unique_name
+                try:
+                    image.save(destination)
+                    image_path = f"uploads/{unique_name}"
+                except OSError:
+                    current_app.logger.exception("Failed to save uploaded species image to %s", destination)
+
+        if image_path:
+            species_data["image_path"] = image_path
 
         current_app.logger.info("Received species definition: %s", species_data)
 
-    return render_template("define-species.html")
+        if species_level:
+            replaced = replace_first_species(
+                species_level,
+                name=species_name,
+                image_path=image_path,
+                moves=is_mobile,
+            )
+            if not replaced:
+                current_app.logger.warning("Unable to replace organism for level '%s'", species_level)
+        else:
+            current_app.logger.warning("Custom species submitted without a trophic level selection")
+
+        return redirect(next_url)
+
+    return render_template("define-species.html", next_url=next_url)
 
 
 @bp.route('/api/simulation/step', methods=['POST'])

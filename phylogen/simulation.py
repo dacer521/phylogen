@@ -4,7 +4,7 @@ import json
 import random
 from pathlib import Path
 from threading import Lock
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
 from Organisim import Organism
 from evoultion import EvolutionContext, advance_population, prepare_evolution
@@ -325,7 +325,7 @@ SPEED_BY_LEVEL = {
     "tertiary-consumers": 2,
     "secondary-consumers": 2,
     "primary-consumers": 2,
-    "producers": 1,
+    "producers": 2,
 }
 
 # Random move jitter keeps paths from looking overly deterministic.
@@ -334,9 +334,9 @@ RANDOM_DIRECTION_CHANCE = 0.5
 TROPHIC_RELATIONS = {
     "producers": {"prey": [], "predators": ["primary-consumers"]},
     "primary-consumers": {"prey": ["producers"], "predators": ["secondary-consumers"]},
-    "secondary-consumers": {"prey": ["primary-consumers"], "predators": ["tertiary-consumers", "apex"]},
-    "tertiary-consumers": {"prey": ["secondary-consumers"], "predators": ["apex"]},
-    "apex": {"prey": ["tertiary-consumers"], "predators": []},
+    "secondary-consumers": {"prey": ["primary-consumers", "producers"], "predators": ["tertiary-consumers", "apex"]},
+    "tertiary-consumers": {"prey": ["secondary-consumers", "primary-consumers"], "predators": ["apex"]},
+    "apex": {"prey": ["tertiary-consumers", "secondary-consumers"], "predators": []},
 }
 
 ORGANISM_BEHAVIORS: Dict[str, Dict[str, List[str]]] = {
@@ -509,6 +509,51 @@ def initialize_simulation_state(
         }
         SIMULATION_STATE["cycle"] = 0
         SIMULATION_STATE["evolution"] = evolution_state
+
+
+def replace_first_species(
+    level_id: str,
+    *,
+    name: str,
+    image_path: Optional[str] = None,
+    moves: Optional[bool] = None,
+) -> bool:
+    """Replace the first organism entry for a trophic level with a new species."""
+    if not level_id or not name:
+        return False
+
+    with STATE_LOCK:
+        target_level = None
+        for level in TROPHIC_LEVEL_CONFIG:
+            if level.get("id") == level_id:
+                target_level = level
+                break
+
+        if not target_level:
+            return False
+
+        organisms = target_level.get("organisms") or []
+        if not organisms:
+            return False
+
+        primary = organisms[0]
+        organism_id = primary.get("id")
+        primary["name"] = name
+        if image_path:
+            primary["image"] = image_path
+        if moves is not None:
+            primary["moves"] = moves
+
+        organism_lookup = SIMULATION_STATE.get("organisms", {})
+        organism = organism_lookup.get(organism_id)
+        if organism:
+            organism.name = name
+            if image_path:
+                organism.imagePath = image_path
+            if moves is not None:
+                organism.setMoves(moves)
+
+        return True
 
 def _clamp_step(value: int) -> int:
     """Normalize a delta to -1, 0, or 1 so movement stays grid-aligned."""

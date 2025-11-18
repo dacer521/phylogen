@@ -11,6 +11,7 @@
   </header>
 
   <form class="species-form__form" action="{{ url_for('main.define_species') }}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="next" value="{{ next_url }}">
     <div class="form-field">
       <label for="species-name">Species name</label>
       <input type="text" id="species-name" name="name" value="Dog" required>
@@ -31,6 +32,14 @@
       <label for="image">Species image</label>
       <input type="file" id="image" name="species_image" accept="image/*">
       <p class="form-field__hint">PNG or JPG up to 5MB.</p>
+    </div>
+
+    <div class="form-field">
+      <label for="moves">Does this species move?</label>
+      <select id="moves" name="moves">
+        <option value="yes" selected>Yes</option>
+        <option value="no">No</option>
+      </select>
     </div>
 
     <!-- <div class="form-field"> placeholder for species_sound upload
