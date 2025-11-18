@@ -340,12 +340,12 @@ TROPHIC_RELATIONS = {
 }
 
 ORGANISM_BEHAVIORS: Dict[str, Dict[str, List[str]]] = {
-    "consumer-1": {"prey_ids": ["producer-2", "producer-1"]},  # Shrimp Swarm eats alagage and plankton
-    "consumer-2": {"prey_ids": ["producer-2", "producer-1"]},  # Krill Cloud eats alage and plankton
-    "predator-2": {"prey_ids": ["consumer-1", "consumer-2"]},  # Jellyfish Bloom eats krill and shrimp
-    "predator-3": {"prey_ids": ["predator-1"]},  # Seal Pod eats  Lobster 
-    "predator-4": {"prey_ids": ["predator-2"]},  # Whale Shark eats Jellyfish Bloom
-    "apex" : {"prey" : ["predator-3", "predator-4"]} #orca eats Whale sharks and seals
+    "consumer-1": {"prey_ids": ["producer-2", "producer-1"]},  # ex. Shrimp Swarm eats alagage and plankton
+    "consumer-2": {"prey_ids": ["producer-2", "producer-1"]},  # ex. Krill Cloud eats alage and plankton
+    "predator-2": {"prey_ids": ["consumer-1", "consumer-2"]},  # ex. Jellyfish Bloom eats krill and shrimp
+    "predator-3": {"prey_ids": ["predator-1"]},  # ex. Seal Pod eats Lobster 
+    "predator-4": {"prey_ids": ["predator-2"]},  # ex. Whale Shark eats Jellyfish Bloom
+    "apex" : {"prey" : ["predator-3", "predator-4"]} #ex. orca eats Whale sharks and seals
 }
 
 STATE_LOCK: Lock = Lock()

@@ -1,97 +1,84 @@
 {% extends 'base.html' %}
 
-{% block title %}Evolution Simulator - Phylogen{% endblock %}
+{% block title %}Phylogen - An Evolution Simulator{% endblock %}
 
 {% block content %}
-  <section class="simulation">
-    <header class="simulation__header">
-      <div class="simulation__title">
-        <img src="{{ url_for('static', filename='images/phylogen-logo.png') }}"
-             alt="Phylogen logo"
-             class="simulation__logo">
-        <h1>Evolution Simulator</h1>
+  <section class="landing">
+    <div class="landing__hero">
+      <div class="landing__hero-headline">
+        <div class="landing__hero-text">
+          <p class="landing__eyebrow">Phylogen</p>
+          <h1>Phylogen</h1>
+          <p class="landing__lede">
+            Phylogen is an evoultion simulation game where you can create your own species, and see how it fares in an environment! We have one finished currently, and 11 more on the way! Stay tuned, and get ready to watch evoultion happen in real time.
+          </p>
+        </div>
+        <img
+          src="{{ url_for('static', filename='images/phylogen-logo.png') }}"
+          alt="Phylogen emblem"
+          class="landing__hero-logo">
       </div>
-
-      <button type="button"
-              id="start-simulation"
-              class="simulation__control">
-        Start Movement
-      </button>
-    </header>
-
-    <div class="simulation__layout"
-         style="--grid-rows: {{ map_grid.rows }}; --grid-cols: {{ map_grid.cols }};">
-
-
-      <div class="map-panel">
-           
-        <div class="map-grid" role="grid" aria-label="Habitat map">
-          {% for row in range(map_grid.rows) %}
-            {% for col in range(map_grid.cols) %}
-              {% set label = map_grid.label_lookup.get((row, col)) %}
-              <div class="map-tile"
-                   role="gridcell"
-                   aria-label="Tile {{ row }} {{ col }}"
-                   data-row="{{ row }}"
-                   data-col="{{ col }}"
-                   {% if label %}data-label="{{ label }}"{% endif %}>
-                {% if label %}
-                  <span class="map-label">{{ label }}</span>
-                {% endif %}
-              </div>
-            {% endfor %}
-          {% endfor %}
-        </div>
-
-        <div class="sprite-layer" aria-hidden="true">
-          {% for level in trophic_levels %}
-            {% for organism in level.organisms %}
-              <div class="sprite"
-                   id="{{ organism.id }}"
-                   data-level="{{ level.id }}"
-                   data-row="{{ organism.row }}"
-                   data-col="{{ organism.col }}"
-                   style="--sprite-row: {{ organism.row }};
-                  --sprite-col: {{ organism.col }};
-                  background-image: url('{{ url_for('static', filename=organism.imagePath) }}');">
-
-                <span class="sprite__name">{{ organism.name }}</span>
-              </div>
-
-            {% endfor %} 
-          {% endfor %}
-        </div>
+      <div class="landing__actions">
+        <a class="button button--primary" href="{{ url_for('main.ocean') }}">
+          Enter the Ocean Biome
+        </a>
+        <button class="button button--ghost" type="button" disabled>
+          More habitats coming soon
+        </button>
       </div>
-
-      <aside class="sidebar">
-        <h2>Trophic Levels</h2>
-        <div class="trophic-levels">
-          {% for level in trophic_levels %}
-            <section class="trophic-level" data-level="{{ level.id }}">
-              <header class="trophic-level__header">
-                <h3>{{ level.name }}</h3>
-                <span class="trophic-level__count">Population: {{ level.population_count }} individuals</span>
-              </header>
-              <ul class="trophic-level__list">
-                {% for organism in level.organisms %}
-                  <li>
-                    <button type="button"
-                            class="trophic-level__organism"
-                            data-target-id="{{ organism.id }}">
-                      <span class="trophic-level__organism-name">{{ organism.name }}</span>
-                      <span class="trophic-level__organism-coords">
-                        r{{ '%02d' % organism.row }}, c{{ '%02d' % organism.col }}
-                      </span>
-                      <span class="trophic-level__organism-population">{{ organism.size }} individuals</span>
-                      <span class="trophic-level__organism-genome">Avg genome: n/a</span>
-                    </button>
-                  </li>
-                {% endfor %}
-              </ul>
-            </section>
-          {% endfor %}
-        </div>
-      </aside>
+      <ul class="landing__highlights">
+        <li>Procedural simulation</li>
+        <li>Unique results every time</li>
+        <li>Will you outcompete the rest?</li>
+      </ul>
     </div>
+
+    <section class="biome-grid">
+      <div class="biome-grid__header">
+        <div>
+          <p class="biome-grid__eyebrow">Choose a biome</p>
+          <h2>Pick a habitat to explore</h2>
+          <p>Each biome has a unique setting, background, and organisims!</p>
+        </div>
+        <span class="biome-grid__badge">More in development</span>
+      </div>
+
+      <div class="biome-grid__cards">
+        <a href="{{ url_for('main.ocean') }}" class="biome-card biome-card--available">
+          <div class="biome-card__status">Live</div>
+          <h3>Ocean</h3>
+          <p>Currents, coral reefs, and a complete aquatic food web to observe.</p>
+          <span class="biome-card__cta">Launch simulation &rarr;</span>
+        </a>
+
+        <article class="biome-card biome-card--disabled">
+          <div class="biome-card__status">In progress</div>
+          <h3>Rainforest</h3>
+          <p>High biodiversity, shifting canopy light, and relentless competition.</p>
+          <span class="biome-card__cta">Coming soon</span>
+        </article>
+
+        <article class="biome-card biome-card--disabled">
+          <div class="biome-card__status">Queued</div>
+          <h3>Desert</h3>
+          <p>Endure blistering heat, sparse water, and nocturnal adaptations.</p>
+          <span class="biome-card__cta">Coming soon</span>
+        </article>
+
+        <article class="biome-card biome-card--disabled">
+          <div class="biome-card__status">Queued</div>
+          <h3>Tundra</h3>
+          <p>Permafrost, seasonal light, and survival against the cold.</p>
+          <span class="biome-card__cta">Coming soon</span>
+        </article>
+
+        <article class="biome-card biome-card--disabled">
+          <div class="biome-card__status">Concept</div>
+          <h3>Mountain</h3>
+          <p>High altitude plateaus, thin air, and hardy alpine life.</p>
+          <span class="biome-card__cta">Coming soon</span>
+        </article>
+      </div>
+    </section>
   </section>
 {% endblock %}

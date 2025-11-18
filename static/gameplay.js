@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let running = false;
   let currentController = null;
-  const stepInterval = 800;
+  const stepInterval = 800;    //delay stuff to make smoother
   const organismPanels = new Map();
   const levelPanels = new Map();
 
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    fetch('/api/simulation/save', {
+    fetch('/api/simulation/save', { //json stuff to access current info
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     if (typeof row === 'number') {
-      sprite.dataset.row = String(row);
+      sprite.dataset.row = String(row);   //moving sprite logic
       sprite.style.setProperty('--sprite-row', row);
     }
     if (typeof col === 'number') {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (typeof caughtPrey === 'boolean') {
-      sprite.dataset.caughtPrey = caughtPrey ? 'true' : 'false';
+      sprite.dataset.caughtPrey = caughtPrey ? 'true' : 'false'; //"true" if caughtprey == true "false" if not
     } else {
       delete sprite.dataset.caughtPrey;
     }
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const controller = new AbortController();
     currentController = controller;
 
-    fetch('/api/simulation/step', {
+    fetch('/api/simulation/step', {   //writing to json
       method: 'POST',
       signal: controller.signal,
     })
@@ -172,11 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
           document.dispatchEvent(new CustomEvent('simulation:cycleComplete', { detail }));
         }
       })
-      .catch((error) => {
+      .catch((error) => { //error handling
         console.error(error);
         stopSimulation();
       })
-      .finally(() => {
+      .finally(() => { //runs if no error
         if (currentController === controller) {
           currentController = null;
         }
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  startButton.addEventListener('click', () => {
+  startButton.addEventListener('click', () => { //resetting json file to stop bad data
     if (running) {
       stopSimulation();
     } else {

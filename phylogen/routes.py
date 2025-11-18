@@ -11,8 +11,7 @@ from .simulation import (
 bp = Blueprint('main', __name__)
 
 
-@bp.route('/')
-def index():
+def _build_map_context(biome_name="Evolution Simulator"):
     map_grid = {
         "rows": 12,
         "cols": 16,
@@ -29,11 +28,41 @@ def index():
     trophic_levels, evolution_state = build_trophic_levels()
     initialize_simulation_state(trophic_levels, map_grid, evolution_state)
 
+    return {
+        "map_grid": map_grid,
+        "trophic_levels": trophic_levels,
+        "biome_name": biome_name,
+    }
+
+
+@bp.route('/')
+def index():
+    return render_template("index.html")
+
+
+@bp.route('/ocean')
+def ocean():
+    context = _build_map_context("Ocean Biome")
     return render_template(
-        "index.html",
-        map_grid=map_grid,
-        trophic_levels=trophic_levels,
+        "simulation.html",
+        **context,
     )
+
+
+@bp.route('/species/define', methods=['GET', 'POST'])
+def define_species():
+    if request.method == 'POST':
+        species_data = {
+            "name": request.form.get("name", "").strip(),
+            "trophic_level": request.form.get("trophic_level"),
+        }
+        image = request.files.get("species_image")
+        if image and image.filename:
+            species_data["image_filename"] = image.filename
+
+        current_app.logger.info("Received species definition: %s", species_data)
+
+    return render_template("define-species.html")
 
 
 @bp.route('/api/simulation/step', methods=['POST'])

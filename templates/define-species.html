@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Define Species{% endblock %}
+
+{% block content %}
+<section class="species-form">
+  <header class="species-form__header">
+    <p class="species-form__eyebrow">Species Builder</p>
+    <h1>Define a species</h1>
+    <p>Create a new organism by choosing its role and uploading a reference image.</p>
+  </header>
+
+  <form class="species-form__form" action="{{ url_for('main.define_species') }}" method="post" enctype="multipart/form-data">
+    <div class="form-field">
+      <label for="species-name">Species name</label>
+      <input type="text" id="species-name" name="name" value="Dog" required>
+    </div>
+
+    <div class="form-field">
+      <label for="trophic-level">Trophic level</label>
+      <select name="trophic_level" id="trophic-level">
+        <option value="producer">Producer</option>
+        <option value="primary-consumer">Primary Consumer</option>
+        <option value="secondary-consumer">Secondary Consumer</option>
+        <option value="tertiary-consumer">Tertiary Consumer</option>
+        <option value="apex-predator">Apex Predator</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="image">Species image</label>
+      <input type="file" id="image" name="species_image" accept="image/*">
+      <p class="form-field__hint">PNG or JPG up to 5MB.</p>
+    </div>
+
+    <!-- <div class="form-field"> placeholder for species_sound upload
+      <label for="sound">Species sound</label>
+      <input type="file" id="sound" name="species_sound">
+    </div> -->
+
+    <button class="button button--primary species-form__submit" type="submit">Save species</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ biome_name|default('Evolution Simulator') }} - Phylogen{% endblock %}
+
+{% block content %}
+  <section class="simulation">
+    <header class="simulation__header">
+      <div class="simulation__title">
+        <img src="{{ url_for('static', filename='images/phylogen-logo.png') }}"
+             alt="Phylogen logo"
+             class="simulation__logo">
+        <div>
+          <p class="simulation__eyebrow">Phylogen</p>
+          <h1>{{ biome_name|default('Evolution Simulator') }}</h1>
+        </div>
+      </div>
+
+      <button type="button"
+              id="start-simulation"
+              class="simulation__control">
+        Start Movement
+      </button>
+      <a href="{{ url_for('main.define_species') }}"
+         id="define-organism"
+         class="simulation__control">
+        Define your own species
+      </a>
+    </header>
+
+    <div class="simulation__layout"
+         style="--grid-rows: {{ map_grid.rows }}; --grid-cols: {{ map_grid.cols }};">
+
+
+      <div class="map-panel">
+           
+        <div class="map-grid" role="grid" aria-label="Habitat map">
+          {% for row in range(map_grid.rows) %}
+            {% for col in range(map_grid.cols) %}
+              {% set label = map_grid.label_lookup.get((row, col)) %}
+              <div class="map-tile"
+                   role="gridcell"
+                   aria-label="Tile {{ row }} {{ col }}"
+                   data-row="{{ row }}"
+                   data-col="{{ col }}"
+                   {% if label %}data-label="{{ label }}"{% endif %}>
+                {% if label %}
+                  <span class="map-label">{{ label }}</span>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+
+        <div class="sprite-layer" aria-hidden="true">
+          {% for level in trophic_levels %}
+            {% for organism in level.organisms %}
+              <div class="sprite"
+                   id="{{ organism.id }}"
+                   data-level="{{ level.id }}"
+                   data-row="{{ organism.row }}"
+                   data-col="{{ organism.col }}"
+                   style="--sprite-row: {{ organism.row }};
+                  --sprite-col: {{ organism.col }};
+                  background-image: url('{{ url_for('static', filename=organism.imagePath) }}');">
+
+                <span class="sprite__name">{{ organism.name }}</span>
+              </div>
+
+            {% endfor %} 
+          {% endfor %}
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <h2>Trophic Levels</h2>
+        <div class="trophic-levels">
+          {% for level in trophic_levels %}
+            <section class="trophic-level" data-level="{{ level.id }}">
+              <header class="trophic-level__header">
+                <h3>{{ level.name }}</h3>
+                <span class="trophic-level__count">Population: {{ level.population_count }} individuals</span>
+              </header>
+              <ul class="trophic-level__list">
+                {% for organism in level.organisms %}
+                  <li>
+                    <button type="button"
+                            class="trophic-level__organism"
+                            data-target-id="{{ organism.id }}">
+                      <span class="trophic-level__organism-name">{{ organism.name }}</span>
+                      <span class="trophic-level__organism-coords">
+                        {{ '%02d' % organism.row }}, c{{ '%02d' % organism.col }}
+                      </span>
+                      <span class="trophic-level__organism-population">{{ organism.size }} individuals</span>
+                      <span class="trophic-level__organism-genome">Avg genome: n/a</span>
+                    </button>
+                  </li>
+                {% endfor %}
+              </ul>
+            </section>
+          {% endfor %}
+        </div>
+      </aside>
+    </div>
+  </section>
+{% endblock %}
