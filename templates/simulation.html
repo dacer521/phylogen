@@ -15,16 +15,23 @@
         </div>
       </div>
 
-      <button type="button"
-              id="start-simulation"
-              class="simulation__control">
-        Start Movement
-      </button>
-      <a href="{{ url_for('main.define_species', next=request.url) }}"
-         id="define-organism"
-         class="simulation__control">
-        Define your own species
-      </a>
+      <div class="simulation__actions">
+        <a href="{{ url_for('main.index') }}"
+           class="simulation__control">
+          Home
+        </a>
+
+        <button type="button"
+                id="start-simulation"
+                class="simulation__control">
+          Start Movement
+        </button>
+        <a href="{{ url_for('main.define_species', next=request.url) }}"
+           id="define-organism"
+           class="simulation__control">
+          Define your own species
+        </a>
+      </div>
     </header>
 
     <div class="simulation__layout"

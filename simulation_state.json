@@ -5,7 +5,7 @@
       {
         "caughtPrey": false,
         "id": "producer-1",
-        "wasCaught": true
+        "wasCaught": false
       },
       {
         "caughtPrey": false,
@@ -15,7 +15,7 @@
       {
         "caughtPrey": true,
         "id": "consumer-1",
-        "wasCaught": false
+        "wasCaught": true
       },
       {
         "caughtPrey": true,
@@ -23,17 +23,17 @@
         "wasCaught": true
       },
       {
-        "caughtPrey": false,
+        "caughtPrey": true,
         "id": "predator-1",
-        "wasCaught": false
+        "wasCaught": true
       },
       {
         "caughtPrey": true,
         "id": "predator-2",
-        "wasCaught": false
+        "wasCaught": true
       },
       {
-        "caughtPrey": false,
+        "caughtPrey": true,
         "id": "predator-3",
         "wasCaught": true
       },
@@ -51,122 +51,122 @@
     "organisms": [
       {
         "averageGenome": [
-          0.4211,
-          0.527,
-          0.4813,
-          0.4535
+          0.5082,
+          0.5971,
+          0.457,
+          0.5158
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 4,
         "cycleStep": 30,
         "id": "producer-1",
-        "population": 75,
+        "population": 69,
         "row": 1,
-        "wasCaught": true
+        "wasCaught": false
       },
       {
         "averageGenome": [
-          0.4297,
-          0.5084,
-          0.458,
-          0.5417
+          0.4279,
+          0.53,
+          0.4743,
+          0.5121
         ],
         "canMove": true,
         "caughtPrey": false,
         "col": 8,
         "cycleStep": 30,
         "id": "producer-2",
-        "population": 138,
+        "population": 115,
         "row": 3,
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.4459,
-          0.4407,
-          0.5312,
-          0.4661
+          0.4545,
+          0.4756,
+          0.4766,
+          0.4837
         ],
         "canMove": true,
         "caughtPrey": true,
         "col": 8,
         "cycleStep": 30,
         "id": "consumer-1",
-        "population": 76,
+        "population": 62,
         "row": 4,
-        "wasCaught": false
+        "wasCaught": true
       },
       {
         "averageGenome": [
-          0.421,
-          0.4532,
-          0.4662,
-          0.5238
+          0.5015,
+          0.4586,
+          0.4615,
+          0.4758
         ],
         "canMove": true,
         "caughtPrey": true,
         "col": 5,
         "cycleStep": 30,
         "id": "consumer-2",
-        "population": 56,
+        "population": 50,
         "row": 7,
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.4669,
-          0.5621,
-          0.4069,
-          0.5938
+          0.4791,
+          0.5433,
+          0.3611,
+          0.6407
         ],
         "canMove": true,
-        "caughtPrey": false,
+        "caughtPrey": true,
         "col": 11,
         "cycleStep": 30,
         "id": "predator-1",
-        "population": 29,
+        "population": 37,
         "row": 6,
-        "wasCaught": false
+        "wasCaught": true
       },
       {
         "averageGenome": [
-          0.4784,
-          0.5459,
-          0.4332,
-          0.6502
+          0.572,
+          0.6144,
+          0.4164,
+          0.5745
         ],
         "canMove": true,
         "caughtPrey": true,
         "col": 2,
         "cycleStep": 30,
         "id": "predator-2",
-        "population": 52,
+        "population": 53,
         "row": 10,
-        "wasCaught": false
+        "wasCaught": true
       },
       {
         "averageGenome": [
-          0.4978,
-          0.6562,
-          0.584,
-          0.6471
+          0.467,
+          0.6468,
+          0.5771,
+          0.6683
         ],
         "canMove": true,
-        "caughtPrey": false,
+        "caughtPrey": true,
         "col": 12,
         "cycleStep": 30,
         "id": "predator-3",
-        "population": 22,
+        "population": 28,
         "row": 11,
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.5134,
-          0.5893,
-          0.4657,
-          0.6383
+          0.3662,
+          0.6514,
+          0.5015,
+          0.5297
         ],
         "canMove": true,
         "caughtPrey": true,
@@ -179,17 +179,17 @@
       },
       {
         "averageGenome": [
-          0.6674,
-          0.7289,
-          0.4206,
-          0.7359
+          0.6708,
+          0.7392,
+          0.4703,
+          0.7851
         ],
         "canMove": true,
         "caughtPrey": true,
         "col": 12,
         "cycleStep": 30,
         "id": "apex-1",
-        "population": 23,
+        "population": 21,
         "row": 8,
         "wasCaught": false
       }

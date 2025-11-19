@@ -77,10 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const populationNode = button.querySelector('.trophic-level__organism-population');
     const genomeNode = button.querySelector('.trophic-level__organism-genome');
+    const coordsNode = button.querySelector('.trophic-level__organism-coords');
     const parentSection = button.closest('.trophic-level');
     organismPanels.set(organismId, {
       populationNode,
       genomeNode,
+      coordsNode,
       levelId: parentSection ? parentSection.dataset.level : null,
       population: null,
     });
@@ -98,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const updateOrganismPanel = ({ id, population, averageGenome }) => {
+  const updateOrganismPanel = ({ id, population, averageGenome, row, col }) => {
     const panel = organismPanels.get(id);
     if (!panel) {
       return;
@@ -121,6 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         panel.genomeNode.textContent = 'Avg genome: n/a';
       }
+    }
+
+    if (panel.coordsNode && typeof row === 'number' && typeof col === 'number') {
+      const formatCoord = (value) => String(value).padStart(2, '0');
+      panel.coordsNode.textContent = `${formatCoord(row)}, c${formatCoord(col)}`;
     }
 
     refreshLevelTotals();
