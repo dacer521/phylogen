@@ -613,7 +613,7 @@ def _direction_from_levels(origin: Organism, level_ids: List[str], toward: bool)
     return closest if toward else (-closest[0], -closest[1])
 
 
-def _direction_from_targets(origin, target_ids, toward):
+def _direction_from_targets(origin, target_ids, toward):   
     """Pick the direction toward or away from specific organism ids."""
     if not target_ids:
         return 0, 0
@@ -643,14 +643,16 @@ def _direction_from_targets(origin, target_ids, toward):
     return closest if toward else (-closest[0], -closest[1])
 
 
-def _calculate_move_delta(organism: Organism, relations: Dict[str, List[str]], current_step: int, speed: int) -> Tuple[int, int]:
+def _calculate_move_delta(organism: Organism, relations: Dict[str, List[str]], current_step: int, speed: int):
     """Blend prey pursuit, predator avoidance, and randomness into a movement vector."""
-    prey_levels = relations.get("prey", [])
+    prey_levels = relations.get("prey", []) 
     predator_levels = relations.get("predators", [])
 
     behavior = ORGANISM_BEHAVIORS.get(organism.id, {})
     specific_prey_ids = behavior.get("prey_ids", [])
     specific_predator_ids = behavior.get("predator_ids", [])
+
+    #calling helper function
 
     prey_direction = _direction_from_targets(organism, specific_prey_ids, toward=True)
     if prey_direction == (0, 0):

@@ -3,8 +3,37 @@
 {% block title %}About Phylogen{% endblock %}
 
 {% block content %}
-<section class="about-page">
-  <h1>About Phylogen</h1>
-  <p>about</p>
-</section>
+<header class="simulation__header">
+      <div class="simulation__title">
+        <img src="{{ url_for('static', filename='images/phylogen-logo.png') }}"
+             alt="Phylogen logo"
+             class="simulation__logo">
+        <div>
+          <p class="simulation__eyebrow">About</p>
+          <h1>{{ 'Phylogen' }}</h1>
+        </div>
+      </div>
+
+      <div class="simulation__actions">
+        <a href="{{ url_for('main.index') }}"
+           class="simulation__control">
+          Home
+        </a>
+      </div>
+    </header>
+
+    <div class = "buttons">
+
+    <button onClick = "help()" id = "help" class = "button button--primary">Click here for instructions on how to play the game</button>
+
+    <button onClick = "info()" id = "info" class = "button button--primary">Click here for more information about the game</button>
+
+    <button onClick = "author()" id = "author" class = "button button--primary">Click here for more information about the creator</button>
+
+
+    </div>
+
+
+    <p id="text" class="about-text">asd</p>
+
 {% endblock %}
