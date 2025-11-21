@@ -12,6 +12,7 @@ class Organism:
         fecundity=1.0,
         moves=True,
         ideal_traits=None,
+        trait_names=None,
     ):
         self.id = i
         self.name = n
@@ -23,6 +24,7 @@ class Organism:
         self.genes = [] #deap gene values
         self.moves = moves
         self.ideal_traits = list(ideal_traits) if ideal_traits is not None else []
+        self.trait_names = list(trait_names) if trait_names is not None else []
         self._cycle_steps = 0
         self._caught_prey = False
         self._was_caught = False
@@ -35,6 +37,8 @@ class Organism:
             data["fecundity"] = self.fecundity
         if self.ideal_traits:
             data["idealTraits"] = self.ideal_traits
+        if self.trait_names:
+            data["traitNames"] = self.trait_names
         data["wasCaught"] = self._was_caught
         return data
 
@@ -113,6 +117,12 @@ class Organism:
 
     def setIdealTraits(self, traits):
         self.ideal_traits = list(traits) if traits is not None else []
+
+    def getTraitNames(self):
+        return self.trait_names
+
+    def setTraitNames(self, trait_names):
+        self.trait_names = list(trait_names) if trait_names is not None else []
 
     def wasCaught(self):
         return self._was_caught

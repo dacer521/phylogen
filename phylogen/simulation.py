@@ -1,4 +1,3 @@
-"""Runtime logic for orchestrating the habitat simulation loop."""
 
 import json
 import random
@@ -9,6 +8,9 @@ from typing import Dict, Iterable, List, Optional, Tuple
 from Organisim import Organism
 from evoultion import EvolutionContext, advance_population, prepare_evolution
 
+DEFAULT_TRAIT_NAMES = ["Camouflage", "Metabolism", "Defense", "Senses"]
+
+"""Runtime logic for orchestrating the habitat simulation loop."""
 
 def _trait_penalties(gene_pool: List, ideal_traits: Iterable[float]) -> List[float]:
     """Weight individuals by how poorly they match the trophic targets."""
@@ -130,7 +132,7 @@ def _advance_evolution_cycle() -> None:
         if population is None or context is None:
             continue
 
-        members: List[Organism] = [
+        members = [
             organism
             for organism in organism_lookup.values()
             if level_lookup.get(organism.id) == level_id
@@ -167,7 +169,7 @@ def _advance_evolution_cycle() -> None:
             share_values = [1 for _ in members]
             total_shares = len(share_values) or 1
 
-        counts: List[int] = []
+        counts = []
         for share in share_values:
             fraction = share / total_shares if total_shares else 0.0
             counts.append(int(round(total_population * fraction)))
@@ -202,17 +204,18 @@ def _advance_evolution_cycle() -> None:
             if extras:
                 richest = max(
                     members,
-                    key=lambda organism: len(organism.getGenes() or []),
-                )
+                    key=lambda organism: len(organism.getGenes() or []), #returns len(organism.getGenes) if existent if not len([]) which is 0
+                ) 
                 updated = list(richest.getGenes() or [])
                 updated.extend(extras)
                 richest.setGenes(updated)
                 richest.setSize(len(updated))
 
-TROPHIC_LEVEL_CONFIG: List[Dict] = [
+TROPHIC_LEVEL_CONFIG= [
     {
         "id": "producers",
         "name": "Primary Producers",
+        "trait_names": DEFAULT_TRAIT_NAMES,
         "simulation": {
             "seed": 1024,
             "population_size": 160,
@@ -234,6 +237,7 @@ TROPHIC_LEVEL_CONFIG: List[Dict] = [
     {
         "id": "primary-consumers",
         "name": "Primary Consumers",
+        "trait_names": DEFAULT_TRAIT_NAMES,
         "simulation": {
             "seed": 2048,
             "population_size": 110,
@@ -255,6 +259,7 @@ TROPHIC_LEVEL_CONFIG: List[Dict] = [
     {
         "id": "secondary-consumers",
         "name": "Secondary Consumers",
+        "trait_names": DEFAULT_TRAIT_NAMES,
         "simulation": {
             "seed": 4096,
             "population_size": 75,
@@ -276,6 +281,7 @@ TROPHIC_LEVEL_CONFIG: List[Dict] = [
     {
         "id": "tertiary-consumers",
         "name": "Tertiary Consumers",
+        "trait_names": DEFAULT_TRAIT_NAMES,
         "simulation": {
             "seed": 8192,
             "population_size": 45,
@@ -297,6 +303,7 @@ TROPHIC_LEVEL_CONFIG: List[Dict] = [
     {
         "id": "apex",
         "name": "Apex Predator",
+        "trait_names": DEFAULT_TRAIT_NAMES,
         "simulation": {
             "seed": 16384,
             "population_size": 25,
@@ -391,6 +398,7 @@ def build_trophic_levels() -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
         population_count = len(population)
         organism_configs = level["organisms"]
         level_id = level["id"]
+        level_trait_names = level.get("trait_names") or DEFAULT_TRAIT_NAMES
 
         evolution_state[level_id] = {
             "population": population,
@@ -410,6 +418,7 @@ def build_trophic_levels() -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
                     organism_cfg["image"],
                     moves=organism_cfg.get("moves", True),
                     ideal_traits=level["simulation"].get("target_traits"),
+                    trait_names=level_trait_names,
                 )
                 for organism_cfg in organism_configs
             ]
@@ -456,6 +465,7 @@ def build_trophic_levels() -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
                     organism_cfg["image"],
                     moves=organism_cfg.get("moves", True),
                     ideal_traits=level["simulation"].get("target_traits"),
+                    trait_names=level_trait_names,
                 )
                 organism.setGenes(assigned)
                 organism.setSize(len(assigned))
@@ -786,7 +796,7 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                     organism.setY(home[0])
                     organism.setX(home[1])
 
-        updates: List[Dict[str, object]] = []
+        updates = []
         for organism in organism_lookup.values():
             genes = organism.getGenes() or []
             population_size = len(genes)
@@ -804,6 +814,7 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                     "canMove": organism.canMove(),
                     "population": population_size,
                     "averageGenome": average_genome,
+                    "traitNames": organism.getTraitNames(),
                 }
             )
 

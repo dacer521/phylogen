@@ -100,7 +100,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const updateOrganismPanel = ({ id, population, averageGenome, row, col }) => {
+  const defaultTraitNames = ['Trait 1', 'Trait 2', 'Trait 3', 'Trait 4'];
+  const resolveTraitName = (traitNames, index) => {
+    if (Array.isArray(traitNames) && traitNames[index]) {
+      return String(traitNames[index]);
+    }
+    return defaultTraitNames[index] || `Trait ${index + 1}`;
+  };
+
+  const updateOrganismPanel = ({ id, population, averageGenome, row, col, traitNames }) => {
     const panel = organismPanels.get(id);
     if (!panel) {
       return;
@@ -114,11 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (panel.genomeNode) {
       if (Array.isArray(averageGenome) && averageGenome.length > 0) {
         const formattedValues = averageGenome
-          .map((value) => {
+          .map((value, index) => {
             const numeric = Number.parseFloat(value);
-            return Number.isFinite(numeric) ? numeric.toFixed(3) : 'n/a';
+            const label = resolveTraitName(traitNames, index);
+            const displayValue = Number.isFinite(numeric) ? numeric.toFixed(3) : 'n/a';
+            return `${label}: ${displayValue}`;
           })
-          .join(', ');
+          .join(' | ');
         panel.genomeNode.textContent = `Avg genome: ${formattedValues}`;
       } else {
         panel.genomeNode.textContent = 'Avg genome: n/a';

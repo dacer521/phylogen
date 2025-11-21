@@ -26,11 +26,17 @@
           More habitats coming soon
         </button>
       </div>
-      <ul class="landing__highlights">
-        <li>Procedural simulation</li>
-        <li>Unique results every time</li>
-        <li>Will you outcompete the rest?</li>
-      </ul>
+      <div class="landing__highlights-row">
+        <ul class="landing__highlights">
+          <li>Procedural simulation</li>
+          <li>Unique results every time</li>
+          <li>Will you outcompete the rest?</li>
+        </ul>
+
+        <a class="about" href="{{ url_for('main.about') }}">
+          <img src="{{ url_for('static', filename='images/QuestionMark.png') }}" alt="About Phylogen">
+        </a>
+      </div>
     </div>
 
     <section class="biome-grid">

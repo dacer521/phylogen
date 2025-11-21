@@ -75,6 +75,10 @@ def ocean():
         **context,
     )
 
+@bp.route('/about')
+def about():
+    return render_template("about.html")
+
 
 @bp.route('/species/define', methods=['GET', 'POST'])
 def define_species():
