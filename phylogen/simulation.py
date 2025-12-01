@@ -96,6 +96,8 @@ def _average_genome(gene_pool: List) -> List[float]:
 
 
 def resolvePredation(organism_lookup, cycle_summary):
+    level_lookup = SIMULATION_STATE.get("level_lookup", {})
+
     for organism in organism_lookup.values():
         genes = list(organism.getGenes() or [])
         population_size = len(genes)
@@ -103,13 +105,33 @@ def resolvePredation(organism_lookup, cycle_summary):
             continue
 
         ideal_traits = organism.getEffectiveIdealTraits()
+        level_id = level_lookup.get(organism.getId())
+        relations = TROPHIC_RELATIONS.get(level_id, {"prey": [], "predators": []})
+        prey_levels = relations.get("prey", [])
+        behavior = ORGANISM_BEHAVIORS.get(organism.id, {})
+        prey_ids = behavior.get("prey_ids", [])
 
-        if "producer" not in organism.getId() and not organism.hasCaughtPrey():
-            size = organism.getSize()
-            new_size = size * 0.8
-            num_kill = max(0, int(size - new_size))
-            for _ in range(min(num_kill, len(genes))):
-                genes.pop(random.randint(0, len(genes) - 1))
+        available_prey = 0
+        if prey_levels or prey_ids:
+            for candidate in organism_lookup.values():
+                if candidate.id == organism.id:
+                    continue
+                candidate_level = level_lookup.get(candidate.id)
+                if (prey_levels and candidate_level in prey_levels) or (prey_ids and candidate.id in prey_ids):
+                    available_prey += len(candidate.getGenes() or [])
+
+        starvation_rate = 0.0
+        if prey_levels or prey_ids:
+            demand = max(1, population_size)
+            food_ratio = available_prey / demand
+            starvation_rate = 0.05 + 0.35 * max(0.0, 1.0 - food_ratio)
+            if not organism.hasCaughtPrey():
+                starvation_rate += 0.05
+            starvation_rate = min(0.6, starvation_rate)
+
+        if starvation_rate > 0.0 and population_size:
+            losses = int(round(population_size * starvation_rate))
+            genes = _apply_weighted_deaths(genes, ideal_traits, losses)
             population_size = len(genes)
 
         if organism.wasCaught() and population_size:
@@ -154,6 +176,13 @@ def _advance_evolution_cycle() -> None:
             aggregated.extend(member.getGenes() or [])
 
         population[:] = aggregated
+        override_targets = None
+        for member in members:
+            effective_traits = member.getEffectiveIdealTraits()
+            if effective_traits:
+                override_targets = tuple(effective_traits)
+                break
+        context.target_traits_override = override_targets
         if not population:
             for member in members:
                 member.setGenes([])
@@ -753,6 +782,24 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
         for organism in organism_lookup.values():
             position_map.setdefault((organism.getY(), organism.getX()), []).append(organism)
 
+        penalty_cache: Dict[str, float] = {}
+
+        def _penalty_for(organism: Organism) -> float:
+            """Cache harsh penalty so capture odds reflect trait quality."""
+            cached = penalty_cache.get(organism.id)
+            if cached is not None:
+                return cached
+            penalties = _trait_penalties(
+                organism.getGenes() or [],
+                organism.getEffectiveIdealTraits(),
+            )
+            if not penalties:
+                value = 0.0
+            else:
+                value = sum(penalties) / len(penalties)
+            penalty_cache[organism.id] = value
+            return value
+
         for occupants in position_map.values():
             if len(occupants) < 2:
                 continue
@@ -780,9 +827,15 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                     )
                 ]
                 if caught_targets:
-                    organism.setCaughtPrey(True)
+                    predator_penalty = _penalty_for(organism)
+                    predator_quality = 1.0 / (1.0 + predator_penalty)
                     for prey in caught_targets:
-                        prey.setWasCaught(True)
+                        prey_penalty = _penalty_for(prey)
+                        prey_quality = 1.0 / (1.0 + prey_penalty)
+                        success_chance = predator_quality / (predator_quality + prey_quality + 1e-9)
+                        if random.random() < success_chance:
+                            organism.setCaughtPrey(True)
+                            prey.setWasCaught(True)
 
         cycle_complete = all(
             organism.getCycleSteps() >= MAX_CYCLE_STEPS for organism in organism_lookup.values()

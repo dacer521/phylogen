@@ -1,7 +1,7 @@
 import copy
 import random
 from dataclasses import dataclass
-from typing import List, Sequence, Tuple
+from typing import List, Optional, Sequence, Tuple
 
 from deap import base, creator, tools
 
@@ -24,6 +24,7 @@ class EvolutionContext:
     elite_count: int
     perfectly_matching_score: int
     target_population_baseline: int
+    target_traits_override: Optional[Sequence[float]] = None
 
 
 def _ensure_creators() -> None:
@@ -44,6 +45,17 @@ def _scaled_fitness(population: List) -> List[float]:
     minimum = min(raw_scores)
     offset = -minimum + 1e-9 if minimum < 0 else 1e-9
     return [score + offset for score in raw_scores]
+
+
+def _select_roulette_scaled(population: List, count: int) -> List:
+    """Roulette selection that uses scaled fitness to keep probabilities positive."""
+    if count <= 0 or not population:
+        return []
+
+    weights = _scaled_fitness(population)
+    if not weights or sum(weights) <= 0:
+        return random.choices(population, k=count)
+    return random.choices(population, weights=weights, k=count)
 
 
 def _roll_immigration_quota(current_size: int, context: EvolutionContext) -> int:
@@ -88,6 +100,12 @@ def prepare_evolution(
     _ensure_creators()
 
     trait_count = len(target_traits)
+    toolbox = base.Toolbox()
+    base_population = max(min_population_size, min(max_population_size, population_size))
+    target_population_baseline = max(
+        min_population_size,
+        min(max_population_size, int(round(base_population * fecundity))),
+    )
     perfectly_matching_score = trait_count
 
     def clone(individual):
@@ -99,32 +117,13 @@ def prepare_evolution(
         for index, gene in enumerate(individual):
             individual[index] = min(max(gene, 0.0), 1.0)
 
-    def evaluate(individual):
-        """
-        Score individuals by similarity to the target: the closer they are, the better.
-
-        A perfect match returns `perfectly_matching_score` and larger scores mean higher fitness.
-        """
-        difference = sum(abs(gene - target) for gene, target in zip(individual, target_traits))
-        return (perfectly_matching_score - difference,)
-
-    toolbox = base.Toolbox()
     toolbox.register("attr_trait", random.random)
     toolbox.register("individual", tools.initRepeat, creator.EvoIndividual, toolbox.attr_trait, trait_count)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     toolbox.register("clone", clone)
-    toolbox.register("evaluate", evaluate)
     toolbox.register("mate", tools.cxBlend, alpha=0.5)
     toolbox.register("mutate", tools.mutGaussian, mu=0.0, sigma=0.25, indpb=0.6)
     toolbox.register("clamp_traits", clamp_traits)
-
-    base_population = max(min_population_size, min(max_population_size, population_size))
-    target_population_baseline = max(
-        min_population_size,
-        min(max_population_size, int(round(base_population * fecundity))),
-    )
-
-    population = toolbox.population(n=base_population)
 
     context = EvolutionContext(
         toolbox=toolbox,
@@ -142,6 +141,19 @@ def prepare_evolution(
         perfectly_matching_score=perfectly_matching_score,
         target_population_baseline=target_population_baseline,
     )
+
+    def evaluate(individual, _context=context):
+        """
+        Score individuals by similarity to the current target traits.
+
+        A perfect match returns `perfectly_matching_score` and larger scores mean higher fitness.
+        """
+        targets = _context.target_traits_override or _context.target_traits
+        difference = sum(abs(gene - target) for gene, target in zip(individual, targets))
+        return (_context.perfectly_matching_score - difference,)
+
+    toolbox.register("evaluate", evaluate)
+    population = toolbox.population(n=base_population)
 
     return population, context
 
@@ -183,7 +195,7 @@ def advance_population(population: List, context: EvolutionContext, generations:
         roulette_slots = parent_slots - elite_to_keep
         other_parents = []
         if roulette_slots > 0:
-            selected = tools.selRoulette(population, roulette_slots)
+            selected = _select_roulette_scaled(population, roulette_slots)
             other_parents = [toolbox.clone(individual) for individual in selected]
 
         random.shuffle(other_parents)
@@ -229,7 +241,9 @@ def advance_population(population: List, context: EvolutionContext, generations:
 
         immigrants = [toolbox.individual() for _ in range(immigration_quota)]
 
-        new_generation = offspring + immigrants
+        elite_copies = [toolbox.clone(elite) for elite in elite_parents]
+
+        new_generation = offspring + immigrants + elite_copies
 
         if len(new_generation) < target_population:
             deficit = target_population - len(new_generation)
