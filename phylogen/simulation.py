@@ -29,10 +29,16 @@ def _trait_penalties(gene_pool: List, ideal_traits: Iterable[float]) -> List[flo
             genome_values = [genome]
 
         delta = 0.0
+        harsh_excess = 0.0
         for gene_value, target in zip(genome_values, ideal):
-            delta += abs(gene_value - target)
+            diff = abs(gene_value - target)
+            delta += diff
+            if diff > 0.35:
+                harsh_excess += (diff - 0.35)
 
-        penalties.append(max(delta, 1e-6))
+        # Harshly punish genomes with traits far from ideal
+        penalty = delta * (1.0 + 4.0 * harsh_excess)
+        penalties.append(max(penalty, 1e-6))
 
     return penalties
 
@@ -96,7 +102,7 @@ def resolvePredation(organism_lookup, cycle_summary):
         if population_size == 0:
             continue
 
-        ideal_traits = organism.getIdealTraits()
+        ideal_traits = organism.getEffectiveIdealTraits()
 
         if "producer" not in organism.getId() and not organism.hasCaughtPrey():
             size = organism.getSize()
@@ -219,7 +225,7 @@ TROPHIC_LEVEL_CONFIG= [
         "simulation": {
             "seed": 1024,
             "population_size": 160,
-            "target_traits": [0.2, 0.5, 0.4, 0.6],
+            "target_traits": [0.05, 0.5, 0.4, 0.9],
             "generations": 30,
             "min_population_size": 120,
             "max_population_size": 240,
@@ -241,7 +247,7 @@ TROPHIC_LEVEL_CONFIG= [
         "simulation": {
             "seed": 2048,
             "population_size": 110,
-            "target_traits": [0.35, 0.55, 0.4, 0.5],
+            "target_traits": [0.35, 0.55, 0.15, 0.8],
             "generations": 28,
             "min_population_size": 80,
             "max_population_size": 170,
@@ -263,7 +269,7 @@ TROPHIC_LEVEL_CONFIG= [
         "simulation": {
             "seed": 4096,
             "population_size": 75,
-            "target_traits": [0.45, 0.6, 0.55, 0.65],
+            "target_traits": [0.45, 0.6, 0.25, 0.75],
             "generations": 26,
             "min_population_size": 55,
             "max_population_size": 120,
@@ -285,7 +291,7 @@ TROPHIC_LEVEL_CONFIG= [
         "simulation": {
             "seed": 8192,
             "population_size": 45,
-            "target_traits": [0.55, 0.7, 0.6, 0.75],
+            "target_traits": [0.01, 0.7, 0.6, 0.75],
             "generations": 24,
             "min_population_size": 30,
             "max_population_size": 80,
@@ -307,7 +313,7 @@ TROPHIC_LEVEL_CONFIG= [
         "simulation": {
             "seed": 16384,
             "population_size": 25,
-            "target_traits": [0.7, 0.85, 0.75, 0.9],
+            "target_traits": [0.7, 0.85, 0.45, 0.3],
             "generations": 22,
             "min_population_size": 15,
             "max_population_size": 45,
@@ -418,6 +424,7 @@ def build_trophic_levels() -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
                     organism_cfg["image"],
                     moves=organism_cfg.get("moves", True),
                     ideal_traits=level["simulation"].get("target_traits"),
+                    user_ideal_traits=organism_cfg.get("user_ideal_traits"),
                     trait_names=level_trait_names,
                 )
                 for organism_cfg in organism_configs
@@ -465,6 +472,7 @@ def build_trophic_levels() -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
                     organism_cfg["image"],
                     moves=organism_cfg.get("moves", True),
                     ideal_traits=level["simulation"].get("target_traits"),
+                    user_ideal_traits=organism_cfg.get("user_ideal_traits"),
                     trait_names=level_trait_names,
                 )
                 organism.setGenes(assigned)
@@ -524,9 +532,10 @@ def initialize_simulation_state(
 def replace_first_species(
     level_id: str,
     *,
-    name: str,
-    image_path: Optional[str] = None,
-    moves: Optional[bool] = None,
+        name: str,
+        image_path: Optional[str] = None,
+        moves: Optional[bool] = None,
+        user_ideal_traits: Optional[list] = None,
 ) -> bool:
     """Replace the first organism entry for a trophic level with a new species."""
     if not level_id or not name:
@@ -553,6 +562,8 @@ def replace_first_species(
             primary["image"] = image_path
         if moves is not None:
             primary["moves"] = moves
+        if user_ideal_traits is not None:
+            primary["user_ideal_traits"] = user_ideal_traits
 
         organism_lookup = SIMULATION_STATE.get("organisms", {})
         organism = organism_lookup.get(organism_id)
@@ -562,6 +573,8 @@ def replace_first_species(
                 organism.imagePath = image_path
             if moves is not None:
                 organism.setMoves(moves)
+            if user_ideal_traits is not None:
+                organism.setUserIdealTraits(user_ideal_traits)
 
         return True
 

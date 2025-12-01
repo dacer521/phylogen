@@ -802,6 +802,78 @@ body {
   width: 100%;
 }
 
+.trophic-level__organism-genome {
+  position: relative;
+  display: inline-block;
+}
+
+.trophic-level__organism-genome_tooltip {
+  display: none; /* Hidden by default */
+  width: 220px;
+  background-color: #0f172a;
+  color: #ffffff;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 8px;
+  position: absolute;
+  left: 0;
+  top: 110%;
+  z-index: 1; /* Ensure tooltip is displayed above content */
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.2);
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+.genome-tooltip-trigger {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+  border-radius: 9999px;
+  width: 22px;
+  height: 22px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 0.35rem;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.genome-tooltip-trigger:hover,
+.genome-tooltip-trigger:focus {
+  outline: none;
+  border-color: #94a3b8;
+  background: #e2e8f0;
+}
+
+.trophic-level__organism-genome:hover .trophic-level__organism-genome_tooltip,
+.trophic-level__organism-genome:focus-within .trophic-level__organism-genome_tooltip,
+.genome-tooltip-trigger:hover + .trophic-level__organism-genome_tooltip,
+.genome-tooltip-trigger:focus + .trophic-level__organism-genome_tooltip {
+  display: block;
+}
+
+.trait-targets {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.trait-target {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.trait-target input[type="number"] {
+  width: 6.5rem;
+}
+
 @media (min-width: 768px) {
   .buttons {
     flex-direction: row;

@@ -85,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
       coordsNode,
       levelId: parentSection ? parentSection.dataset.level : null,
       population: null,
+      lastAverageGenome: null,
+      lastTraitNames: null,
     });
   });
 
@@ -108,6 +110,38 @@ document.addEventListener('DOMContentLoaded', () => {
     return defaultTraitNames[index] || `Trait ${index + 1}`;
   };
 
+  let showExactGenes = false;
+  const genomeDisplayButton = document.getElementById('toggle-genome-display');
+
+  const genotypeLabel = (value) => {
+    const numeric = Number.parseFloat(value);
+    if (!Number.isFinite(numeric)) {
+      return 'n/a';
+    }
+    if (numeric >= 0.75) {
+      return 'TT';
+    }
+    if (numeric > 0.25 && numeric < 0.75) {
+      return 'Tt';
+    }
+    return 'tt';
+  };
+
+  const formatGeneValue = (value, traitNames, index) => {
+    const label = resolveTraitName(traitNames, index);
+    if (showExactGenes) {
+      const numeric = Number.parseFloat(value);
+      const displayValue = Number.isFinite(numeric) ? numeric.toFixed(3) : 'n/a';
+      return `${label}: ${displayValue}`;
+    }
+    return `${label}: ${genotypeLabel(value)}`;
+  };
+
+  const updateGenomeToggleLabel = () => {
+    if (!genomeDisplayButton) return;
+    genomeDisplayButton.textContent = showExactGenes ? 'Show Gene Notation' : 'Show Exact Genes';
+  };
+
   const updateOrganismPanel = ({ id, population, averageGenome, row, col, traitNames }) => {
     const panel = organismPanels.get(id);
     if (!panel) {
@@ -120,19 +154,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (panel.genomeNode) {
+      const genomeText = panel.genomeNode.querySelector('.trophic-level__organism-genome-text');
       if (Array.isArray(averageGenome) && averageGenome.length > 0) {
         const formattedValues = averageGenome
-          .map((value, index) => {
-            const numeric = Number.parseFloat(value);
-            const label = resolveTraitName(traitNames, index);
-            const displayValue = Number.isFinite(numeric) ? numeric.toFixed(3) : 'n/a';
-            return `${label}: ${displayValue}`;
-          })
+          .map((value, index) => formatGeneValue(value, traitNames, index))
           .join(' | ');
-        panel.genomeNode.textContent = `Avg genome: ${formattedValues}`;
+        if (genomeText) {
+          genomeText.textContent = `Avg genome: ${formattedValues}`;
+        } else {
+          panel.genomeNode.textContent = `Avg genome: ${formattedValues}`;
+        }
       } else {
-        panel.genomeNode.textContent = 'Avg genome: n/a';
+        if (genomeText) {
+          genomeText.textContent = 'Avg genome: n/a';
+        } else {
+          panel.genomeNode.textContent = 'Avg genome: n/a';
+        }
       }
+      panel.lastAverageGenome = Array.isArray(averageGenome) ? averageGenome : null;
+      panel.lastTraitNames = Array.isArray(traitNames) ? traitNames : null;
     }
 
     if (panel.coordsNode && typeof row === 'number' && typeof col === 'number') {
@@ -142,6 +182,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     refreshLevelTotals();
   };
+
+  if (genomeDisplayButton) {
+    genomeDisplayButton.addEventListener('click', () => {
+      showExactGenes = !showExactGenes;
+      updateGenomeToggleLabel();
+      // Refresh existing panels with last known genomes
+      organismPanels.forEach((panel, organismId) => {
+        if (!panel.lastAverageGenome || !panel.genomeNode) return;
+        const genomeText = panel.genomeNode.querySelector('.trophic-level__organism-genome-text');
+        const formattedValues = panel.lastAverageGenome
+          .map((value, index) => formatGeneValue(value, panel.lastTraitNames, index))
+          .join(' | ');
+        if (genomeText) {
+          genomeText.textContent = `Avg genome: ${formattedValues}`;
+        } else {
+          panel.genomeNode.textContent = `Avg genome: ${formattedValues}`;
+        }
+      });
+    });
+    updateGenomeToggleLabel();
+  }
 
   const performStep = () => {
     if (!running) {

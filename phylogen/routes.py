@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 
 from .simulation import (
     build_trophic_levels,
+    DEFAULT_TRAIT_NAMES,
     initialize_simulation_state,
     persist_simulation_state,
     replace_first_species,
@@ -93,10 +94,27 @@ def define_species():
         species_level = _normalize_level_id(request.form.get("trophic_level"))
         moves_value = (request.form.get("moves") or "yes").strip().lower()
         is_mobile = moves_value not in ("no", "false", "0")
+
+        user_ideal_traits = []
+        for index, trait_name in enumerate(DEFAULT_TRAIT_NAMES):
+            raw_value = request.form.get(f"target_trait_{index}")
+            if raw_value is None or raw_value == "":
+                continue
+            try:
+                numeric = float(raw_value)
+            except (TypeError, ValueError):
+                continue
+            clamped = max(0.0, min(1.0, numeric))
+            user_ideal_traits.append(clamped)
+
+        if not user_ideal_traits:
+            user_ideal_traits = None
+
         species_data = {
             "name": species_name,
             "trophic_level": species_level,
             "moves": is_mobile,
+            "user_ideal_traits": user_ideal_traits,
         }
 
         image = request.files.get("species_image")
@@ -133,6 +151,7 @@ def define_species():
                 name=species_name,
                 image_path=image_path,
                 moves=is_mobile,
+                user_ideal_traits=user_ideal_traits,
             )
             if not replaced:
                 current_app.logger.warning("Unable to replace organism for level '%s'", species_level)
@@ -141,7 +160,7 @@ def define_species():
 
         return redirect(next_url)
 
-    return render_template("define-species.html", next_url=next_url)
+    return render_template("define-species.html", next_url=next_url, trait_names=DEFAULT_TRAIT_NAMES)
 
 
 @bp.route('/api/simulation/step', methods=['POST'])

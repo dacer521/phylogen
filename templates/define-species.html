@@ -42,6 +42,24 @@
       </select>
     </div>
 
+    <div class="form-field">
+      <label>Desired trait targets (0 to 1)</label>
+      <p class="form-field__hint">Set goals for each trait; the true environmental ideal remains unknown.</p>
+      <div class="trait-targets">
+        {% for trait in trait_names or [] %}
+          <label class="trait-target">
+            <span class="trait-target__label">{{ trait }}</span>
+            <input type="number"
+                   name="target_trait_{{ loop.index0 }}"
+                   min="0"
+                   max="1"
+                   step="0.01"
+                   placeholder="0.50">
+          </label>
+        {% endfor %}
+      </div>
+    </div>
+
     <!-- <div class="form-field"> placeholder for species_sound upload
       <label for="sound">Species sound</label>
       <input type="file" id="sound" name="species_sound">

@@ -31,6 +31,11 @@
            class="simulation__control">
           Define your own species
         </a>
+         <button type="button"
+                id="toggle-genome-display"
+                class="simulation__control">
+          Show Gene Notation
+        </button>
       </div>
     </header>
 
@@ -80,6 +85,7 @@
 
       <aside class="sidebar">
         <h2>Trophic Levels</h2>
+
         <div class="trophic-levels">
           {% for level in trophic_levels %}
             <section class="trophic-level" data-level="{{ level.id }}">
@@ -98,7 +104,16 @@
                         {{ '%02d' % organism.row }}, c{{ '%02d' % organism.col }}
                       </span>
                       <span class="trophic-level__organism-population">{{ organism.size }} individuals</span>
-                      <span class="trophic-level__organism-genome">Avg genome: n/a</span>
+                      <span class="trophic-level__organism-genome">
+                        <span class="trophic-level__organism-genome-text">Avg genome: n/a</span>
+                        <span class="genome-tooltip-trigger"
+                              role="button"
+                              tabindex="0"
+                              aria-label="What does this genotype notation mean?">?</span>
+                        <span class="trophic-level__organism-genome_tooltip">
+                          This notation refers to the average genotype of the species. Some traits are dominant and others are recessive. Homozygous dominant means two dominant alleles (TT, 0.75+), heterozygous means one dominant and one recessive allele (Tt, 0.25-0.75) , and homozygous recessive means two recessive alleles (tt,  0.25-).
+                        </span>
+                      </span>
                     </button>
                   </li>
                 {% endfor %}

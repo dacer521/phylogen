@@ -12,6 +12,7 @@ class Organism:
         fecundity=1.0,
         moves=True,
         ideal_traits=None,
+        user_ideal_traits=None,
         trait_names=None,
     ):
         self.id = i
@@ -24,6 +25,7 @@ class Organism:
         self.genes = [] #deap gene values
         self.moves = moves
         self.ideal_traits = list(ideal_traits) if ideal_traits is not None else []
+        self.user_ideal_traits = list(user_ideal_traits) if user_ideal_traits is not None else None
         self.trait_names = list(trait_names) if trait_names is not None else []
         self._cycle_steps = 0
         self._caught_prey = False
@@ -37,6 +39,8 @@ class Organism:
             data["fecundity"] = self.fecundity
         if self.ideal_traits:
             data["idealTraits"] = self.ideal_traits
+        if self.user_ideal_traits is not None:
+            data["userIdealTraits"] = self.user_ideal_traits
         if self.trait_names:
             data["traitNames"] = self.trait_names
         data["wasCaught"] = self._was_caught
@@ -117,6 +121,18 @@ class Organism:
 
     def setIdealTraits(self, traits):
         self.ideal_traits = list(traits) if traits is not None else []
+
+    def getUserIdealTraits(self):
+        return self.user_ideal_traits
+
+    def setUserIdealTraits(self, traits):
+        self.user_ideal_traits = list(traits) if traits is not None else None
+
+    def getEffectiveIdealTraits(self):
+        """Prefer user-defined ideals; fall back to the default environmental targets."""
+        if self.user_ideal_traits is not None:
+            return self.user_ideal_traits
+        return self.ideal_traits
 
     def getTraitNames(self):
         return self.trait_names
