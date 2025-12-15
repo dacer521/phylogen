@@ -28,7 +28,7 @@
                 class="simulation__control">
           Start Movement
         </button>
-        <a href="{{ url_for('main.define_species', next=request.url) }}"
+        <a href="{{ url_for('main.define_species', next=request.url, biome=biome_id) }}"
            id="define-organism"
            class="simulation__control">
           Define your own species

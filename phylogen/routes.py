@@ -6,7 +6,9 @@ from flask import Blueprint, current_app, jsonify, redirect, render_template, re
 from werkzeug.utils import secure_filename
 
 from .simulation import (
+    SIMULATION_STATE,
     build_trophic_levels,
+    DEFAULT_BIOME_ID,
     DEFAULT_TRAIT_NAMES,
     _get_biome_config,
     initialize_simulation_state,
@@ -88,20 +90,32 @@ def about():
 
 @bp.route('/species/define', methods=['GET', 'POST'])
 def define_species():
-    next_url = (
-        request.values.get("next")
-        or request.referrer
-        or url_for('main.index')
-    )
+    biome_id = request.values.get("biome") or DEFAULT_BIOME_ID
+    biome_config = _get_biome_config(biome_id)
+    biome_trait_names = biome_config.get("trait_names", DEFAULT_TRAIT_NAMES)
+    next_url = request.values.get("next") or request.referrer
+    if not next_url:
+        if biome_id == "rainforest":
+            next_url = url_for('main.rainforest')
+        else:
+            next_url = url_for('main.ocean')
 
     if request.method == 'POST':
+        if SIMULATION_STATE.get("biome_id") != biome_id:
+            map_grid = biome_config.get("map", {"rows": 12, "cols": 16, "labels": []})
+            map_grid["label_lookup"] = {
+                (label["row"] - 1, label["col"] - 1): label["text"] for label in map_grid["labels"]
+            }
+            trophic_levels, evolution_state = build_trophic_levels(biome_config)
+            initialize_simulation_state(trophic_levels, map_grid, evolution_state, biome_config=biome_config)
+
         species_name = request.form.get("name", "").strip()
         species_level = _normalize_level_id(request.form.get("trophic_level"))
         moves_value = (request.form.get("moves") or "yes").strip().lower()
         is_mobile = moves_value not in ("no", "false", "0")
 
         user_ideal_traits = []
-        for index, trait_name in enumerate(DEFAULT_TRAIT_NAMES):
+        for index, trait_name in enumerate(biome_trait_names):
             raw_value = request.form.get(f"target_trait_{index}")
             if raw_value is None or raw_value == "":
                 continue
@@ -165,7 +179,12 @@ def define_species():
 
         return redirect(next_url)
 
-    return render_template("define-species.html", next_url=next_url, trait_names=DEFAULT_TRAIT_NAMES)
+    return render_template(
+        "define-species.html",
+        next_url=next_url,
+        trait_names=biome_trait_names,
+        biome_id=biome_id,
+    )
 
 
 @bp.route('/api/simulation/step', methods=['POST'])

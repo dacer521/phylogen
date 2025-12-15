@@ -12,6 +12,7 @@
 
   <form class="species-form__form" action="{{ url_for('main.define_species') }}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="next" value="{{ next_url }}">
+    <input type="hidden" name="biome" value="{{ biome_id }}">
     <div class="form-field">
       <label for="species-name">Species name</label>
       <input type="text" id="species-name" name="name" value="Dog" required>

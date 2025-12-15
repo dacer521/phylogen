@@ -497,8 +497,14 @@ def _compose_biome_config(preset: Dict) -> Dict:
 
 def _get_biome_config(biome_id: Optional[str]) -> Dict:
     """Return a deep copy of the biome preset so mutations stay scoped."""
+    requested = biome_id or SIMULATION_STATE.get("biome_id") or DEFAULT_BIOME_ID
+    cached_config = SIMULATION_STATE.get("biome_config") or {}
+
+    if cached_config.get("id") == requested:
+        return copy.deepcopy(cached_config)
+
     fallback = BIOME_PRESETS.get(DEFAULT_BIOME_ID, {})
-    base = BIOME_PRESETS.get(biome_id or DEFAULT_BIOME_ID, fallback)
+    base = BIOME_PRESETS.get(requested, fallback)
     return _compose_biome_config(base or fallback)
 
 
