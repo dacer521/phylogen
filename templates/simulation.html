@@ -21,6 +21,8 @@
           Home
         </a>
 
+     
+
         <button type="button"
                 id="start-simulation"
                 class="simulation__control">
@@ -43,7 +45,10 @@
          style="--grid-rows: {{ map_grid.rows }}; --grid-cols: {{ map_grid.cols }};">
 
 
-      <div class="map-panel">
+      <div class="map-panel"
+           {% if biome_id == 'rainforest' %}
+           style="background-image: url('{{ url_for('static', filename='images/backgrounds/jungle.png') }}');"
+           {% endif %}>
            
         <div class="map-grid" role="grid" aria-label="Habitat map">
           {% for row in range(map_grid.rows) %}
