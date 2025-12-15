@@ -1,4 +1,5 @@
 
+import copy
 import json
 import random
 from pathlib import Path
@@ -97,6 +98,8 @@ def _average_genome(gene_pool: List) -> List[float]:
 
 def resolvePredation(organism_lookup, cycle_summary):
     level_lookup = SIMULATION_STATE.get("level_lookup", {})
+    relations_map = _relations_lookup()
+    behavior_map = _behavior_lookup()
 
     for organism in organism_lookup.values():
         genes = list(organism.getGenes() or [])
@@ -106,9 +109,9 @@ def resolvePredation(organism_lookup, cycle_summary):
 
         ideal_traits = organism.getEffectiveIdealTraits()
         level_id = level_lookup.get(organism.getId())
-        relations = TROPHIC_RELATIONS.get(level_id, {"prey": [], "predators": []})
+        relations = relations_map.get(level_id, {"prey": [], "predators": []})
         prey_levels = relations.get("prey", [])
-        behavior = ORGANISM_BEHAVIORS.get(organism.id, {})
+        behavior = behavior_map.get(organism.id, {})
         prey_ids = behavior.get("prey_ids", [])
 
         available_prey = 0
@@ -246,8 +249,19 @@ def _advance_evolution_cycle() -> None:
                 richest.setGenes(updated)
                 richest.setSize(len(updated))
 
-TROPHIC_LEVEL_CONFIG= [
-    {
+DEFAULT_BIOME_ID = "ocean"
+
+LEVEL_ORDER = [
+    "producers",
+    "primary-consumers",
+    "secondary-consumers",
+    "tertiary-consumers",
+    "apex",
+]
+
+# Shared simulation/trait settings reused across all biomes.
+BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
+    "producers": {
         "id": "producers",
         "name": "Primary Producers",
         "trait_names": DEFAULT_TRAIT_NAMES,
@@ -264,12 +278,8 @@ TROPHIC_LEVEL_CONFIG= [
             "fecundity": 1.25,
             "fecundity_variation": 0.20,
         },
-        "organisms": [
-            {"id": "producer-1", "name": "Kelp Forest", "row": 1, "col": 4, "image": "images/sprites/ocean/alage.png", "share": 0.35, "moves": False},
-            {"id": "producer-2", "name": "Plankton Bloom", "row": 3, "col": 8, "image": "images/sprites/ocean/plankton.png", "share": 0.65},
-        ],
     },
-    {
+    "primary-consumers": {
         "id": "primary-consumers",
         "name": "Primary Consumers",
         "trait_names": DEFAULT_TRAIT_NAMES,
@@ -286,12 +296,8 @@ TROPHIC_LEVEL_CONFIG= [
             "fecundity": 1.15,
             "fecundity_variation": 0.18,
         },
-        "organisms": [
-            {"id": "consumer-1", "name": "Shrimp Swarm", "row": 4, "col": 8, "image": "images/sprites/ocean/shrimp.png", "share": 0.55},
-            {"id": "consumer-2", "name": "Krill Cloud", "row": 7, "col": 5, "image": "images/sprites/ocean/krill.png", "share": 0.45},
-        ],
     },
-    {
+    "secondary-consumers": {
         "id": "secondary-consumers",
         "name": "Secondary Consumers",
         "trait_names": DEFAULT_TRAIT_NAMES,
@@ -308,12 +314,8 @@ TROPHIC_LEVEL_CONFIG= [
             "fecundity": 1.05,
             "fecundity_variation": 0.15,
         },
-        "organisms": [
-            {"id": "predator-1", "name": "Lobster Patrol", "row": 6, "col": 11, "image": "images/sprites/ocean/lobster.png", "share": 0.4},
-            {"id": "predator-2", "name": "Jellyfish Bloom", "row": 10, "col": 2, "image": "images/sprites/ocean/jellyfish.png", "share": 0.6},
-        ],
     },
-    {
+    "tertiary-consumers": {
         "id": "tertiary-consumers",
         "name": "Tertiary Consumers",
         "trait_names": DEFAULT_TRAIT_NAMES,
@@ -330,12 +332,8 @@ TROPHIC_LEVEL_CONFIG= [
             "fecundity": 0.95,
             "fecundity_variation": 0.12,
         },
-        "organisms": [
-            {"id": "predator-3", "name": "Seal Pod", "row": 11, "col": 12, "image": "images/sprites/ocean/seal.png", "share": 0.6},
-            {"id": "predator-4", "name": "Whale Shark Pair", "row": 6, "col": 5, "image": "images/sprites/ocean/whale-shark.png", "share": 0.4},
-        ],
     },
-    {
+    "apex": {
         "id": "apex",
         "name": "Apex Predator",
         "trait_names": DEFAULT_TRAIT_NAMES,
@@ -352,17 +350,14 @@ TROPHIC_LEVEL_CONFIG= [
             "fecundity": 0.85,
             "fecundity_variation": 0.1,
         },
-        "organisms": [
-            {"id": "apex-1", "name": "Orca Pod", "row": 8, "col": 12, "image": "images/sprites/ocean/orca.png", "share": 1.0},
-        ],
     },
-]
+}
 
 # length of each generation
 MAX_CYCLE_STEPS = 30
 
 #predators can out-compete prey
-SPEED_BY_LEVEL = {
+DEFAULT_SPEED_BY_LEVEL = {
     "apex": 3,
     "tertiary-consumers": 2,
     "secondary-consumers": 2,
@@ -373,7 +368,7 @@ SPEED_BY_LEVEL = {
 # Random move jitter keeps paths from looking overly deterministic.
 RANDOM_DIRECTION_CHANCE = 0.5
 
-TROPHIC_RELATIONS = {
+DEFAULT_TROPHIC_RELATIONS = {
     "producers": {"prey": [], "predators": ["primary-consumers"]},
     "primary-consumers": {"prey": ["producers"], "predators": ["secondary-consumers"]},
     "secondary-consumers": {"prey": ["primary-consumers", "producers"], "predators": ["tertiary-consumers", "apex"]},
@@ -381,13 +376,86 @@ TROPHIC_RELATIONS = {
     "apex": {"prey": ["tertiary-consumers", "secondary-consumers"], "predators": []},
 }
 
-ORGANISM_BEHAVIORS: Dict[str, Dict[str, List[str]]] = {
+OCEAN_ORGANISM_BEHAVIORS: Dict[str, Dict[str, List[str]]] = {
     "consumer-1": {"prey_ids": ["producer-2", "producer-1"]},  # ex. Shrimp Swarm eats alagage and plankton
     "consumer-2": {"prey_ids": ["producer-2", "producer-1"]},  # ex. Krill Cloud eats alage and plankton
     "predator-2": {"prey_ids": ["consumer-1", "consumer-2"]},  # ex. Jellyfish Bloom eats krill and shrimp
     "predator-3": {"prey_ids": ["predator-1"]},  # ex. Seal Pod eats Lobster 
     "predator-4": {"prey_ids": ["predator-2"]},  # ex. Whale Shark eats Jellyfish Bloom
     "apex" : {"prey" : ["predator-3", "predator-4"]} #ex. orca eats Whale sharks and seals
+}
+
+RAINFOREST_ORGANISM_BEHAVIORS: Dict[str, Dict[str, List[str]]] = {
+    "rf-consumer-1": {"prey_ids": ["rf-producer-1", "rf-producer-2"]},
+    "rf-consumer-2": {"prey_ids": ["rf-producer-1", "rf-producer-2"]},
+    "rf-predator-1": {"prey_ids": ["rf-consumer-1", "rf-consumer-2"]},
+    "rf-predator-2": {"prey_ids": ["rf-consumer-2"]},
+    "rf-predator-3": {"prey_ids": ["rf-predator-1", "rf-predator-2"]},
+    "rf-predator-4": {"prey_ids": ["rf-predator-1", "rf-predator-2", "rf-consumer-1"]},
+    "rf-apex-1": {"prey_ids": ["rf-predator-3", "rf-predator-4"]},
+}
+
+BIOME_PRESETS: Dict[str, Dict] = {
+    "ocean": {
+        "id": "ocean",
+        "name": "Ocean Biome",
+        "map": {"rows": 12, "cols": 16, "labels": []},
+        "trait_names": ["Buoyancy", "Filter Efficiency", "Armor", "Echo Sensing"],
+        "organisms": {
+            "producers": [
+                {"id": "producer-1", "name": "Kelp Forest", "row": 1, "col": 4, "image": "images/sprites/ocean/alage.png", "share": 0.35, "moves": False, "trait_names": ["Frond Growth", "Sunlight Capture", "Holdfast Strength", "Wave Tolerance"]},
+                {"id": "producer-2", "name": "Plankton Bloom", "row": 3, "col": 8, "image": "images/sprites/ocean/plankton.png", "share": 0.65, "trait_names": ["Drift Control", "Reproduction Rate", "Nutrient Uptake", "Light Sensitivity"]},
+            ],
+            "primary-consumers": [
+                {"id": "consumer-1", "name": "Shrimp Swarm", "row": 4, "col": 8, "image": "images/sprites/ocean/shrimp.png", "share": 0.55, "trait_names": ["Shell Thickness", "Filter Appendages", "Burrow Speed", "Predator Awareness"]},
+                {"id": "consumer-2", "name": "Krill Cloud", "row": 7, "col": 5, "image": "images/sprites/ocean/krill.png", "share": 0.45, "trait_names": ["Schooling Cohesion", "Molting Rate", "Filter Efficiency", "Light Response"]},
+            ],
+            "secondary-consumers": [
+                {"id": "predator-1", "name": "Lobster Patrol", "row": 6, "col": 11, "image": "images/sprites/ocean/lobster.png", "share": 0.4, "trait_names": ["Claw Strength", "Carapace Armor", "Scuttle Speed", "Chemoreception"]},
+                {"id": "predator-2", "name": "Jellyfish Bloom", "row": 10, "col": 2, "image": "images/sprites/ocean/jellyfish.png", "share": 0.6, "trait_names": ["Tentacle Length", "Nematocyst Potency", "Bell Pulsing", "Current Riding"]},
+            ],
+            "tertiary-consumers": [
+                {"id": "predator-3", "name": "Seal Pod", "row": 11, "col": 12, "image": "images/sprites/ocean/seal.png", "share": 0.6, "trait_names": ["Blubber Thickness", "Dive Depth", "Flipper Power", "Echolocation"]},
+                {"id": "predator-4", "name": "Whale Shark Pair", "row": 6, "col": 5, "image": "images/sprites/ocean/whale-shark.png", "share": 0.4, "trait_names": ["Gill Filtering", "Mouth Gape", "Cruise Endurance", "Thermoregulation"]},
+            ],
+            "apex": [
+                {"id": "apex-1", "name": "Orca Pod", "row": 8, "col": 12, "image": "images/sprites/ocean/orca.png", "share": 1.0, "trait_names": ["Sonar Precision", "Pack Coordination", "Burst Speed", "Bite Force"]},
+            ],
+        },
+        "behaviors": OCEAN_ORGANISM_BEHAVIORS,
+        "speed_by_level": DEFAULT_SPEED_BY_LEVEL,
+        "relations": DEFAULT_TROPHIC_RELATIONS,
+    },
+    "rainforest": {
+        "id": "rainforest",
+        "name": "Rainforest Biome",
+        "map": {"rows": 12, "cols": 16, "labels": []},
+        "trait_names": ["Canopy Camouflage", "Metabolism", "Defense/Venom", "Senses"],
+        "organisms": {
+            "producers": [
+                {"id": "rf-producer-1", "name": "Bamboo Grove", "row": 2, "col": 3, "image": "images/sprites/rainforest/bamboo.png", "share": 0.55, "moves": False, "trait_names": ["Culm Growth", "Canopy Reach", "Root Spread", "Water Storage"]},
+                {"id": "rf-producer-2", "name": "Coconut Cluster", "row": 5, "col": 10, "image": "images/sprites/rainforest/coconut.png", "share": 0.45, "moves": False, "trait_names": ["Light Capture", "Fruit Yield", "Salt Tolerance", "Wind Resilience"]},
+            ],
+            "primary-consumers": [
+                {"id": "rf-consumer-1", "name": "Aphid Swarm", "row": 4, "col": 6, "image": "images/sprites/rainforest/aphid.png", "share": 0.5, "trait_names": ["Sap Intake", "Reproduction Rate", "Wing Development", "Ant Signaling"]},
+                {"id": "rf-consumer-2", "name": "Spider Mite Cluster", "row": 7, "col": 9, "image": "images/sprites/rainforest/spidermite.png", "share": 0.5, "trait_names": ["Web Density", "Leaf Hiding", "Egg Survival", "Dispersal Speed"]},
+            ],
+            "secondary-consumers": [
+                {"id": "rf-predator-1", "name": "Poison Dart Frog", "row": 6, "col": 5, "image": "images/sprites/rainforest/poisondartfrog.png", "share": 0.55, "trait_names": ["Skin Toxin", "Tongue Snap", "Moisture Retention", "Camouflage"]},
+                {"id": "rf-predator-2", "name": "Tarantula Ambush", "row": 9, "col": 4, "image": "images/sprites/rainforest/tarantula.png", "share": 0.45, "trait_names": ["Venom Potency", "Silk Strength", "Pounce Speed", "Vibration Sense"]},
+            ],
+            "tertiary-consumers": [
+                {"id": "rf-predator-3", "name": "Ocelot Patrol", "row": 10, "col": 13, "image": "images/sprites/rainforest/ocelot.png", "share": 0.5, "trait_names": ["Stealth Stalk", "Climbing Grip", "Night Vision", "Leap Power"]},
+                {"id": "rf-predator-4", "name": "Canopy Anaconda", "row": 5, "col": 14, "image": "images/sprites/rainforest/anaconda.png", "share": 0.5, "trait_names": ["Constriction Force", "Heat Sensing", "Branch Balance", "Ambush Patience"]},
+            ],
+            "apex": [
+                {"id": "rf-apex-1", "name": "Jaguar Stalk", "row": 8, "col": 12, "image": "images/sprites/rainforest/jaguar.png", "share": 1.0, "trait_names": ["Bite Force", "Swim Ability", "Camouflage", "Sprint Speed"]},
+            ],
+        },
+        "behaviors": RAINFOREST_ORGANISM_BEHAVIORS,
+        "speed_by_level": DEFAULT_SPEED_BY_LEVEL,
+        "relations": DEFAULT_TROPHIC_RELATIONS,
+    },
 }
 
 STATE_LOCK: Lock = Lock()
@@ -398,9 +466,52 @@ SIMULATION_STATE: Dict = {
     "grid": {"rows": 0, "cols": 0},
     "cycle": 0,
     "evolution": {},
+    "biome_id": DEFAULT_BIOME_ID,
+    "biome_config": None,
+    "relations": DEFAULT_TROPHIC_RELATIONS,
+    "speed_by_level": DEFAULT_SPEED_BY_LEVEL,
+    "behaviors": OCEAN_ORGANISM_BEHAVIORS,
 }
 
 STATE_LOG_PATH = Path(__file__).resolve().parent.parent / "simulation_state.json"
+
+def _compose_biome_config(preset: Dict) -> Dict:
+    """Build a full biome config by merging shared level settings with biome organisms."""
+    resolved = copy.deepcopy(preset)
+    organisms_by_level = resolved.get("organisms", {})
+    trait_names_override = resolved.get("trait_names")
+
+    trophic_levels: List[Dict] = []
+    for level_id in LEVEL_ORDER:
+        base_level = copy.deepcopy(BASE_LEVEL_SETTINGS.get(level_id, {}))
+        base_level["trait_names"] = trait_names_override or base_level.get("trait_names") or DEFAULT_TRAIT_NAMES
+        base_level["organisms"] = copy.deepcopy(organisms_by_level.get(level_id, []))
+        trophic_levels.append(base_level)
+
+    resolved["trophic_levels"] = trophic_levels
+    resolved["map"] = copy.deepcopy(resolved.get("map", {"rows": 12, "cols": 16, "labels": []}))
+    resolved["relations"] = copy.deepcopy(resolved.get("relations", DEFAULT_TROPHIC_RELATIONS))
+    resolved["speed_by_level"] = copy.deepcopy(resolved.get("speed_by_level", DEFAULT_SPEED_BY_LEVEL))
+    resolved["behaviors"] = copy.deepcopy(resolved.get("behaviors", {}))
+    return resolved
+
+def _get_biome_config(biome_id: Optional[str]) -> Dict:
+    """Return a deep copy of the biome preset so mutations stay scoped."""
+    fallback = BIOME_PRESETS.get(DEFAULT_BIOME_ID, {})
+    base = BIOME_PRESETS.get(biome_id or DEFAULT_BIOME_ID, fallback)
+    return _compose_biome_config(base or fallback)
+
+
+def _relations_lookup() -> Dict[str, Dict[str, List[str]]]:
+    return SIMULATION_STATE.get("relations") or DEFAULT_TROPHIC_RELATIONS
+
+
+def _speed_lookup() -> Dict[str, int]:
+    return SIMULATION_STATE.get("speed_by_level") or DEFAULT_SPEED_BY_LEVEL
+
+
+def _behavior_lookup() -> Dict[str, Dict[str, List[str]]]:
+    return SIMULATION_STATE.get("behaviors") or {}
 
 
 def _run_simulation(settings: Dict) -> Tuple[List, EvolutionContext]:
@@ -423,12 +534,15 @@ def _run_simulation(settings: Dict) -> Tuple[List, EvolutionContext]:
             random.setstate(previous_state)
 
 
-def build_trophic_levels() -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
+def build_trophic_levels(
+    biome_config: Optional[Dict] = None,
+) -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
     """Run GA simulations for each trophic level and build organism metadata."""
+    config = biome_config or _get_biome_config(SIMULATION_STATE.get("biome_id"))
     trophic_levels: List[Dict] = []
     evolution_state: Dict[str, Dict[str, object]] = {}
 
-    for level in TROPHIC_LEVEL_CONFIG:
+    for level in config.get("trophic_levels", []):
         population, context = _run_simulation(level["simulation"])
         population_count = len(population)
         organism_configs = level["organisms"]
@@ -454,7 +568,7 @@ def build_trophic_levels() -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
                     moves=organism_cfg.get("moves", True),
                     ideal_traits=level["simulation"].get("target_traits"),
                     user_ideal_traits=organism_cfg.get("user_ideal_traits"),
-                    trait_names=level_trait_names,
+                    trait_names=organism_cfg.get("trait_names", level_trait_names),
                 )
                 for organism_cfg in organism_configs
             ]
@@ -502,7 +616,7 @@ def build_trophic_levels() -> Tuple[List[Dict], Dict[str, Dict[str, object]]]:
                     moves=organism_cfg.get("moves", True),
                     ideal_traits=level["simulation"].get("target_traits"),
                     user_ideal_traits=organism_cfg.get("user_ideal_traits"),
-                    trait_names=level_trait_names,
+                    trait_names=organism_cfg.get("trait_names", level_trait_names),
                 )
                 organism.setGenes(assigned)
                 organism.setSize(len(assigned))
@@ -533,6 +647,8 @@ def initialize_simulation_state(
     trophic_levels: List[Dict],
     map_grid: Dict,
     evolution_state: Dict[str, Dict[str, object]],
+    *,
+    biome_config: Optional[Dict] = None,
 ) -> None:
     """Seed the shared simulation state with organisms and map geometry."""
     with STATE_LOCK:
@@ -556,6 +672,12 @@ def initialize_simulation_state(
         }
         SIMULATION_STATE["cycle"] = 0
         SIMULATION_STATE["evolution"] = evolution_state
+        resolved_biome = biome_config or _get_biome_config(DEFAULT_BIOME_ID)
+        SIMULATION_STATE["biome_config"] = resolved_biome
+        SIMULATION_STATE["biome_id"] = resolved_biome.get("id", SIMULATION_STATE.get("biome_id", DEFAULT_BIOME_ID))
+        SIMULATION_STATE["relations"] = resolved_biome.get("relations") or BIOME_PRESETS[DEFAULT_BIOME_ID]["relations"]
+        SIMULATION_STATE["speed_by_level"] = resolved_biome.get("speed_by_level") or BIOME_PRESETS[DEFAULT_BIOME_ID]["speed_by_level"]
+        SIMULATION_STATE["behaviors"] = resolved_biome.get("behaviors") or BIOME_PRESETS[DEFAULT_BIOME_ID]["behaviors"]
 
 
 def replace_first_species(
@@ -571,8 +693,10 @@ def replace_first_species(
         return False
 
     with STATE_LOCK:
+        biome_config = SIMULATION_STATE.get("biome_config") or _get_biome_config(SIMULATION_STATE.get("biome_id"))
+        trophic_config = biome_config.get("trophic_levels") if isinstance(biome_config, dict) else None
         target_level = None
-        for level in TROPHIC_LEVEL_CONFIG:
+        for level in trophic_config or []:
             if level.get("id") == level_id:
                 target_level = level
                 break
@@ -605,6 +729,7 @@ def replace_first_species(
             if user_ideal_traits is not None:
                 organism.setUserIdealTraits(user_ideal_traits)
 
+        SIMULATION_STATE["biome_config"] = biome_config
         return True
 
 def _clamp_step(value: int) -> int:
@@ -690,7 +815,7 @@ def _calculate_move_delta(organism: Organism, relations: Dict[str, List[str]], c
     prey_levels = relations.get("prey", []) 
     predator_levels = relations.get("predators", [])
 
-    behavior = ORGANISM_BEHAVIORS.get(organism.id, {})
+    behavior = _behavior_lookup().get(organism.id, {})
     specific_prey_ids = behavior.get("prey_ids", [])
     specific_predator_ids = behavior.get("predator_ids", [])
 
@@ -745,6 +870,8 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
             return {"organisms": [], "cycleComplete": False, "cycleSummary": []}
 
         grid = SIMULATION_STATE["grid"]
+        relations_map = _relations_lookup()
+        speed_map = _speed_lookup()
         planned_moves: List[Tuple[str, int, int]] = []
 
         for organism in organism_lookup.values():
@@ -753,8 +880,8 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                 continue
 
             level_id = SIMULATION_STATE["level_lookup"].get(organism.id)
-            relations = TROPHIC_RELATIONS.get(level_id, {"prey": [], "predators": []})
-            speed = SPEED_BY_LEVEL.get(level_id, 1)
+            relations = relations_map.get(level_id, {"prey": [], "predators": []})
+            speed = speed_map.get(level_id, 1)
 
             row_delta = 0
             col_delta = 0
@@ -809,11 +936,11 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
             }
             for organism in occupants:
                 level_id = occupant_levels.get(organism.id)
-                relations = TROPHIC_RELATIONS.get(level_id, {"prey": [], "predators": []})
+                relations = relations_map.get(level_id, {"prey": [], "predators": []})
                 prey_levels = relations.get("prey", [])
                 if organism.hasCaughtPrey():
                     continue
-                behavior = ORGANISM_BEHAVIORS.get(organism.id, {})
+                behavior = _behavior_lookup().get(organism.id, {})
                 prey_ids = behavior.get("prey_ids", [])
                 if not prey_levels and not prey_ids:
                     continue

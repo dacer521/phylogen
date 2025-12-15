@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 from .simulation import (
     build_trophic_levels,
     DEFAULT_TRAIT_NAMES,
+    _get_biome_config,
     initialize_simulation_state,
     persist_simulation_state,
     replace_first_species,
@@ -39,27 +40,22 @@ def _normalize_level_id(raw_value: Optional[str]) -> Optional[str]:
     return LEVEL_ALIAS_MAP.get(key, key)
 
 
-def _build_map_context(biome_name="Evolution Simulator"):
-    map_grid = {
-        "rows": 12,
-        "cols": 16,
-        "labels": [
-            # {"row": 2, "col": 4, "text": "Watering Hole"},
-            # {"row": 6, "col": 10, "text": "Nest"},
-            # {"row": 9, "col": 3, "text": "Food Storage"},
-        ],
-    }
+def _build_map_context(biome_id="ocean"):
+    biome_config = _get_biome_config(biome_id)
+    biome_name = biome_config.get("name", "Evolution Simulator")
+    map_grid = biome_config.get("map", {"rows": 12, "cols": 16, "labels": []})
     map_grid["label_lookup"] = {
         (label["row"] - 1, label["col"] - 1): label["text"] for label in map_grid["labels"]
     }
 
-    trophic_levels, evolution_state = build_trophic_levels()
-    initialize_simulation_state(trophic_levels, map_grid, evolution_state)
+    trophic_levels, evolution_state = build_trophic_levels(biome_config)
+    initialize_simulation_state(trophic_levels, map_grid, evolution_state, biome_config=biome_config)
 
     return {
         "map_grid": map_grid,
         "trophic_levels": trophic_levels,
         "biome_name": biome_name,
+        "biome_id": biome_config.get("id", biome_id),
     }
 
 
@@ -70,7 +66,16 @@ def index():
 
 @bp.route('/ocean')
 def ocean():
-    context = _build_map_context("Ocean Biome")
+    context = _build_map_context("ocean")
+    return render_template(
+        "simulation.html",
+        **context,
+    )
+
+
+@bp.route('/rainforest')
+def rainforest():
+    context = _build_map_context("rainforest")
     return render_template(
         "simulation.html",
         **context,

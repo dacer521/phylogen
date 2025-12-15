@@ -4,1246 +4,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "consumer-2",
+        "id": "rf-producer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-2",
         "wasCaught": true
       },
       {
         "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
+        "id": "rf-predator-3",
+        "wasCaught": false
       },
       {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
+        "caughtPrey": false,
+        "id": "rf-predator-4",
         "wasCaught": false
       },
       {
         "caughtPrey": true,
-        "id": "predator-4",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "apex-1",
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.2703,
-          0.4877,
-          0.3979,
-          0.6691
+          0.2693,
+          0.5258,
+          0.437,
+          0.6874
         ],
         "canMove": false,
         "caughtPrey": false,
-        "col": 4,
+        "col": 3,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 74,
-        "row": 1,
+        "id": "rf-producer-1",
+        "population": 94,
+        "row": 2,
         "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.355,
-          0.4993,
-          0.4082,
-          0.6646
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "producer-2",
-        "population": 152,
-        "row": 3,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.4813,
-          0.4769,
-          0.3898,
-          0.6266
+          0.3026,
+          0.4715,
+          0.4123,
+          0.6911
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 77,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.5033,
+          0.4928,
+          0.3344,
+          0.6379
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
+        "caughtPrey": false,
+        "col": 6,
         "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 64,
+        "id": "rf-consumer-1",
+        "population": 59,
         "row": 4,
         "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.4167,
-          0.5732,
-          0.3799,
-          0.6816
+          0.5039,
+          0.4965,
+          0.4385,
+          0.6468
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 5,
+        "col": 9,
         "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 46,
-        "row": 7,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.523,
-          0.5121,
-          0.4313,
-          0.6689
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 36,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.5025,
-          0.4974,
-          0.3749,
-          0.7009
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
+        "id": "rf-consumer-2",
         "population": 53,
-        "row": 10,
+        "row": 7,
         "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.1992,
-          0.7566,
-          0.6064,
-          0.7658
+          0.4931,
+          0.5652,
+          0.3915,
+          0.7101
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 27,
-        "row": 11,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.3297,
-          0.6602,
-          0.5449,
-          0.6349
-        ],
-        "canMove": true,
-        "caughtPrey": true,
+        "caughtPrey": false,
         "col": 5,
         "cycleStep": 30,
-        "id": "predator-4",
-        "population": 17,
+        "id": "rf-predator-1",
+        "population": 48,
         "row": 6,
         "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.5382,
-          0.8301,
-          0.4637,
-          0.3866
+          0.5236,
+          0.5659,
+          0.3356,
+          0.6996
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "apex-1",
-        "population": 23,
-        "row": 8,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      }
-    ]
-  },
-  {
-    "cycle": 1,
-    "summary": [
-      {
-        "caughtPrey": false,
-        "id": "producer-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "apex-1",
-        "wasCaught": false
-      }
-    ],
-    "organisms": [
-      {
-        "averageGenome": [
-          0.3004,
-          0.5283,
-          0.4404,
-          0.6766
-        ],
-        "canMove": false,
         "caughtPrey": false,
         "col": 4,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 76,
-        "row": 1,
+        "id": "rf-predator-2",
+        "population": 36,
+        "row": 9,
         "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.3557,
+          0.6931,
+          0.6975,
+          0.7329
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 23,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3049,
-          0.4595,
-          0.4161,
-          0.6988
+          0.3123,
+          0.6418,
+          0.6372,
+          0.7188
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 8,
+        "col": 14,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 142,
-        "row": 3,
+        "id": "rf-predator-4",
+        "population": 21,
+        "row": 5,
         "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4082,
-          0.5386,
-          0.3753,
-          0.6501
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 68,
-        "row": 4,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4591,
-          0.5678,
-          0.3723,
-          0.6066
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 49,
-        "row": 7,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4687,
-          0.5696,
-          0.4501,
-          0.6412
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 37,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.4241,
-          0.5369,
-          0.4094,
-          0.6658
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 54,
-        "row": 10,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.2034,
-          0.7392,
-          0.5521,
-          0.74
+          0.6845,
+          0.887,
+          0.5866,
+          0.3476
         ],
         "canMove": true,
         "caughtPrey": true,
         "col": 12,
         "cycleStep": 30,
-        "id": "predator-3",
-        "population": 27,
-        "row": 11,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2718,
-          0.6628,
-          0.5337,
-          0.6489
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 19,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.5691,
-          0.7891,
-          0.4841,
-          0.4337
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "apex-1",
+        "id": "rf-apex-1",
         "population": 21,
         "row": 8,
         "traitNames": [
+          "Bite Force",
+          "Swim Ability",
           "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      }
-    ]
-  },
-  {
-    "cycle": 2,
-    "summary": [
-      {
-        "caughtPrey": false,
-        "id": "producer-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "apex-1",
-        "wasCaught": false
-      }
-    ],
-    "organisms": [
-      {
-        "averageGenome": [
-          0.2682,
-          0.5126,
-          0.4306,
-          0.6853
-        ],
-        "canMove": false,
-        "caughtPrey": false,
-        "col": 4,
-        "cycleStep": 30,
-        "id": "producer-1",
-        "population": 60,
-        "row": 1,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.3278,
-          0.4629,
-          0.4095,
-          0.7346
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "producer-2",
-        "population": 101,
-        "row": 3,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4572,
-          0.56,
-          0.3955,
-          0.5765
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 64,
-        "row": 4,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4437,
-          0.5297,
-          0.3406,
-          0.5772
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 41,
-        "row": 7,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4309,
-          0.5346,
-          0.4407,
-          0.6176
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 33,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4395,
-          0.5839,
-          0.3761,
-          0.6521
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 44,
-        "row": 10,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2105,
-          0.6679,
-          0.5264,
-          0.641
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 24,
-        "row": 11,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.1745,
-          0.8108,
-          0.5867,
-          0.6961
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 16,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.6127,
-          0.8465,
-          0.4434,
-          0.418
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "apex-1",
-        "population": 22,
-        "row": 8,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      }
-    ]
-  },
-  {
-    "cycle": 3,
-    "summary": [
-      {
-        "caughtPrey": false,
-        "id": "producer-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": false,
-        "id": "predator-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": false,
-        "id": "predator-3",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "predator-4",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "apex-1",
-        "wasCaught": false
-      }
-    ],
-    "organisms": [
-      {
-        "averageGenome": [
-          0.3241,
-          0.4972,
-          0.3999,
-          0.7261
-        ],
-        "canMove": false,
-        "caughtPrey": false,
-        "col": 4,
-        "cycleStep": 30,
-        "id": "producer-1",
-        "population": 70,
-        "row": 1,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.3777,
-          0.4555,
-          0.4154,
-          0.6796
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "producer-2",
-        "population": 107,
-        "row": 3,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4482,
-          0.613,
-          0.3445,
-          0.6372
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 63,
-        "row": 4,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4426,
-          0.5305,
-          0.5043,
-          0.5516
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 44,
-        "row": 7,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4588,
-          0.6474,
-          0.3727,
-          0.6076
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 30,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.414,
-          0.6245,
-          0.402,
-          0.6562
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 41,
-        "row": 10,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.1668,
-          0.7445,
-          0.541,
-          0.6774
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 27,
-        "row": 11,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2813,
-          0.7042,
-          0.537,
-          0.5504
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 19,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.675,
-          0.8198,
-          0.5664,
-          0.4044
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "apex-1",
-        "population": 19,
-        "row": 8,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      }
-    ]
-  },
-  {
-    "cycle": 4,
-    "summary": [
-      {
-        "caughtPrey": false,
-        "id": "producer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "predator-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "apex-1",
-        "wasCaught": false
-      }
-    ],
-    "organisms": [
-      {
-        "averageGenome": [
-          0.3447,
-          0.4838,
-          0.3642,
-          0.7216
-        ],
-        "canMove": false,
-        "caughtPrey": false,
-        "col": 4,
-        "cycleStep": 30,
-        "id": "producer-1",
-        "population": 70,
-        "row": 1,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3561,
-          0.4474,
-          0.454,
-          0.6943
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "producer-2",
-        "population": 107,
-        "row": 3,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4165,
-          0.5918,
-          0.3883,
-          0.5591
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 87,
-        "row": 4,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4756,
-          0.4787,
-          0.4366,
-          0.5597
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 61,
-        "row": 7,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.395,
-          0.6948,
-          0.3982,
-          0.588
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 39,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4981,
-          0.5593,
-          0.4269,
-          0.6655
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 51,
-        "row": 10,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2746,
-          0.7694,
-          0.5177,
-          0.6509
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 24,
-        "row": 11,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.2484,
-          0.7094,
-          0.5649,
-          0.7194
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 14,
-        "row": 6,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.6703,
-          0.8593,
-          0.5263,
-          0.3481
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "apex-1",
-        "population": 19,
-        "row": 8,
-        "traitNames": [
-          "Camouflage",
-          "Metabolism",
-          "Defense",
-          "Senses"
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
