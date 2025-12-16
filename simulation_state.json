@@ -4,246 +4,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
+        "id": "rf-producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-2",
         "wasCaught": true
       },
       {
         "caughtPrey": false,
-        "id": "producer-2",
+        "id": "rf-consumer-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-1",
         "wasCaught": true
       },
       {
         "caughtPrey": true,
-        "id": "consumer-1",
+        "id": "rf-predator-2",
         "wasCaught": false
       },
       {
         "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "id": "rf-predator-3",
         "wasCaught": false
       },
       {
         "caughtPrey": true,
-        "id": "apex-1",
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.2864,
-          0.4893,
-          0.4159,
-          0.6796
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 4,
-        "cycleStep": 30,
-        "id": "producer-1",
-        "population": 58,
-        "row": 1,
-        "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2617,
-          0.5168,
-          0.3843,
-          0.7236
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "producer-2",
-        "population": 106,
-        "row": 3,
-        "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4278,
-          0.474,
-          0.4011,
-          0.6029
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 85,
-        "row": 4,
-        "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.5083,
-          0.5123,
-          0.3728,
-          0.5906
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 62,
-        "row": 7,
-        "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.5412,
-          0.5041,
-          0.3357,
-          0.7772
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 31,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.5687,
-          0.5236,
-          0.3514,
-          0.6463
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 47,
-        "row": 10,
-        "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2796,
-          0.6824,
-          0.6713,
-          0.7131
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 25,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3628,
-          0.5831,
-          0.6388,
-          0.7495
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 17,
-        "row": 6,
-        "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.6122,
-          0.8573,
-          0.5805,
-          0.4058
+          0.2619,
+          0.5133,
+          0.4015,
+          0.7125
         ],
         "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 98,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2833,
+          0.5336,
+          0.3435,
+          0.7201
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 73,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4257,
+          0.5266,
+          0.4546,
+          0.6567
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 54,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4762,
+          0.5676,
+          0.4174,
+          0.6346
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 61,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4893,
+          0.4936,
+          0.3284,
+          0.6229
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 41,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.529,
+          0.5083,
+          0.3427,
+          0.7407
+        ],
+        "canMove": true,
         "caughtPrey": true,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 39,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2505,
+          0.6003,
+          0.6146,
+          0.7383
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 23,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3202,
+          0.5757,
+          0.5809,
+          0.642
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 21,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.6613,
+          0.851,
+          0.5372,
+          0.3859
+        ],
+        "canMove": false,
+        "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
-        "population": 21,
+        "id": "rf-apex-1",
+        "population": 20,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -254,246 +254,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "apex-1",
+        "id": "rf-producer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.272,
-          0.5135,
-          0.4395,
-          0.6854
+          0.2523,
+          0.4899,
+          0.3447,
+          0.7638
         ],
-        "canMove": true,
+        "canMove": false,
         "caughtPrey": false,
-        "col": 4,
+        "col": 3,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 75,
-        "row": 1,
+        "id": "rf-producer-1",
+        "population": 97,
+        "row": 2,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.286,
+          0.5296,
+          0.4068,
+          0.7097
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 65,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.3575,
-          0.4772,
-          0.4734,
-          0.6084
+          0.4374,
+          0.5177,
+          0.4173,
+          0.7346
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 8,
+        "col": 6,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 136,
-        "row": 3,
-        "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4837,
-          0.4671,
-          0.3538,
-          0.6795
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 71,
+        "id": "rf-consumer-1",
+        "population": 67,
         "row": 4,
         "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
         ],
-        "wasCaught": true
+        "wasCaught": false
       },
       {
         "averageGenome": [
-          0.4577,
-          0.4848,
-          0.3019,
-          0.5944
+          0.5077,
+          0.4443,
+          0.4052,
+          0.5881
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
+        "caughtPrey": false,
+        "col": 9,
         "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 52,
+        "id": "rf-consumer-2",
+        "population": 76,
         "row": 7,
         "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.5572,
-          0.503,
-          0.2515,
-          0.7467
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 31,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4832,
-          0.5185,
-          0.3549,
-          0.64
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 55,
-        "row": 10,
-        "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.2894,
-          0.5915,
-          0.6461,
-          0.746
+          0.5127,
+          0.5452,
+          0.3174,
+          0.5985
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 26,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.2809,
-          0.5963,
-          0.5914,
-          0.6473
-        ],
-        "canMove": true,
-        "caughtPrey": true,
+        "caughtPrey": false,
         "col": 5,
         "cycleStep": 30,
-        "id": "predator-4",
-        "population": 18,
+        "id": "rf-predator-1",
+        "population": 44,
         "row": 6,
         "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.5735,
-          0.8533,
-          0.7625,
-          0.4223
+          0.5088,
+          0.5038,
+          0.4627,
+          0.724
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 44,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.1697,
+          0.6519,
+          0.5839,
+          0.7212
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 21,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3369,
+          0.6778,
+          0.6707,
+          0.7625
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 19,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.5966,
+          0.8086,
+          0.5957,
+          0.4043
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
+        "id": "rf-apex-1",
         "population": 22,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -504,246 +504,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "producer-2",
+        "id": "rf-producer-2",
         "wasCaught": true
       },
       {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "apex-1",
+        "id": "rf-consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3089,
-          0.4811,
-          0.4942,
-          0.6168
+          0.286,
+          0.5267,
+          0.42,
+          0.6895
         ],
-        "canMove": true,
+        "canMove": false,
         "caughtPrey": false,
-        "col": 4,
+        "col": 3,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 71,
-        "row": 1,
+        "id": "rf-producer-1",
+        "population": 108,
+        "row": 2,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3397,
-          0.4982,
-          0.489,
-          0.6659
+          0.274,
+          0.518,
+          0.4227,
+          0.7156
         ],
-        "canMove": true,
+        "canMove": false,
         "caughtPrey": false,
-        "col": 8,
+        "col": 10,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 116,
-        "row": 3,
+        "id": "rf-producer-2",
+        "population": 66,
+        "row": 5,
         "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.4401,
-          0.4846,
-          0.3066,
-          0.6976
+          0.4314,
+          0.4614,
+          0.3769,
+          0.7551
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
+        "caughtPrey": false,
+        "col": 6,
         "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 85,
+        "id": "rf-consumer-1",
+        "population": 52,
         "row": 4,
         "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
         ],
-        "wasCaught": true
+        "wasCaught": false
       },
       {
         "averageGenome": [
-          0.467,
-          0.4226,
-          0.4223,
-          0.5504
+          0.5061,
+          0.5069,
+          0.4016,
+          0.729
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
+        "caughtPrey": false,
+        "col": 9,
         "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 63,
+        "id": "rf-consumer-2",
+        "population": 53,
         "row": 7,
         "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.4476,
-          0.6968,
-          0.2744,
-          0.6828
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 25,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4652,
-          0.5133,
-          0.3288,
-          0.7301
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 45,
-        "row": 10,
-        "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2913,
-          0.6298,
-          0.5955,
-          0.7294
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 28,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.2892,
-          0.5778,
-          0.6676,
-          0.7026
+          0.4763,
+          0.5865,
+          0.3767,
+          0.7084
         ],
         "canMove": true,
         "caughtPrey": true,
         "col": 5,
         "cycleStep": 30,
-        "id": "predator-4",
-        "population": 19,
+        "id": "rf-predator-1",
+        "population": 34,
         "row": 6,
         "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.545,
-          0.8149,
-          0.785,
-          0.5466
+          0.438,
+          0.5469,
+          0.4534,
+          0.621
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 34,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2077,
+          0.6144,
+          0.6052,
+          0.7245
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 24,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3478,
+          0.5868,
+          0.5932,
+          0.6509
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 22,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.6785,
+          0.8423,
+          0.6119,
+          0.4415
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
+        "id": "rf-apex-1",
         "population": 20,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -754,246 +754,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
+        "id": "rf-producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-2",
         "wasCaught": true
       },
       {
         "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
+        "id": "rf-consumer-1",
         "wasCaught": true
       },
       {
         "caughtPrey": false,
-        "id": "predator-3",
+        "id": "rf-consumer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-1",
         "wasCaught": false
       },
       {
         "caughtPrey": true,
-        "id": "predator-4",
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
         "wasCaught": false
       },
       {
         "caughtPrey": true,
-        "id": "apex-1",
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3351,
-          0.4749,
-          0.5758,
-          0.6537
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 4,
-        "cycleStep": 30,
-        "id": "producer-1",
-        "population": 78,
-        "row": 1,
-        "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3738,
-          0.5087,
-          0.4796,
-          0.6315
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "producer-2",
-        "population": 127,
-        "row": 3,
-        "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4551,
-          0.5086,
-          0.2871,
-          0.6714
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 79,
-        "row": 4,
-        "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4884,
-          0.4676,
-          0.3049,
-          0.6758
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 59,
-        "row": 7,
-        "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4706,
-          0.6397,
-          0.2465,
-          0.7144
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 28,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4527,
-          0.5518,
-          0.2902,
-          0.7471
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 49,
-        "row": 10,
-        "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3432,
-          0.6392,
-          0.6502,
-          0.6222
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 23,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.2093,
-          0.5891,
-          0.6276,
-          0.6501
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 17,
-        "row": 6,
-        "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4812,
-          0.6947,
-          0.7441,
-          0.5505
+          0.3159,
+          0.5074,
+          0.4707,
+          0.6367
         ],
         "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 112,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3233,
+          0.5086,
+          0.4167,
+          0.6592
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 61,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.416,
+          0.5027,
+          0.3507,
+          0.7372
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 67,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5175,
+          0.5684,
+          0.44,
+          0.5594
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 76,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4642,
+          0.5263,
+          0.4335,
+          0.6815
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 45,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4915,
+          0.5702,
+          0.4251,
+          0.4992
+        ],
+        "canMove": true,
         "caughtPrey": true,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 46,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2422,
+          0.6898,
+          0.6286,
+          0.7291
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 24,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3056,
+          0.6195,
+          0.6492,
+          0.6152
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 22,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.6159,
+          0.7351,
+          0.6074,
+          0.4616
+        ],
+        "canMove": false,
+        "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
-        "population": 21,
+        "id": "rf-apex-1",
+        "population": 20,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -1004,246 +1004,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "apex-1",
+        "id": "rf-producer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3581,
-          0.4867,
-          0.6343,
-          0.6583
+          0.334,
+          0.4761,
+          0.4473,
+          0.6598
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 139,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2778,
+          0.4861,
+          0.4797,
+          0.6397
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 75,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4128,
+          0.4992,
+          0.2561,
+          0.6374
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 51,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.3937,
+          0.604,
+          0.31,
+          0.6616
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 57,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5124,
+          0.4804,
+          0.3928,
+          0.5718
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 40,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4546,
+          0.5021,
+          0.4146,
+          0.6536
         ],
         "canMove": true,
         "caughtPrey": false,
         "col": 4,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 70,
-        "row": 1,
+        "id": "rf-predator-2",
+        "population": 39,
+        "row": 9,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
         ],
-        "wasCaught": true
+        "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3353,
-          0.5199,
-          0.5713,
-          0.6908
+          0.2648,
+          0.6527,
+          0.6165,
+          0.7464
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 8,
+        "col": 13,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 114,
-        "row": 3,
-        "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4453,
-          0.537,
-          0.2666,
-          0.6639
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 77,
-        "row": 4,
-        "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4989,
-          0.5094,
-          0.3295,
-          0.6765
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 57,
-        "row": 7,
-        "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4164,
-          0.5548,
-          0.2993,
-          0.7489
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 31,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4427,
-          0.4994,
-          0.3547,
-          0.6298
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 60,
+        "id": "rf-predator-3",
+        "population": 21,
         "row": 10,
         "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.2054,
-          0.6292,
-          0.5308,
-          0.6882
+          0.296,
+          0.7939,
+          0.623,
+          0.7624
         ],
         "canMove": true,
         "caughtPrey": true,
-        "col": 12,
+        "col": 14,
         "cycleStep": 30,
-        "id": "predator-3",
-        "population": 22,
-        "row": 11,
+        "id": "rf-predator-4",
+        "population": 21,
+        "row": 5,
         "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3263,
-          0.6766,
-          0.632,
-          0.6624
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 16,
-        "row": 6,
-        "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4184,
-          0.741,
-          0.8418,
-          0.5313
+          0.5905,
+          0.7528,
+          0.5303,
+          0.5438
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
-        "population": 20,
+        "id": "rf-apex-1",
+        "population": 19,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -1254,246 +1254,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "predator-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "apex-1",
+        "id": "rf-producer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3803,
-          0.5057,
-          0.6146,
-          0.6692
+          0.2632,
+          0.5194,
+          0.4778,
+          0.6966
         ],
-        "canMove": true,
+        "canMove": false,
         "caughtPrey": false,
-        "col": 4,
+        "col": 3,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 77,
-        "row": 1,
+        "id": "rf-producer-1",
+        "population": 119,
+        "row": 2,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.264,
+          0.5291,
+          0.5629,
+          0.6836
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 58,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.386,
-          0.5185,
-          0.5766,
-          0.6612
+          0.3512,
+          0.5915,
+          0.2947,
+          0.6731
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 8,
+        "col": 6,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 127,
-        "row": 3,
-        "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4355,
-          0.5491,
-          0.2894,
-          0.6788
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 61,
+        "id": "rf-consumer-1",
+        "population": 72,
         "row": 4,
         "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
         ],
-        "wasCaught": true
+        "wasCaught": false
       },
       {
         "averageGenome": [
-          0.4485,
-          0.4626,
-          0.2341,
-          0.6305
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 45,
-        "row": 7,
-        "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.406,
-          0.4873,
-          0.3088,
-          0.7196
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 28,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4388,
-          0.4909,
-          0.3141,
-          0.7169
+          0.4609,
+          0.5649,
+          0.4603,
+          0.5845
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 2,
+        "col": 9,
         "cycleStep": 30,
-        "id": "predator-2",
-        "population": 52,
-        "row": 10,
+        "id": "rf-consumer-2",
+        "population": 72,
+        "row": 7,
         "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.3,
-          0.6423,
-          0.6179,
-          0.6968
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 27,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.2571,
-          0.6239,
-          0.5269,
-          0.6397
+          0.4313,
+          0.5093,
+          0.3973,
+          0.6476
         ],
         "canMove": true,
         "caughtPrey": true,
         "col": 5,
         "cycleStep": 30,
-        "id": "predator-4",
-        "population": 19,
+        "id": "rf-predator-1",
+        "population": 45,
         "row": 6,
         "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3541,
-          0.5965,
-          0.8162,
-          0.619
+          0.4393,
+          0.4672,
+          0.3573,
+          0.5624
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 44,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2959,
+          0.6943,
+          0.5369,
+          0.7819
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 23,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3086,
+          0.6972,
+          0.5995,
+          0.7536
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 23,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.584,
+          0.6637,
+          0.5836,
+          0.5429
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
-        "population": 20,
+        "id": "rf-apex-1",
+        "population": 22,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -1504,246 +1504,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "id": "rf-producer-2",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "apex-1",
+        "id": "rf-consumer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3645,
-          0.4465,
-          0.5836,
-          0.6608
+          0.2313,
+          0.5436,
+          0.5052,
+          0.7266
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 127,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2694,
+          0.5561,
+          0.5128,
+          0.6456
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 62,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3573,
+          0.5998,
+          0.2942,
+          0.6881
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 56,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3583,
+          0.601,
+          0.3217,
+          0.7241
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 51,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4511,
+          0.5149,
+          0.3467,
+          0.6425
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 35,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4985,
+          0.5178,
+          0.4174,
+          0.5785
         ],
         "canMove": true,
         "caughtPrey": false,
         "col": 4,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 81,
-        "row": 1,
+        "id": "rf-predator-2",
+        "population": 32,
+        "row": 9,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3838,
-          0.5246,
-          0.5756,
-          0.7071
+          0.3335,
+          0.6521,
+          0.5527,
+          0.8158
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 19,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2663,
+          0.7996,
+          0.6107,
+          0.7885
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 8,
+        "col": 14,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 120,
-        "row": 3,
+        "id": "rf-predator-4",
+        "population": 19,
+        "row": 5,
         "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3632,
-          0.5075,
-          0.22,
-          0.6907
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 83,
-        "row": 4,
-        "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.5091,
-          0.5438,
-          0.481,
-          0.5444
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 63,
-        "row": 7,
-        "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4398,
-          0.4681,
-          0.2854,
-          0.7351
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 29,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4022,
-          0.5146,
-          0.3761,
-          0.6505
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 60,
-        "row": 10,
-        "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3129,
-          0.6293,
-          0.5724,
-          0.65
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 25,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.2769,
-          0.7539,
-          0.5719,
-          0.7169
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 18,
-        "row": 6,
-        "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.2853,
-          0.2785,
-          0.8578,
-          0.5559
+          0.7332,
+          0.7357,
+          0.4862,
+          0.5968
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
-        "population": 20,
+        "id": "rf-apex-1",
+        "population": 21,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -1754,246 +1754,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
+        "id": "rf-producer-2",
         "wasCaught": true
       },
       {
         "caughtPrey": false,
-        "id": "consumer-2",
+        "id": "rf-consumer-1",
         "wasCaught": true
       },
       {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "predator-4",
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-2",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "apex-1",
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3566,
-          0.5136,
-          0.6322,
-          0.6723
+          0.2068,
+          0.5457,
+          0.5118,
+          0.7101
         ],
-        "canMove": true,
+        "canMove": false,
         "caughtPrey": false,
-        "col": 4,
+        "col": 3,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 94,
-        "row": 1,
+        "id": "rf-producer-1",
+        "population": 162,
+        "row": 2,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.4107,
-          0.4687,
-          0.5584,
-          0.6524
+          0.3616,
+          0.5228,
+          0.4939,
+          0.5566
         ],
-        "canMove": true,
+        "canMove": false,
         "caughtPrey": false,
-        "col": 8,
+        "col": 10,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 126,
-        "row": 3,
+        "id": "rf-producer-2",
+        "population": 71,
+        "row": 5,
         "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.3602,
-          0.5611,
-          0.2946,
-          0.7387
+          0.312,
+          0.5603,
+          0.3012,
+          0.7495
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
+        "caughtPrey": false,
+        "col": 6,
         "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 77,
+        "id": "rf-consumer-1",
+        "population": 70,
         "row": 4,
         "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.4406,
-          0.6111,
-          0.3874,
-          0.5601
+          0.4298,
+          0.5677,
+          0.4541,
+          0.5241
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 5,
+        "col": 9,
         "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 56,
+        "id": "rf-consumer-2",
+        "population": 72,
         "row": 7,
         "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4247,
-          0.5596,
-          0.4268,
-          0.6735
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 25,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3753,
-          0.4793,
-          0.293,
-          0.6637
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 52,
-        "row": 10,
-        "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.3192,
-          0.707,
-          0.5968,
-          0.7092
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 25,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.3392,
-          0.6844,
-          0.6939,
-          0.6838
+          0.4888,
+          0.5696,
+          0.2947,
+          0.613
         ],
         "canMove": true,
         "caughtPrey": false,
         "col": 5,
         "cycleStep": 30,
-        "id": "predator-4",
-        "population": 16,
+        "id": "rf-predator-1",
+        "population": 45,
         "row": 6,
         "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3169,
-          0.3548,
-          0.8118,
-          0.6473
+          0.5168,
+          0.4637,
+          0.5057,
+          0.5569
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 43,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2776,
+          0.6699,
+          0.5321,
+          0.8575
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 22,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2868,
+          0.6139,
+          0.6059,
+          0.6591
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 23,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.7009,
+          0.7402,
+          0.5646,
+          0.6049
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
-        "population": 23,
+        "id": "rf-apex-1",
+        "population": 21,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -2004,246 +2004,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
+        "id": "rf-producer-2",
         "wasCaught": false
       },
       {
-        "caughtPrey": true,
-        "id": "predator-2",
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
         "wasCaught": false
       },
       {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
         "wasCaught": false
       },
       {
-        "caughtPrey": true,
-        "id": "apex-1",
+        "caughtPrey": false,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3389,
-          0.505,
-          0.627,
-          0.7369
+          0.2766,
+          0.5208,
+          0.4584,
+          0.6873
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 147,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2017,
+          0.5349,
+          0.5056,
+          0.6938
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 64,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3606,
+          0.5468,
+          0.2892,
+          0.6789
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 52,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.304,
+          0.5274,
+          0.4033,
+          0.6374
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 53,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.5068,
+          0.44,
+          0.3025,
+          0.5955
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 46,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4612,
+          0.5127,
+          0.3816,
+          0.5849
         ],
         "canMove": true,
         "caughtPrey": false,
         "col": 4,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 81,
-        "row": 1,
+        "id": "rf-predator-2",
+        "population": 44,
+        "row": 9,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3374,
-          0.4963,
-          0.6036,
-          0.697
+          0.3028,
+          0.7822,
+          0.4769,
+          0.8242
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 8,
+        "col": 13,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 97,
-        "row": 3,
-        "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3588,
-          0.5316,
-          0.3332,
-          0.6514
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 64,
-        "row": 4,
-        "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4152,
-          0.5544,
-          0.3636,
-          0.6488
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 47,
-        "row": 7,
-        "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3813,
-          0.5467,
-          0.3939,
-          0.6904
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 25,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.4715,
-          0.5506,
-          0.4056,
-          0.6586
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 51,
+        "id": "rf-predator-3",
+        "population": 19,
         "row": 10,
         "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.2642,
-          0.6472,
-          0.6183,
-          0.7447
+          0.1894,
+          0.6868,
+          0.5575,
+          0.8456
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
+        "caughtPrey": false,
+        "col": 14,
         "cycleStep": 30,
-        "id": "predator-3",
-        "population": 25,
-        "row": 11,
+        "id": "rf-predator-4",
+        "population": 19,
+        "row": 5,
         "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3568,
-          0.642,
-          0.6909,
-          0.6033
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "predator-4",
-        "population": 17,
-        "row": 6,
-        "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.2561,
-          0.266,
-          0.8459,
-          0.6651
+          0.8104,
+          0.7211,
+          0.541,
+          0.635
         ],
         "canMove": false,
-        "caughtPrey": true,
+        "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
+        "id": "rf-apex-1",
         "population": 20,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -2254,246 +2254,246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "id": "rf-producer-2",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "apex-1",
+        "id": "rf-consumer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3024,
-          0.4958,
-          0.6644,
-          0.7724
+          0.2529,
+          0.5646,
+          0.4772,
+          0.6672
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 161,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2677,
+          0.5348,
+          0.5317,
+          0.669
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 70,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3099,
+          0.5234,
+          0.3191,
+          0.6949
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 70,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.5029,
+          0.4992,
+          0.4396,
+          0.5401
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 64,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4813,
+          0.474,
+          0.2916,
+          0.572
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 45,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4883,
+          0.4678,
+          0.3582,
+          0.6132
         ],
         "canMove": true,
         "caughtPrey": false,
         "col": 4,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 98,
-        "row": 1,
+        "id": "rf-predator-2",
+        "population": 41,
+        "row": 9,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3634,
-          0.5107,
-          0.56,
-          0.639
+          0.274,
+          0.7812,
+          0.5602,
+          0.7852
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 8,
+        "col": 13,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 106,
-        "row": 3,
-        "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.3926,
-          0.5286,
-          0.3545,
-          0.649
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
-        "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 63,
-        "row": 4,
-        "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
-        ],
-        "wasCaught": false
-      },
-      {
-        "averageGenome": [
-          0.3656,
-          0.5615,
-          0.3212,
-          0.6678
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
-        "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 42,
-        "row": 7,
-        "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4007,
-          0.5875,
-          0.3227,
-          0.6967
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 30,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4892,
-          0.5315,
-          0.3457,
-          0.5614
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 59,
+        "id": "rf-predator-3",
+        "population": 21,
         "row": 10,
         "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2968,
-          0.6492,
-          0.6542,
-          0.6467
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 25,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.2205,
-          0.6003,
-          0.654,
-          0.7159
+          0.3869,
+          0.631,
+          0.4699,
+          0.6983
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 5,
+        "caughtPrey": false,
+        "col": 14,
         "cycleStep": 30,
-        "id": "predator-4",
-        "population": 17,
-        "row": 6,
+        "id": "rf-predator-4",
+        "population": 21,
+        "row": 5,
         "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.2027,
-          0.2969,
-          0.9264,
-          0.691
+          0.7402,
+          0.6801,
+          0.6395,
+          0.6149
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
+        "id": "rf-apex-1",
         "population": 21,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
@@ -2504,246 +2504,1246 @@
     "summary": [
       {
         "caughtPrey": false,
-        "id": "producer-1",
+        "id": "rf-producer-1",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "producer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "consumer-1",
+        "id": "rf-producer-2",
         "wasCaught": true
       },
       {
         "caughtPrey": false,
-        "id": "consumer-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-1",
+        "id": "rf-consumer-1",
         "wasCaught": true
       },
       {
         "caughtPrey": false,
-        "id": "predator-2",
-        "wasCaught": true
-      },
-      {
-        "caughtPrey": false,
-        "id": "predator-3",
-        "wasCaught": false
-      },
-      {
-        "caughtPrey": true,
-        "id": "predator-4",
+        "id": "rf-consumer-2",
         "wasCaught": false
       },
       {
         "caughtPrey": false,
-        "id": "apex-1",
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
         "wasCaught": false
       }
     ],
     "organisms": [
       {
         "averageGenome": [
-          0.3318,
-          0.4959,
-          0.6445,
-          0.6532
+          0.2557,
+          0.4773,
+          0.4692,
+          0.6747
         ],
-        "canMove": true,
+        "canMove": false,
         "caughtPrey": false,
-        "col": 4,
+        "col": 3,
         "cycleStep": 30,
-        "id": "producer-1",
-        "population": 87,
-        "row": 1,
+        "id": "rf-producer-1",
+        "population": 169,
+        "row": 2,
         "traitNames": [
-          "Frond Growth",
-          "Sunlight Capture",
-          "Holdfast Strength",
-          "Wave Tolerance"
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.4005,
-          0.5134,
-          0.596,
-          0.7119
+          0.1973,
+          0.522,
+          0.4078,
+          0.6941
         ],
-        "canMove": true,
+        "canMove": false,
         "caughtPrey": false,
-        "col": 8,
+        "col": 10,
         "cycleStep": 30,
-        "id": "producer-2",
-        "population": 85,
-        "row": 3,
+        "id": "rf-producer-2",
+        "population": 66,
+        "row": 5,
         "traitNames": [
-          "Drift Control",
-          "Reproduction Rate",
-          "Nutrient Uptake",
-          "Light Sensitivity"
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.3963,
-          0.5109,
-          0.3238,
-          0.698
+          0.3664,
+          0.5478,
+          0.3724,
+          0.6824
         ],
         "canMove": true,
-        "caughtPrey": true,
-        "col": 8,
+        "caughtPrey": false,
+        "col": 6,
         "cycleStep": 30,
-        "id": "consumer-1",
-        "population": 69,
+        "id": "rf-consumer-1",
+        "population": 66,
         "row": 4,
         "traitNames": [
-          "Shell Thickness",
-          "Filter Appendages",
-          "Burrow Speed",
-          "Predator Awareness"
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
         ],
         "wasCaught": true
       },
       {
         "averageGenome": [
-          0.4108,
-          0.5281,
-          0.4013,
-          0.6121
+          0.4564,
+          0.5102,
+          0.3298,
+          0.5931
         ],
         "canMove": true,
         "caughtPrey": false,
-        "col": 5,
+        "col": 9,
         "cycleStep": 30,
-        "id": "consumer-2",
-        "population": 44,
+        "id": "rf-consumer-2",
+        "population": 68,
         "row": 7,
         "traitNames": [
-          "Schooling Cohesion",
-          "Molting Rate",
-          "Filter Efficiency",
-          "Light Response"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4295,
-          0.5098,
-          0.276,
-          0.557
-        ],
-        "canMove": true,
-        "caughtPrey": true,
-        "col": 11,
-        "cycleStep": 30,
-        "id": "predator-1",
-        "population": 26,
-        "row": 6,
-        "traitNames": [
-          "Claw Strength",
-          "Carapace Armor",
-          "Scuttle Speed",
-          "Chemoreception"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.4809,
-          0.5391,
-          0.2723,
-          0.6951
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 2,
-        "cycleStep": 30,
-        "id": "predator-2",
-        "population": 50,
-        "row": 10,
-        "traitNames": [
-          "Tentacle Length",
-          "Nematocyst Potency",
-          "Bell Pulsing",
-          "Current Riding"
-        ],
-        "wasCaught": true
-      },
-      {
-        "averageGenome": [
-          0.2559,
-          0.6873,
-          0.5737,
-          0.6832
-        ],
-        "canMove": true,
-        "caughtPrey": false,
-        "col": 12,
-        "cycleStep": 30,
-        "id": "predator-3",
-        "population": 26,
-        "row": 11,
-        "traitNames": [
-          "Blubber Thickness",
-          "Dive Depth",
-          "Flipper Power",
-          "Echolocation"
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.3509,
-          0.6363,
-          0.5487,
-          0.5936
+          0.4199,
+          0.5344,
+          0.2763,
+          0.5633
         ],
         "canMove": true,
-        "caughtPrey": true,
+        "caughtPrey": false,
         "col": 5,
         "cycleStep": 30,
-        "id": "predator-4",
-        "population": 18,
+        "id": "rf-predator-1",
+        "population": 40,
         "row": 6,
         "traitNames": [
-          "Gill Filtering",
-          "Mouth Gape",
-          "Cruise Endurance",
-          "Thermoregulation"
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
         ],
         "wasCaught": false
       },
       {
         "averageGenome": [
-          0.1687,
-          0.2903,
-          0.9105,
-          0.7253
+          0.4415,
+          0.4395,
+          0.3603,
+          0.612
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 39,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3373,
+          0.7055,
+          0.5256,
+          0.8143
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 22,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3029,
+          0.551,
+          0.5023,
+          0.6057
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 23,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.6865,
+          0.6828,
+          0.6949,
+          0.6195
         ],
         "canMove": false,
         "caughtPrey": false,
         "col": 12,
         "cycleStep": 30,
-        "id": "apex-1",
+        "id": "rf-apex-1",
+        "population": 19,
+        "row": 8,
+        "traitNames": [
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
+        ],
+        "wasCaught": false
+      }
+    ]
+  },
+  {
+    "cycle": 11,
+    "summary": [
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
+        "wasCaught": false
+      }
+    ],
+    "organisms": [
+      {
+        "averageGenome": [
+          0.2213,
+          0.5052,
+          0.4172,
+          0.71
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 152,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.1942,
+          0.4782,
+          0.4083,
+          0.6783
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 60,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4242,
+          0.5373,
+          0.3493,
+          0.6215
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 64,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4096,
+          0.5015,
+          0.2593,
+          0.63
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 66,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4743,
+          0.5151,
+          0.3728,
+          0.6196
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 39,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.5064,
+          0.4867,
+          0.2723,
+          0.5606
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 38,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2351,
+          0.5162,
+          0.5354,
+          0.7184
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 23,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3339,
+          0.5807,
+          0.5253,
+          0.6224
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 25,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.727,
+          0.6367,
+          0.7005,
+          0.5443
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "rf-apex-1",
+        "population": 20,
+        "row": 8,
+        "traitNames": [
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
+        ],
+        "wasCaught": false
+      }
+    ]
+  },
+  {
+    "cycle": 12,
+    "summary": [
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
+        "wasCaught": false
+      }
+    ],
+    "organisms": [
+      {
+        "averageGenome": [
+          0.2086,
+          0.5552,
+          0.4495,
+          0.6857
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 161,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2397,
+          0.5865,
+          0.4507,
+          0.6112
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 57,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4224,
+          0.5224,
+          0.3194,
+          0.6464
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 52,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4205,
+          0.4434,
+          0.328,
+          0.5987
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 52,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.5166,
+          0.5213,
+          0.2727,
+          0.5697
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 38,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.4485,
+          0.4675,
+          0.2644,
+          0.6351
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 39,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2863,
+          0.6723,
+          0.5726,
+          0.7131
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 19,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3595,
+          0.6033,
+          0.4884,
+          0.6748
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 21,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.7318,
+          0.6287,
+          0.6789,
+          0.6049
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "rf-apex-1",
+        "population": 23,
+        "row": 8,
+        "traitNames": [
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
+        ],
+        "wasCaught": false
+      }
+    ]
+  },
+  {
+    "cycle": 13,
+    "summary": [
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
+        "wasCaught": false
+      }
+    ],
+    "organisms": [
+      {
+        "averageGenome": [
+          0.2288,
+          0.5493,
+          0.4257,
+          0.656
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 150,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2171,
+          0.5155,
+          0.4651,
+          0.5955
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 53,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3219,
+          0.4643,
+          0.3122,
+          0.6596
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 57,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4975,
+          0.5384,
+          0.428,
+          0.6088
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 58,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4711,
+          0.5737,
+          0.2792,
+          0.755
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 46,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.467,
+          0.5599,
+          0.3676,
+          0.5778
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 45,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.3089,
+          0.7831,
+          0.5424,
+          0.7308
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 18,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.1282,
+          0.6688,
+          0.5758,
+          0.7108
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 21,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.7198,
+          0.6307,
+          0.6596,
+          0.4892
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "rf-apex-1",
         "population": 22,
         "row": 8,
         "traitNames": [
-          "Sonar Precision",
-          "Pack Coordination",
-          "Burst Speed",
-          "Bite Force"
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
+        ],
+        "wasCaught": false
+      }
+    ]
+  },
+  {
+    "cycle": 14,
+    "summary": [
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-producer-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-1",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-consumer-2",
+        "wasCaught": true
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-1",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-2",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-predator-3",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": true,
+        "id": "rf-predator-4",
+        "wasCaught": false
+      },
+      {
+        "caughtPrey": false,
+        "id": "rf-apex-1",
+        "wasCaught": false
+      }
+    ],
+    "organisms": [
+      {
+        "averageGenome": [
+          0.2355,
+          0.5632,
+          0.3999,
+          0.7031
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 3,
+        "cycleStep": 30,
+        "id": "rf-producer-1",
+        "population": 126,
+        "row": 2,
+        "traitNames": [
+          "Culm Growth",
+          "Canopy Reach",
+          "Root Spread",
+          "Water Storage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2544,
+          0.5558,
+          0.3611,
+          0.5713
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 10,
+        "cycleStep": 30,
+        "id": "rf-producer-2",
+        "population": 45,
+        "row": 5,
+        "traitNames": [
+          "Light Capture",
+          "Fruit Yield",
+          "Salt Tolerance",
+          "Wind Resilience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.339,
+          0.5075,
+          0.275,
+          0.7058
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 6,
+        "cycleStep": 30,
+        "id": "rf-consumer-1",
+        "population": 66,
+        "row": 4,
+        "traitNames": [
+          "Sap Intake",
+          "Reproduction Rate",
+          "Wing Development",
+          "Ant Signaling"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.4399,
+          0.4753,
+          0.381,
+          0.621
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 9,
+        "cycleStep": 30,
+        "id": "rf-consumer-2",
+        "population": 67,
+        "row": 7,
+        "traitNames": [
+          "Web Density",
+          "Leaf Hiding",
+          "Egg Survival",
+          "Dispersal Speed"
+        ],
+        "wasCaught": true
+      },
+      {
+        "averageGenome": [
+          0.5302,
+          0.5241,
+          0.26,
+          0.7037
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 5,
+        "cycleStep": 30,
+        "id": "rf-predator-1",
+        "population": 35,
+        "row": 6,
+        "traitNames": [
+          "Skin Toxin",
+          "Tongue Snap",
+          "Moisture Retention",
+          "Camouflage"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.5021,
+          0.6459,
+          0.2813,
+          0.6423
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 4,
+        "cycleStep": 30,
+        "id": "rf-predator-2",
+        "population": 33,
+        "row": 9,
+        "traitNames": [
+          "Venom Potency",
+          "Silk Strength",
+          "Pounce Speed",
+          "Vibration Sense"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.1942,
+          0.7427,
+          0.549,
+          0.8021
+        ],
+        "canMove": true,
+        "caughtPrey": false,
+        "col": 13,
+        "cycleStep": 30,
+        "id": "rf-predator-3",
+        "population": 21,
+        "row": 10,
+        "traitNames": [
+          "Stealth Stalk",
+          "Climbing Grip",
+          "Night Vision",
+          "Leap Power"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.2841,
+          0.5933,
+          0.5524,
+          0.6248
+        ],
+        "canMove": true,
+        "caughtPrey": true,
+        "col": 14,
+        "cycleStep": 30,
+        "id": "rf-predator-4",
+        "population": 27,
+        "row": 5,
+        "traitNames": [
+          "Constriction Force",
+          "Heat Sensing",
+          "Branch Balance",
+          "Ambush Patience"
+        ],
+        "wasCaught": false
+      },
+      {
+        "averageGenome": [
+          0.5806,
+          0.6294,
+          0.6768,
+          0.5164
+        ],
+        "canMove": false,
+        "caughtPrey": false,
+        "col": 12,
+        "cycleStep": 30,
+        "id": "rf-apex-1",
+        "population": 19,
+        "row": 8,
+        "traitNames": [
+          "Bite Force",
+          "Swim Ability",
+          "Camouflage",
+          "Sprint Speed"
         ],
         "wasCaught": false
       }
