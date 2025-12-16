@@ -10,6 +10,105 @@ document.addEventListener('DOMContentLoaded', () => {
   const organismPanels = new Map();
   const levelPanels = new Map();
 
+  const tour = document.querySelector('.simulation-tour');
+  const openTourButton = document.getElementById('open-simulation-tour');
+  const tourStorageKey = 'phylogen-simulation-tour-v1';
+
+  if (tour) {
+    const slides = Array.from(tour.querySelectorAll('.simulation-tour__slide'));
+    const dotGroup = tour.querySelector('.simulation-tour__dot-group');
+    let dots = Array.from(tour.querySelectorAll('.simulation-tour__dot'));
+    const progress = tour.querySelector('[data-tour-progress]');
+    const prevButton = tour.querySelector('[data-tour-action="prev"]');
+    const nextButton = tour.querySelector('[data-tour-action="next"]');
+    const closeTriggers = Array.from(tour.querySelectorAll('[data-tour-action="close"]'));
+
+    let currentSlideIndex = 0;
+
+    const syncDots = () => {
+      if (!dotGroup) return;
+      if (dots.length === slides.length) return;
+      dotGroup.innerHTML = '';
+      for (let i = 0; i < slides.length; i += 1) {
+        const dot = document.createElement('span');
+        dot.className = 'simulation-tour__dot';
+        dotGroup.appendChild(dot);
+      }
+      dots = Array.from(dotGroup.querySelectorAll('.simulation-tour__dot'));
+    };
+
+    const updateDots = () => {
+      syncDots();
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('is-active', index === currentSlideIndex);
+      });
+    };
+
+    const updateSlides = () => {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('is-active', index === currentSlideIndex);
+      });
+      if (progress) {
+        progress.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+      }
+      if (prevButton) {
+        prevButton.disabled = currentSlideIndex === 0;
+      }
+      if (nextButton) {
+        nextButton.textContent = currentSlideIndex === slides.length - 1 ? 'Finish' : 'Next';
+      }
+      updateDots();
+    };
+
+    const openTour = () => {
+      tour.classList.add('is-open');
+      tour.setAttribute('aria-hidden', 'false');
+      window.localStorage.setItem(tourStorageKey, 'seen');
+      currentSlideIndex = 0;
+      updateSlides();
+    };
+
+    const closeTour = () => {
+      tour.classList.remove('is-open');
+      tour.setAttribute('aria-hidden', 'true');
+      window.localStorage.setItem(tourStorageKey, 'seen');
+    };
+
+    nextButton?.addEventListener('click', () => {
+      if (currentSlideIndex < slides.length - 1) {
+        currentSlideIndex += 1;
+        updateSlides();
+      } else {
+        closeTour();
+      }
+    });
+
+    prevButton?.addEventListener('click', () => {
+      if (currentSlideIndex === 0) return;
+      currentSlideIndex -= 1;
+      updateSlides();
+    });
+
+    closeTriggers.forEach((button) => {
+      button.addEventListener('click', closeTour);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && tour.classList.contains('is-open')) {
+        closeTour();
+      }
+    });
+
+    openTourButton?.addEventListener('click', () => {
+      openTour();
+    });
+
+    const hasSeenTour = window.localStorage.getItem(tourStorageKey);
+    if (!hasSeenTour) {
+      openTour();
+    }
+  }
+
   const persistState = (cycle, summary, organisms) => {
     if (cycle === undefined || cycle === null) {
       return;

@@ -21,6 +21,12 @@
           Home
         </a>
 
+        <button type="button"
+                id="open-simulation-tour"
+                class="simulation__control">
+          How to play
+        </button>
+
      
 
         <button type="button"
@@ -128,5 +134,104 @@
         </div>
       </aside>
     </div>
+
+    <section class="simulation-tour"
+             aria-hidden="true"
+             role="dialog"
+             aria-labelledby="simulation-tour-title">
+      <div class="simulation-tour__backdrop" data-tour-action="close" aria-hidden="true"></div>
+      <div class="simulation-tour__dialog">
+        <header class="simulation-tour__header">
+          <div>
+            <p class="simulation-tour__eyebrow">Quick tour</p>
+            <h2 id="simulation-tour-title">How to play Phylogen</h2>
+            <p class="simulation-tour__lede">This is a walkthrough of how to play Phylogen!</p>
+          </div>
+          <button type="button"
+                  class="simulation-tour__close"
+                  data-tour-action="close"
+                  aria-label="Close tutorial">
+            &times;
+          </button>
+        </header>
+
+        <div class="simulation-tour__slides" role="presentation">
+          <article class="simulation-tour__slide is-active">
+            <div class="simulation-tour__media">
+              <div class="simulation-tour__media-placeholder"><img src = "../static/images/phylogen-logo.png" alt = "logo"></div>
+            </div>
+            <div class="simulation-tour__body">
+              <p class="simulation-tour__label">Welcome</p>
+              <h3>Phylogen is an Evoultion Simulator Game</h3>
+              <p>Your goal is to define a species, or several species, and to have the eco-system survive! To see how to do this, hit next!</p>
+            </div>
+          </article>
+
+          <article class="simulation-tour__slide">
+            <div class="simulation-tour__media">
+              <div class="simulation-tour__media-placeholder"><img src = "../static/images/controls.png" alt = "image of website with controls in a box"></div>
+            </div>
+            <div class="simulation-tour__body">
+              <p class="simulation-tour__label">Navigation</p>
+              <h3>Main controls</h3>
+              <p>These five buttons define how you play the game! They allow you to view this tutorial again, begin the game, pause it, and to define your own species! By defining your species, you customize how YOU think a given organism should fit into its environment. </p>
+            </div>
+          </article>
+
+          <article class="simulation-tour__slide">
+            <div class="simulation-tour__media">
+              <div class="simulation-tour__media-placeholder"><img src = "../static/images/form.png" alt = "webpage form"></div>
+            </div>
+            <div class="simulation-tour__body">
+              <p class="simulation-tour__label">How to define species</p>
+              <h3>Defining species</h3>
+              <p>When you define a species, you are deciding how you think the animal should best fit into its environment. You will give each gene a number from 0-1 to say how high or low that trait should be expressed. A 0 is not having that trait at all, 1 is having that trait a lot, and 0.5 is in the middle. The better you guess its ideal traits, the better the animal will do! But, if you guess wrong, the animal will have difficulty surviving.</p>
+            </div>
+          </article>
+
+           <article class="simulation-tour__slide">
+            <div class="simulation-tour__media">
+              <div class="simulation-tour__media-placeholder"><img src = "../static/images/phylogen-logo.png" alt = "webpage form"></div>
+            </div>
+            <div class="simulation-tour__body">
+              <p class="simulation-tour__label">Playing the game</p>
+              <h3>Good luck!</h3>
+              <p>Now that you've learned all about how to play Phylogen, you are ready to go and fight the battle of nature. If you have any more questions, hit the question mark button on the home screen, or look up questions online. Best of luck, and remember to have fun!</p>
+            </div>
+          </article>
+
+        </div>
+
+        <footer class="simulation-tour__footer">
+          <div class="simulation-tour__progress" aria-live="polite">
+            <span data-tour-progress>1 / 4</span>
+          </div>
+          <div class="simulation-tour__controls">
+            <button type="button"
+                    class="simulation-tour__button simulation-tour__button--ghost"
+                    data-tour-action="prev"
+                    disabled>
+              Previous
+            </button>
+            <div class="simulation-tour__dot-group" aria-hidden="true">
+              <span class="simulation-tour__dot is-active"></span>
+              <span class="simulation-tour__dot"></span>
+              <span class="simulation-tour__dot"></span>
+               <span class="simulation-tour__dot"></span>
+            </div>
+            <button type="button"
+                    class="simulation-tour__button"
+                    data-tour-action="next">
+              Next
+            </button>
+          </div>
+          <button type="button"
+                  class="simulation-tour__skip"
+                  data-tour-action="close">
+            Skip for now
+          </button>
+        </footer>
+      </div>
+    </section>
   </section>
 {% endblock %}
