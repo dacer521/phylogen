@@ -245,6 +245,10 @@ def advance_population(population: List, context: EvolutionContext, generations:
 
         new_generation = offspring + immigrants + elite_copies
 
+        # If no mating occurred (e.g., a lone survivor), do not fabricate extra individuals.
+        if parent_slots < 2 and not offspring:
+            target_population = len(new_generation)
+
         if len(new_generation) < target_population:
             deficit = target_population - len(new_generation)
             new_generation.extend(toolbox.individual() for _ in range(deficit))
