@@ -119,14 +119,9 @@ def resolvePredation(organism_lookup, cycle_summary):
 
         starvation_rate = 0.0
         if prey_levels or prey_ids:
-            if catches_made <= 0:
-                starvation_rate = 0.6  # harsh penalty for failing to hunt
-            elif catches_made == 1:
-                starvation_rate = 0.1  # minimal attrition once fed
-            elif catches_made == 5: #reward good predation
-                starvation_rate = 0.01
-            else:
-                starvation_rate = 0.05  # tiny attrition even for successful predators
+            # Smoothly reward successful hunting: more prey caught -> less attrition, with a floor.
+            starvation_rate = 0.6 / (1.0 + 0.8 * catches_made)
+            starvation_rate = max(0.01, min(0.6, starvation_rate))
 
         if starvation_rate > 0.0 and population_size:
             losses = int(round(population_size * starvation_rate))
@@ -135,10 +130,8 @@ def resolvePredation(organism_lookup, cycle_summary):
 
         predation_rate = 0.0
         if times_caught > 0 and population_size:
-            if times_caught < 5:
-                predation_rate = min(0.02 * times_caught, 0.08)
-            else:
-                predation_rate = min(0.08 + 0.06 * (times_caught - 4), 0.6)
+            # Smoothly scale harm from being caught; grows quickly then caps.
+            predation_rate = min(0.6, 0.06 * pow(times_caught, 1.2))
 
         if predation_rate > 0.0 and population_size:
             losses = int(round(population_size * predation_rate))
@@ -276,7 +269,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "min_population_size": 120,
             "max_population_size": 240,
             "immigration_rate": 0.25,
-            "immigration_chance": 0.55,
+            "immigration_chance": 0.25,
             "immigration_variation": 0.35,
             "fecundity": 1.25,
             "fecundity_variation": 0.20,
@@ -294,7 +287,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "min_population_size": 80,
             "max_population_size": 170,
             "immigration_rate": 0.22,
-            "immigration_chance": 0.5,
+            "immigration_chance": 0.25,
             "immigration_variation": 0.3,
             "fecundity": 1.15,
             "fecundity_variation": 0.18,
@@ -312,7 +305,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "min_population_size": 55,
             "max_population_size": 120,
             "immigration_rate": 0.18,
-            "immigration_chance": 0.45,
+            "immigration_chance": 0.25,
             "immigration_variation": 0.25,
             "fecundity": 1.05,
             "fecundity_variation": 0.15,
@@ -348,7 +341,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "min_population_size": 15,
             "max_population_size": 45,
             "immigration_rate": 0.08,
-            "immigration_chance": 0.35,
+            "immigration_chance": 0.25,
             "immigration_variation": 0.18,
             "fecundity": 0.85,
             "fecundity_variation": 0.1,
@@ -466,6 +459,7 @@ SIMULATION_STATE: Dict = {
     "organisms": {},
     "level_lookup": {},
     "home_positions": {},
+    "extinct": set(),
     "grid": {"rows": 0, "cols": 0},
     "cycle": 0,
     "evolution": {},
@@ -523,6 +517,29 @@ def _behavior_lookup() -> Dict[str, Dict[str, List[str]]]:
     return SIMULATION_STATE.get("behaviors") or {}
 
 
+def _prune_extinct_species() -> List[str]:
+    """Remove organisms with zero population and track them as extinct."""
+    organism_lookup = SIMULATION_STATE.get("organisms", {})
+    level_lookup = SIMULATION_STATE.get("level_lookup", {})
+    home_positions = SIMULATION_STATE.get("home_positions", {})
+
+    extinct_ids: List[str] = []
+    for organism_id, organism in list(organism_lookup.items()):
+        if organism.getGenes():
+            continue
+        extinct_ids.append(organism_id)
+        organism_lookup.pop(organism_id, None)
+        level_lookup.pop(organism_id, None)
+        home_positions.pop(organism_id, None)
+
+    if extinct_ids:
+        extinct_store = set(SIMULATION_STATE.get("extinct") or [])
+        extinct_store.update(extinct_ids)
+        SIMULATION_STATE["extinct"] = extinct_store
+
+    return extinct_ids
+
+
 def _run_simulation(settings: Dict) -> Tuple[List, EvolutionContext]:
     """Configure evolution for a trophic level and run the initial generations."""
     seed = settings.get("seed")
@@ -566,21 +583,7 @@ def build_trophic_levels(
 
         organisms: List[Organism] = []
         if population_count <= 0:
-            organisms = [
-                Organism(
-                    organism_cfg["id"],
-                    organism_cfg["name"],
-                    organism_cfg["row"],
-                    organism_cfg["col"],
-                    0,
-                    organism_cfg["image"],
-                    moves=organism_cfg.get("moves", True),
-                    ideal_traits=level["simulation"].get("target_traits"),
-                    user_ideal_traits=organism_cfg.get("user_ideal_traits"),
-                    trait_names=organism_cfg.get("trait_names", level_trait_names),
-                )
-                for organism_cfg in organism_configs
-            ]
+           continue
         else:
             shares = [organism.get("share", 1.0) for organism in organism_configs]
             share_total = sum(shares) if any(shares) else float(len(organism_configs) or 1)
@@ -681,6 +684,7 @@ def initialize_simulation_state(
         }
         SIMULATION_STATE["cycle"] = 0
         SIMULATION_STATE["evolution"] = evolution_state
+        SIMULATION_STATE["extinct"] = set()
         resolved_biome = biome_config or _get_biome_config(DEFAULT_BIOME_ID)
         SIMULATION_STATE["biome_config"] = resolved_biome
         SIMULATION_STATE["biome_id"] = resolved_biome.get("id", SIMULATION_STATE.get("biome_id", DEFAULT_BIOME_ID))
@@ -882,6 +886,7 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
         relations_map = _relations_lookup()
         speed_map = _speed_lookup()
         planned_moves: List[Tuple[str, int, int]] = []
+        extinct_ids: List[str] = []
 
         for organism in organism_lookup.values():
             current_step = organism.getCycleSteps()
@@ -1014,6 +1019,8 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                     organism.setY(home[0])
                     organism.setX(home[1])
 
+            extinct_ids = _prune_extinct_species()
+
         updates = []
         for organism in organism_lookup.values():
             genes = organism.getGenes() or []
@@ -1049,6 +1056,7 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
             "cycleComplete": cycle_complete,
             "cycleSummary": cycle_summary,
             "cycleIndex": cycle_index,
+            "extinct": extinct_ids,
         }
 
 

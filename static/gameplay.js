@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const coordsNode = button.querySelector('.trophic-level__organism-coords');
     const parentSection = button.closest('.trophic-level');
     organismPanels.set(organismId, {
+      element: button,
       populationNode,
       genomeNode,
       coordsNode,
@@ -239,6 +240,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateGenomeToggleLabel = () => {
     if (!genomeDisplayButton) return;
     genomeDisplayButton.textContent = showExactGenes ? 'Show Gene Notation' : 'Show Exact Genes';
+  };
+
+  const markExtinct = (organismId) => {
+    const panel = organismPanels.get(organismId);
+    if (panel) {
+      panel.population = 0;
+      if (panel.populationNode) {
+        panel.populationNode.textContent = 'Extinct';
+      }
+      if (panel.element) {
+        panel.element.style.display = 'none';
+      }
+    }
+    const sprite = document.getElementById(organismId);
+    if (sprite && sprite.parentElement) {
+      sprite.parentElement.removeChild(sprite);
+    }
   };
 
   const updateOrganismPanel = ({ id, population, averageGenome, row, col, traitNames }) => {
@@ -337,6 +355,12 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSprite(organism);
             updateOrganismPanel(organism);
           });
+        }
+
+        const extinctIds = Array.isArray(data.extinct) ? data.extinct : [];
+        if (extinctIds.length) {
+          extinctIds.forEach(markExtinct);
+          refreshLevelTotals();
         }
 
         if (cycleComplete) {

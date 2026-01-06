@@ -216,3 +216,9 @@ def simulation_reset():
     except OSError as exc:
         current_app.logger.exception("Failed to reset simulation history")
         return jsonify({"status": "error", "message": str(exc)}), 500
+
+
+@bp.route('/api/simulation/extinct', methods=['GET'])
+def simulation_extinct():
+    extinct = SIMULATION_STATE.get("extinct") or set()
+    return jsonify({"extinct": list(extinct)})
