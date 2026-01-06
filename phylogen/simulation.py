@@ -48,7 +48,7 @@ def _apply_weighted_deaths(gene_pool: List, ideal_traits: Iterable[float], kill_
     """Remove individuals using a roulette wheel scaled by trait penalties."""
     if kill_count <= 0 or not gene_pool:
         return gene_pool
-
+ 
     survivors = list(gene_pool)
     for _ in range(min(kill_count, len(survivors))):
         weights = _trait_penalties(survivors, ideal_traits)
@@ -114,31 +114,34 @@ def resolvePredation(organism_lookup, cycle_summary):
         behavior = behavior_map.get(organism.id, {})
         prey_ids = behavior.get("prey_ids", [])
 
-        available_prey = 0
-        if prey_levels or prey_ids:
-            for candidate in organism_lookup.values():
-                if candidate.id == organism.id:
-                    continue
-                candidate_level = level_lookup.get(candidate.id)
-                if (prey_levels and candidate_level in prey_levels) or (prey_ids and candidate.id in prey_ids):
-                    available_prey += len(candidate.getGenes() or [])
+        catches_made = organism.getCaughtPreyCount()
+        times_caught = organism.getTimesCaught()
 
         starvation_rate = 0.0
         if prey_levels or prey_ids:
-            demand = max(1, population_size)
-            food_ratio = available_prey / demand
-            starvation_rate = 0.05 + 0.35 * max(0.0, 1.0 - food_ratio)
-            if not organism.hasCaughtPrey():
-                starvation_rate += 0.05
-            starvation_rate = min(0.6, starvation_rate)
+            if catches_made <= 0:
+                starvation_rate = 0.6  # harsh penalty for failing to hunt
+            elif catches_made == 1:
+                starvation_rate = 0.1  # minimal attrition once fed
+            elif catches_made == 5: #reward good predation
+                starvation_rate = 0.01
+            else:
+                starvation_rate = 0.05  # tiny attrition even for successful predators
 
         if starvation_rate > 0.0 and population_size:
             losses = int(round(population_size * starvation_rate))
             genes = _apply_weighted_deaths(genes, ideal_traits, losses)
             population_size = len(genes)
 
-        if organism.wasCaught() and population_size:
-            losses = int(round(population_size * 0.1))
+        predation_rate = 0.0
+        if times_caught > 0 and population_size:
+            if times_caught < 5:
+                predation_rate = min(0.02 * times_caught, 0.08)
+            else:
+                predation_rate = min(0.08 + 0.06 * (times_caught - 4), 0.6)
+
+        if predation_rate > 0.0 and population_size:
+            losses = int(round(population_size * predation_rate))
             genes = _apply_weighted_deaths(genes, ideal_traits, losses)
 
         organism.setGenes(genes)
@@ -916,6 +919,7 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
             position_map.setdefault((organism.getY(), organism.getX()), []).append(organism)
 
         penalty_cache: Dict[str, float] = {}
+        quality_cache: Dict[str, float] = {}
 
         def _penalty_for(organism: Organism) -> float:
             """Cache harsh penalty so capture odds reflect trait quality."""
@@ -932,6 +936,18 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                 value = sum(penalties) / len(penalties)
             penalty_cache[organism.id] = value
             return value
+
+        def _capture_quality(organism: Organism) -> float:
+            """Translate penalties into a catch/escape skill score."""
+            cached = quality_cache.get(organism.id)
+            if cached is not None:
+                return cached
+            penalty = _penalty_for(organism)
+            # If the population has no genes, treat quality as very poor.
+            quality = 0.1 if not (organism.getGenes() or []) else 1.0 / (1.0 + penalty)
+            bounded = max(0.01, min(0.99, quality))
+            quality_cache[organism.id] = bounded
+            return bounded
 
         for occupants in position_map.values():
             if len(occupants) < 2:
@@ -960,15 +976,14 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                     )
                 ]
                 if caught_targets:
-                    predator_penalty = _penalty_for(organism)
-                    predator_quality = 1.0 / (1.0 + predator_penalty)
+                    predator_quality = _capture_quality(organism)
                     for prey in caught_targets:
-                        prey_penalty = _penalty_for(prey)
-                        prey_quality = 1.0 / (1.0 + prey_penalty)
-                        success_chance = predator_quality / (predator_quality + prey_quality + 1e-9)
+                        prey_quality = _capture_quality(prey)
+                        relative_edge = predator_quality / (predator_quality + prey_quality + 1e-9)
+                        success_chance = max(0.01, min(0.95, relative_edge * predator_quality))
                         if random.random() < success_chance:
-                            organism.setCaughtPrey(True)
-                            prey.setWasCaught(True)
+                            organism.incrementCaughtPrey()
+                            prey.incrementTimesCaught()
 
         cycle_complete = all(
             organism.getCycleSteps() >= MAX_CYCLE_STEPS for organism in organism_lookup.values()
@@ -981,7 +996,9 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                 {
                     "id": organism.id,
                     "caughtPrey": organism.hasCaughtPrey(),
+                    "caughtPreyCount": organism.getCaughtPreyCount(),
                     "wasCaught": organism.wasCaught(),
+                    "timesCaught": organism.getTimesCaught(),
                 }
                 for organism in organism_lookup.values()
             ]
@@ -1010,7 +1027,9 @@ def step_simulation() -> Dict[str, Iterable[Dict]]:
                     "row": organism.getY(),
                     "col": organism.getX(),
                     "caughtPrey": organism.hasCaughtPrey(),
+                    "caughtPreyCount": organism.getCaughtPreyCount(),
                     "wasCaught": organism.wasCaught(),
+                    "timesCaught": organism.getTimesCaught(),
                     "cycleStep": organism.getCycleSteps(),
                     "canMove": organism.canMove(),
                     "population": population_size,

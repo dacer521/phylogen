@@ -29,7 +29,9 @@ class Organism:
         self.trait_names = list(trait_names) if trait_names is not None else []
         self._cycle_steps = 0
         self._caught_prey = False
+        self._caught_prey_count = 0
         self._was_caught = False
+        self._times_caught = 0
 
     def toDict(self):
         data = {"id": self.id, "name": self.name, "row": self.row, "col": self.col}
@@ -108,13 +110,36 @@ class Organism:
     def resetCycle(self):
         self._cycle_steps = 0
         self._caught_prey = False
+        self._caught_prey_count = 0
         self._was_caught = False
+        self._times_caught = 0
 
     def hasCaughtPrey(self):
-        return self._caught_prey
+        return self._caught_prey_count > 0
+
+    def getCaughtPreyCount(self):
+        return self._caught_prey_count
 
     def setCaughtPrey(self, caught=True):
-        self._caught_prey = caught
+        if isinstance(caught, bool):
+            self._caught_prey = caught
+            self._caught_prey_count = int(bool(caught))
+        else:
+            try:
+                count = int(caught)
+            except (TypeError, ValueError):
+                count = 0
+            self._caught_prey_count = max(0, count)
+            self._caught_prey = self._caught_prey_count > 0
+        return self._caught_prey
+
+    def incrementCaughtPrey(self, count=1):
+        try:
+            increment = int(count)
+        except (TypeError, ValueError):
+            increment = 1
+        self._caught_prey_count += max(1, increment)
+        self._caught_prey = True
 
     def getIdealTraits(self):
         return self.ideal_traits
@@ -141,10 +166,28 @@ class Organism:
         self.trait_names = list(trait_names) if trait_names is not None else []
 
     def wasCaught(self):
-        return self._was_caught
+        return self._times_caught > 0
+
+    def getTimesCaught(self):
+        return self._times_caught
 
     def setWasCaught(self, caught=True):
-        self._was_caught = caught
+        if isinstance(caught, bool):
+            self._was_caught = caught
+            self._times_caught = int(bool(caught))
+        else:
+            try:
+                count = int(caught)
+            except (TypeError, ValueError):
+                count = 0
+            self._times_caught = max(0, count)
+            self._was_caught = self._times_caught > 0
+        return self._was_caught
 
-    def setMoves(self, moves):
-        self.moves = moves
+    def incrementTimesCaught(self, count=1):
+        try:
+            increment = int(count)
+        except (TypeError, ValueError):
+            increment = 1
+        self._times_caught += max(1, increment)
+        self._was_caught = True
