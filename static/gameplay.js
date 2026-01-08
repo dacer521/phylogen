@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
 
-        const extinctIds = Array.isArray(data.extinct) ? data.extinct : [];
+        const extinctIds = Array.isArray(data.extinct) ? data.extinct : [];  //don't show extinct species
         if (extinctIds.length) {
           extinctIds.forEach(markExtinct);
           refreshLevelTotals();

@@ -89,8 +89,7 @@ def prepare_evolution(
     """
     Configure the DEAP toolbox and seed an initial population.
 
-    Returns the population list (suitable for in-place mutation) and an EvolutionContext
-    that can be reused for subsequent generational updates.
+    Generates number of species in population (clamped), and sets up evoultion context
     """
     if fecundity <= 0:
         raise ValueError("fecundity must be greater than zero.")

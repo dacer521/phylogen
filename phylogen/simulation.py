@@ -96,6 +96,134 @@ def _average_genome(gene_pool: List) -> List[float]:
     ]
 
 
+def _clamp_step(value: int) -> int:
+    """Normalize a delta to -1, 0, or 1 so movement stays grid-aligned."""
+    if value > 0:
+        return 1
+    if value < 0:
+        return -1
+    return 0
+
+
+def _direction_towards(source: Organism, target: Organism) -> Tuple[int, int]:
+    """Return the single-step direction vector from source to target."""
+    row_delta = target.getY() - source.getY()
+    col_delta = target.getX() - source.getX()
+    return _clamp_step(row_delta), _clamp_step(col_delta)
+
+
+def _direction_from_levels(origin: Organism, level_ids: List[str], toward: bool) -> Tuple[int, int]:
+    """Pick the direction toward or away from the nearest organism in the supplied levels."""
+    if not level_ids:
+        return 0, 0
+
+    closest: Tuple[int, int] = (0, 0)
+    closest_distance = None
+
+    for candidate in SIMULATION_STATE["organisms"].values():
+        if candidate.id == origin.id:
+            continue
+        candidate_level = SIMULATION_STATE["level_lookup"].get(candidate.id)
+        if candidate_level not in level_ids:
+            continue
+
+        direction = _direction_towards(origin, candidate)
+        if direction == (0, 0):
+            closest = direction
+            closest_distance = 0
+            break
+
+        manhattan = abs(candidate.getY() - origin.getY()) + abs(candidate.getX() - origin.getX())
+        if closest_distance is None or manhattan < closest_distance:
+            closest = direction
+            closest_distance = manhattan
+
+    if closest_distance is None:
+        return 0, 0
+
+    return closest if toward else (-closest[0], -closest[1])
+
+
+def _direction_from_targets(origin, target_ids, toward):
+    """Pick the direction toward or away from specific organism ids."""
+    if not target_ids:
+        return 0, 0
+
+    closest: Tuple[int, int] = (0, 0)
+    closest_distance = None
+
+    for target_id in target_ids:
+        candidate = SIMULATION_STATE["organisms"].get(target_id)
+        if candidate is None or candidate.id == origin.id:
+            continue
+
+        direction = _direction_towards(origin, candidate)
+        if direction == (0, 0):
+            closest = direction
+            closest_distance = 0
+            break
+
+        manhattan = abs(candidate.getY() - origin.getY()) + abs(candidate.getX() - origin.getX())
+        if closest_distance is None or manhattan < closest_distance:
+            closest = direction
+            closest_distance = manhattan
+
+    if closest_distance is None:
+        return 0, 0
+
+    return closest if toward else (-closest[0], -closest[1])
+
+
+def _calculate_move_delta(organism: Organism, relations: Dict[str, List[str]], current_step: int, speed: int):
+    """Blend prey pursuit, predator avoidance, and randomness into a movement vector."""
+    prey_levels = relations.get("prey", [])
+    predator_levels = relations.get("predators", [])
+
+    behavior = _behavior_lookup().get(organism.id, {})
+    specific_prey_ids = behavior.get("prey_ids", [])
+    specific_predator_ids = behavior.get("predator_ids", [])
+
+    prey_direction = _direction_from_targets(organism, specific_prey_ids, toward=True)
+    if prey_direction == (0, 0):
+        prey_direction = _direction_from_levels(organism, prey_levels, toward=True)
+
+    predator_direction = _direction_from_targets(organism, specific_predator_ids, toward=False)
+    if predator_direction == (0, 0):
+        predator_direction = _direction_from_levels(organism, predator_levels, toward=False)
+
+    prey_weight = max(2, speed) if (prey_levels or specific_prey_ids) else 1
+    if specific_prey_ids:
+        prey_weight = max(prey_weight, speed + 1)
+
+    if (
+        (prey_levels or specific_prey_ids)
+        and not organism.hasCaughtPrey()
+        and current_step >= MAX_CYCLE_STEPS - 1
+    ):
+        base_row, base_col = prey_direction
+    else:
+        base_row = prey_direction[0] * prey_weight + predator_direction[0]
+        base_col = prey_direction[1] * prey_weight + predator_direction[1]
+
+    if random.random() < RANDOM_DIRECTION_CHANCE:
+        base_row += random.choice([-1, 0, 1])
+    if random.random() < RANDOM_DIRECTION_CHANCE:
+        base_col += random.choice([-1, 0, 1])
+
+    row_step = _clamp_step(base_row)
+    col_step = _clamp_step(base_col)
+
+    if row_step == 0 and col_step == 0:
+        row_step = random.choice([-1, 0, 1])
+        col_step = random.choice([-1, 0, 1])
+        if row_step == 0 and col_step == 0:
+            row_step = random.choice([-1, 1])
+
+    row_delta = max(-speed, min(speed, row_step * speed))
+    col_delta = max(-speed, min(speed, col_step * speed))
+    return row_delta, col_delta
+
+
 def resolvePredation(organism_lookup, cycle_summary):
     level_lookup = SIMULATION_STATE.get("level_lookup", {})
     relations_map = _relations_lookup()
@@ -268,7 +396,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "generations": 30,
             "min_population_size": 120,
             "max_population_size": 240,
-            "immigration_rate": 0.25,
+            "immigration_rate": 0.15,
             "immigration_chance": 0.25,
             "immigration_variation": 0.35,
             "fecundity": 1.25,
@@ -287,7 +415,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "min_population_size": 80,
             "max_population_size": 170,
             "immigration_rate": 0.22,
-            "immigration_chance": 0.25,
+            "immigration_chance": 0.15,
             "immigration_variation": 0.3,
             "fecundity": 1.15,
             "fecundity_variation": 0.18,
@@ -305,7 +433,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "min_population_size": 55,
             "max_population_size": 120,
             "immigration_rate": 0.18,
-            "immigration_chance": 0.25,
+            "immigration_chance": 0.15,
             "immigration_variation": 0.25,
             "fecundity": 1.05,
             "fecundity_variation": 0.15,
@@ -323,7 +451,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "min_population_size": 30,
             "max_population_size": 80,
             "immigration_rate": 0.14,
-            "immigration_chance": 0.4,
+            "immigration_chance": 0.15,
             "immigration_variation": 0.22,
             "fecundity": 0.95,
             "fecundity_variation": 0.12,
@@ -341,7 +469,7 @@ BASE_LEVEL_SETTINGS: Dict[str, Dict] = {
             "min_population_size": 15,
             "max_population_size": 45,
             "immigration_rate": 0.08,
-            "immigration_chance": 0.25,
+            "immigration_chance": 0.15,
             "immigration_variation": 0.18,
             "fecundity": 0.85,
             "fecundity_variation": 0.1,
@@ -525,7 +653,7 @@ def _prune_extinct_species() -> List[str]:
 
     extinct_ids: List[str] = []
     for organism_id, organism in list(organism_lookup.items()):
-        if organism.getGenes():
+        if len(organism.getGenes()) > 0: #if len of genes > 0 not extinct; otherwise, continue.
             continue
         extinct_ids.append(organism_id)
         organism_lookup.pop(organism_id, None)
@@ -744,136 +872,6 @@ def replace_first_species(
 
         SIMULATION_STATE["biome_config"] = biome_config
         return True
-
-def _clamp_step(value: int) -> int:
-    """Normalize a delta to -1, 0, or 1 so movement stays grid-aligned."""
-    if value > 0:
-        return 1
-    if value < 0:
-        return -1
-    return 0
-
-
-def _direction_towards(source: Organism, target: Organism) -> Tuple[int, int]:
-    """Return the single-step direction vector from source to target."""
-    row_delta = target.getY() - source.getY()
-    col_delta = target.getX() - source.getX()
-    return _clamp_step(row_delta), _clamp_step(col_delta)
-
-
-def _direction_from_levels(origin: Organism, level_ids: List[str], toward: bool) -> Tuple[int, int]:
-    """Pick the direction toward or away from the nearest organism in the supplied levels."""
-    if not level_ids:
-        return 0, 0
-
-    closest: Tuple[int, int] = (0, 0)
-    closest_distance = None
-
-    for candidate in SIMULATION_STATE["organisms"].values():
-        if candidate.id == origin.id:
-            continue
-        candidate_level = SIMULATION_STATE["level_lookup"].get(candidate.id)
-        if candidate_level not in level_ids:
-            continue
-
-        direction = _direction_towards(origin, candidate)
-        if direction == (0, 0):
-            closest = direction
-            closest_distance = 0
-            break
-
-        manhattan = abs(candidate.getY() - origin.getY()) + abs(candidate.getX() - origin.getX())
-        if closest_distance is None or manhattan < closest_distance:
-            closest = direction
-            closest_distance = manhattan
-
-    if closest_distance is None:
-        return 0, 0
-
-    return closest if toward else (-closest[0], -closest[1])
-
-
-def _direction_from_targets(origin, target_ids, toward):   
-    """Pick the direction toward or away from specific organism ids."""
-    if not target_ids:
-        return 0, 0
-
-    closest: Tuple[int, int] = (0, 0)
-    closest_distance = None
-
-    for target_id in target_ids:
-        candidate = SIMULATION_STATE["organisms"].get(target_id)
-        if candidate is None or candidate.id == origin.id:
-            continue
-
-        direction = _direction_towards(origin, candidate)
-        if direction == (0, 0):
-            closest = direction
-            closest_distance = 0
-            break
-
-        manhattan = abs(candidate.getY() - origin.getY()) + abs(candidate.getX() - origin.getX())
-        if closest_distance is None or manhattan < closest_distance:
-            closest = direction
-            closest_distance = manhattan
-
-    if closest_distance is None:
-        return 0, 0
-
-    return closest if toward else (-closest[0], -closest[1])
-
-
-def _calculate_move_delta(organism: Organism, relations: Dict[str, List[str]], current_step: int, speed: int):
-    """Blend prey pursuit, predator avoidance, and randomness into a movement vector."""
-    prey_levels = relations.get("prey", []) 
-    predator_levels = relations.get("predators", [])
-
-    behavior = _behavior_lookup().get(organism.id, {})
-    specific_prey_ids = behavior.get("prey_ids", [])
-    specific_predator_ids = behavior.get("predator_ids", [])
-
-    #calling helper function
-
-    prey_direction = _direction_from_targets(organism, specific_prey_ids, toward=True)
-    if prey_direction == (0, 0):
-        prey_direction = _direction_from_levels(organism, prey_levels, toward=True)
-
-    predator_direction = _direction_from_targets(organism, specific_predator_ids, toward=False)
-    if predator_direction == (0, 0):
-        predator_direction = _direction_from_levels(organism, predator_levels, toward=False)
-
-    prey_weight = max(2, speed) if (prey_levels or specific_prey_ids) else 1
-    if specific_prey_ids:
-        prey_weight = max(prey_weight, speed + 1)
-
-    if (
-        (prey_levels or specific_prey_ids)
-        and not organism.hasCaughtPrey()
-        and current_step >= MAX_CYCLE_STEPS - 1
-    ):
-        base_row, base_col = prey_direction
-    else:
-        base_row = prey_direction[0] * prey_weight + predator_direction[0]
-        base_col = prey_direction[1] * prey_weight + predator_direction[1]
-
-    if random.random() < RANDOM_DIRECTION_CHANCE:
-        base_row += random.choice([-1, 0, 1])
-    if random.random() < RANDOM_DIRECTION_CHANCE:
-        base_col += random.choice([-1, 0, 1])
-
-    row_step = _clamp_step(base_row)
-    col_step = _clamp_step(base_col)
-
-    if row_step == 0 and col_step == 0:
-        row_step = random.choice([-1, 0, 1])
-        col_step = random.choice([-1, 0, 1])
-        if row_step == 0 and col_step == 0:
-            row_step = random.choice([-1, 1])
-
-    row_delta = max(-speed, min(speed, row_step * speed))
-    col_delta = max(-speed, min(speed, col_step * speed))
-    return row_delta, col_delta
-
 
 def step_simulation() -> Dict[str, Iterable[Dict]]:
     """Advance the simulation one tick and report organism state updates."""
