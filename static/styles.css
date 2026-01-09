@@ -1117,6 +1117,14 @@ border: 1px solid rgba(94, 234, 212, 0.2);  min-height: 220px;
   padding: 0.25rem 0.5rem;
 }
 
+ .map-tile.is-highlighted {
+  outline: 4px solid #ff006e !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px #ffd60a !important;
+  background: rgba(255, 0, 110, 0.2) !important;
+}
+
+
 @media (max-width: 900px) {
   .simulation-tour__slide {
     grid-template-columns: 1fr;

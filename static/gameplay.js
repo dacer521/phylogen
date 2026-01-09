@@ -425,3 +425,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
   resetSimulationState();
 });
+
+
+function highlightOrganism(row, col) {
+  const mapGrid = document.querySelector('.map-grid');
+  if (!mapGrid) {
+    return;
+  }
+
+  row = row - 1 
+  col = col - 1
+
+  const rowValue = String(row);
+  const colValue = String(col);
+
+
+  const tile = mapGrid.querySelector(`.map-tile[data-row=\"${rowValue}\"][data-col=\"${colValue}\"]`);
+  if (!tile) {
+    return;
+  }
+
+  const previousTile = mapGrid.querySelector('.map-tile.is-highlighted');
+  if (previousTile && previousTile !== tile) {
+    previousTile.classList.remove('is-highlighted');
+  }
+  tile.classList.add('is-highlighted');
+}
+
+function removeHighlightOrganism(row, col) {
+ const mapGrid = document.querySelector('.map-grid');
+  if (!mapGrid) {
+    return;
+  }
+
+  row = row - 1
+  col = col - 1
+
+   const rowValue = String(row);
+  const colValue = String(col);
+  const tile = mapGrid.querySelector(`.map-tile[data-row=\"${rowValue}\"][data-col=\"${colValue}\"]`);
+  if (!tile) {
+    return;
+  }
+ 
+  tile.classList.remove('is-highlighted');
+}
