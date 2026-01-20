@@ -16,7 +16,7 @@ function info() {
 
 function author() {
 
-    text = "Hello! My name is David Manuel. I created this project as my Senior project and I’m hoping to study computational biology in college. This project is something I’ve wanted to do for a long time now, and I’m very glad to finally have done it! I fell in love with programming in elementary school, and biology in 7th grade, so I’m very glad to be able to merge these interests. This project is my “magnum opus” of high school, and I hope you enjoy it! "
+    text = "Hello! My name is David Manuel. I created this project as my Senior project and I’m hoping to study computational biology in college. This project is something I’ve wanted to do for a long time now, and I’m very glad to finally have done it! I fell in love with programming in elementary school, and biology in 7th grade, so I’m very glad to be able to merge these interests. This project is my “magnum opus” of high school, and I hope you enjoy it!\n\n Special Thanks to Ian Vail for assistance in formatting this idea, Mr. Eric Marshall for being a great mentor, and finally to Hudson Jean and Kyle Rosenstein for making sprites; Hudson did the Ocean and Rainforest sprites and Kyle did the desert sprites. "
     space.textContent = text
     space.style.display = "block"
 

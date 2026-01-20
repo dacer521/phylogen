@@ -1,3 +1,5 @@
+let highlightedOrganismId = null;
+
 document.addEventListener('DOMContentLoaded', () => {
   const startButton = document.getElementById('start-simulation');
   if (!startButton) {
@@ -158,6 +160,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       delete sprite.dataset.canMove;
     }
+
+    if (highlightedOrganismId === id) {
+      highlightOrganism(id);
+    }
   };
 
   document.querySelectorAll('.trophic-level').forEach((section) => {
@@ -252,6 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (panel.element) {
         panel.element.style.display = 'none';
       }
+    }
+    if (highlightedOrganismId === organismId) {
+      removeHighlightOrganism(organismId);
     }
     const sprite = document.getElementById(organismId);
     if (sprite && sprite.parentElement) {
@@ -427,17 +436,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function highlightOrganism(row, col) {
+function highlightOrganism(organismId) {
   const mapGrid = document.querySelector('.map-grid');
   if (!mapGrid) {
     return;
   }
 
-  row = row - 1 
-  col = col - 1
+  highlightedOrganismId = organismId;
+  const sprite = document.getElementById(organismId);
+  if (!sprite) {
+    return;
+  }
 
-  const rowValue = String(row);
-  const colValue = String(col);
+  const row = Number(sprite.dataset.row);
+  const col = Number(sprite.dataset.col);
+  if (!Number.isFinite(row) || !Number.isFinite(col)) {
+    return;
+  }
+
+  const tileRow = row - 1;
+  const tileCol = col - 1;
+
+  const rowValue = String(tileRow);
+  const colValue = String(tileCol);
 
 
   const tile = mapGrid.querySelector(`.map-tile[data-row=\"${rowValue}\"][data-col=\"${colValue}\"]`);
@@ -452,21 +473,37 @@ function highlightOrganism(row, col) {
   tile.classList.add('is-highlighted');
 }
 
-function removeHighlightOrganism(row, col) {
+function removeHighlightOrganism(organismId) {
  const mapGrid = document.querySelector('.map-grid');
   if (!mapGrid) {
     return;
   }
 
-  row = row - 1
-  col = col - 1
+  if (highlightedOrganismId !== organismId) {
+    return;
+  }
 
-   const rowValue = String(row);
-  const colValue = String(col);
+  const sprite = document.getElementById(organismId);
+  if (!sprite) {
+    return;
+  }
+
+  const row = Number(sprite.dataset.row);
+  const col = Number(sprite.dataset.col);
+  if (!Number.isFinite(row) || !Number.isFinite(col)) {
+    return;
+  }
+
+  const tileRow = row - 1;
+  const tileCol = col - 1;
+
+   const rowValue = String(tileRow);
+  const colValue = String(tileCol);
   const tile = mapGrid.querySelector(`.map-tile[data-row=\"${rowValue}\"][data-col=\"${colValue}\"]`);
   if (!tile) {
     return;
   }
  
   tile.classList.remove('is-highlighted');
+  highlightedOrganismId = null;
 }

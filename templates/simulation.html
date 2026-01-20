@@ -106,8 +106,8 @@
               </header>
               <ul class="trophic-level__list">
                 {% for organism in level.organisms %}
-                  <li onmouseover="highlightOrganism({{ organism.row }}, {{ organism.col }})"
-                      onmouseleave="removeHighlightOrganism({{ organism.row }}, {{ organism.col }})">
+                  <li onmouseover="highlightOrganism('{{ organism.id }}')"
+                      onmouseleave="removeHighlightOrganism('{{ organism.id }}')">
                     <button type="button"
                             class="trophic-level__organism"
                             data-target-id="{{ organism.id }}">
