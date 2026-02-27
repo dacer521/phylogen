@@ -195,13 +195,16 @@ body {
   font-weight: 600;
   text-align: center;
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.35s ease;
   transform: translate(
     calc((var(--sprite-col, 1) - 1) * (var(--tile-size) + var(--grid-gap))),
     calc((var(--sprite-row, 1) - 1) * (var(--tile-size) + var(--grid-gap)))
   );
   will-change: transform, opacity;
+}
+
+.sprite--animated {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {

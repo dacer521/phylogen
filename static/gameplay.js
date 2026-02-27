@@ -11,6 +11,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const stepInterval = 800;    //delay stuff to make smoother
   const organismPanels = new Map();
   const levelPanels = new Map();
+  const animationToggleButton = document.getElementById('toggle-animations');
+  let animationsEnabled = true;
+
+  const updateAnimationLabel = () => {
+    if (!animationToggleButton) return;
+    animationToggleButton.textContent = `Animations: ${animationsEnabled ? 'On' : 'Off'}`;
+  };
+
+  const setSpriteAnimations = (enabled) => {
+    const sprites = document.querySelectorAll('.sprite');
+    sprites.forEach((sprite) => {
+      sprite.classList.toggle('sprite--animated', enabled);
+    });
+  };
+
+  if (animationToggleButton) {
+    animationToggleButton.addEventListener('click', () => {
+      animationsEnabled = !animationsEnabled;
+      setSpriteAnimations(animationsEnabled);
+      updateAnimationLabel();
+    });
+    setSpriteAnimations(animationsEnabled);
+    updateAnimationLabel();
+  }
 
   const tour = document.querySelector('.simulation-tour');
   const openTourButton = document.getElementById('open-simulation-tour');
@@ -391,7 +415,8 @@ document.addEventListener('DOMContentLoaded', () => {
           currentController = null;
         }
         if (running && !controller.signal.aborted) {
-          window.setTimeout(performStep, stepInterval);
+          const delay = animationsEnabled ? stepInterval : 0;
+          window.setTimeout(performStep, delay);
         }
       });
   };

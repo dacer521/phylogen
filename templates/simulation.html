@@ -34,6 +34,11 @@
                 class="simulation__control">
           Start Movement
         </button>
+        <button type="button"
+                id="toggle-animations"
+                class="simulation__control simulation__control--secondary">
+          Animations: On
+        </button>
         <a href="{{ url_for('main.define_species', next=request.url, biome=biome_id) }}"
            id="define-organism"
            class="simulation__control">
@@ -77,7 +82,7 @@
         <div class="sprite-layer" aria-hidden="true">
           {% for level in trophic_levels %}
             {% for organism in level.organisms %}
-              <div class="sprite"
+              <div class="sprite sprite--animated"
                    id="{{ organism.id }}"
                    data-level="{{ level.id }}"
                    data-row="{{ organism.row }}"
